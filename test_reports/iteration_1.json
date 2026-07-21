@@ -1,0 +1,28 @@
+{
+  "summary": "First-finish smoke test of SplitsPro backend + frontend. Backend: /api/quotes (create + list), /api/quotes validation (empty + short phone -> 422), /api/reviews all working (8 seeded reviews). Frontend: all 11 routes render, kinetic hero present (Premium / Air Conditioning split across lines), no email/mailto anywhere, phone 0414 698 435 and ABN 62 137 127 557 present, Reviews page fetches API data, FAQ accordion expands, quote form validates empty submit (toast) and submits successfully (quote-success shown), mobile menu toggle opens nav, sticky-call-btn present on mobile. 23/23 effective checks passed.",
+  "tested_scope": ["backend", "frontend", "integration"],
+  "passed": [
+    "GET /api/ returns 200",
+    "POST /api/quotes valid returns 200 with id + stored fields",
+    "POST /api/quotes empty body returns 422 with per-field value_error",
+    "POST /api/quotes short phone returns 422 'Please enter a valid phone number'",
+    "GET /api/quotes returns list including newly created lead",
+    "GET /api/reviews returns 8 seeded reviews with name/suburb/rating/text",
+    "Home hero shows 'Premium' + 'Air Conditioning' (kinetic split across lines)",
+    "All 11 routes (/, /about, /split-systems, /ducted, /repairs, /servicing, /gallery, /reviews, /service-areas, /faq, /contact) render without error boundaries",
+    "No mailto links and no email addresses anywhere on Home",
+    "Phone 0414 698 435 and ABN 62 137 127 557 visible in footer",
+    "Reviews page fetches and displays seeded reviews from GET /api/reviews",
+    "FAQ accordion expands on click",
+    "Empty quote form submit -> error toast, no success state",
+    "Filled quote form submits successfully -> quote-success visible",
+    "Mobile menu toggle opens nav (all nav-* items visible)",
+    "Sticky call bar (sticky-call-btn) present on mobile viewport"
+  ],
+  "failed": [],
+  "action_items": [],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "retest_needed": false,
+  "full_testing_deferred": true,
+  "notes": "Playwright assertion 'Home hero contiguous string' was a false negative — the hero splits 'Premium' and 'Air Conditioning' onto separate lines via kinetic text (both words present as designed)."
+}
