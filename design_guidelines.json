@@ -1,0 +1,158 @@
+{
+  "theme": "light",
+  "brand_name": "SplitsPro",
+  "abn": "62 137 127 557",
+  "phone": "0414 698 435",
+  "services": [
+    "Split System Installation",
+    "Ducted Installation",
+    "AC Replacement",
+    "Split System Replacement",
+    "Ducted System Replacement",
+    "AC Repairs",
+    "AC Servicing",
+    "AC Cleaning",
+    "Emergency AC",
+    "Residential AC",
+    "Commercial AC"
+  ],
+  "brands": [
+    "Daikin",
+    "Mitsubishi Electric",
+    "Fujitsu",
+    "Panasonic",
+    "Rinnai"
+  ],
+  "pages": [
+    "Home",
+    "About",
+    "Split Systems",
+    "Ducted Air Conditioning",
+    "Repairs",
+    "Servicing",
+    "Gallery",
+    "Reviews",
+    "Service Areas",
+    "FAQ",
+    "Contact"
+  ],
+  "typography": {
+    "headings": "Outfit",
+    "body": "Satoshi",
+    "notes": "No Inter or Roboto. Use tracking-tighter for H1 and H2. Font pairings must scream premium and technical authority, much like Apple or Tesla brand identities."
+  },
+  "colors": {
+    "background": {
+      "base": "#FFFFFF",
+      "alt": "#F9FAFB"
+    },
+    "text": {
+      "primary": "#0A0A0A",
+      "secondary": "#475569"
+    },
+    "accents": {
+      "primary": "#0055FF",
+      "secondary": "#002244",
+      "subtle": "#EBF3FF"
+    },
+    "notes": "Bright white base. Premium blue accents ONLY. Absolutely NO purple or violet AI-slop gradients."
+  },
+  "visual_enhancers": {
+    "glassmorphism": "Use sparingly on sticky headers and floating elements: bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.04)]",
+    "rounded_corners": "Premium smooth corners using rounded-2xl or rounded-3xl for cards and media.",
+    "textures": "Minimal clean surfaces, relying on sharp drop shadows and precise spacing to create depth rather than muddy textures."
+  },
+  "motion": {
+    "libraries": [
+      "framer-motion",
+      "@studio-freight/react-lenis"
+    ],
+    "hero_animation": "Kinetic hero with a signature on-load moment (masked line-by-line reveal for 'Premium Air Conditioning').",
+    "scroll_reveals": "Subtle translate-y and opacity fades triggered by scroll.",
+    "parallax": "Include one subtle parallax or 3D hero moment using framer-motion useScroll."
+  },
+  "layouts": {
+    "hero": "Awwwards-level kinetic typography headline 'Premium Air Conditioning'. Highly minimal layout focusing on line-by-line text reveal, combined with a subtle parallax image of a premium HVAC setup or Australian home.",
+    "services_grid": "Bento grid protocol (md:grid-cols-3) with wide gap-8. Each card features large minimalist typography and a crisp icon. Hover causes a subtle lift and blue accent border reveal.",
+    "brands_marquee": "One ultra-smooth, slow editorial marquee featuring crisp, high-contrast monochrome logos.",
+    "about_manifesto": "Numbered chapters (e.g., '01', '02' in large display font). Asymmetrical layout avoiding standard alternating left/right blocks. Focus on emotional, brand-driven storytelling.",
+    "gallery": "Clipping frames/spotlights treating real product photography and homes like high-end art installations. Hover expands the clipped mask slightly.",
+    "reviews": "Carousel with glassmorphic cards and crisp 5-star graphics, relying on framer-motion drag or Swiper.",
+    "service_areas": "Sleek, minimalist accordion or tabular list. No clutter.",
+    "faq": "Shadcn accordion with large tap targets and plus/minus icons that rotate cleanly on open.",
+    "contact": "GoHighLevel compatible form layout. Inputs for: Name, Phone, Service, Suburb. NO EMAIL ADDRESS FIELD. Sticky 'Call Now' CTA prominently featuring phone 0414 698 435."
+  },
+  "components": {
+    "buttons": "Pill-shaped (rounded-full). Primary: Solid premium blue bg-[#0055FF] hover:bg-[#002244] text-white with smooth transform scale interactions.",
+    "cards": "Subtle shadows shadow-sm, 1px border-slate-100, white background, generous padding (p-8 to p-12).",
+    "forms": "Use Shadcn components. Clean 1px solid borders focus:ring-2 focus:ring-[#0055FF]. Very large accessible inputs (h-14)."
+  },
+  "image_urls": {
+    "luxury_homes": [
+      {
+        "url": "https://images.unsplash.com/photo-1706808849780-7a04fbac83ef",
+        "description": "Modern Australian home exterior with pool and lounge chairs"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1505843513577-22bb7d21e455",
+        "description": "White and black lighted concrete modern house"
+      }
+    ],
+    "hvac_technicians": [
+      {
+        "url": "https://images.pexels.com/photos/6471913/pexels-photo-6471913.jpeg",
+        "description": "Professional technician repairing outdoor unit"
+      },
+      {
+        "url": "https://images.pexels.com/photos/32588555/pexels-photo-32588555.jpeg",
+        "description": "Skilled technician working on maintenance indoors"
+      }
+    ],
+    "air_conditioning": [
+      {
+        "url": "https://images.pexels.com/photos/7870751/pexels-photo-7870751.jpeg",
+        "description": "Minimalist sunlit white interior column"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1718203862467-c33159fdc504",
+        "description": "White air conditioner on a wall"
+      },
+      {
+        "url": "https://images.unsplash.com/flagged/photo-1556438758-872c68902f60",
+        "description": "Clean white tiled living room with AC"
+      }
+    ]
+  },
+  "accessibility": {
+    "contrast": "Strict APCA/WCAG contrast compliance. Dark slate text (#0A0A0A) on bright backgrounds.",
+    "focus_states": "High contrast focus rings (ring-2 ring-[#0055FF] ring-offset-2).",
+    "data_testid": "All interactive and key informational elements MUST include a `data-testid` attribute."
+  },
+  "instructions_to_main_agent": [
+    "Install required dependencies: framer-motion, @studio-freight/react-lenis, react-fast-marquee, lucide-react.",
+    "Implement Lenis at the root layout for smooth momentum scrolling across the entire app.",
+    "Build a 'Kinetic Hero' with a masked line-by-line reveal using framer-motion (overflow-hidden wrapper, text animating from y: '100%' to '0%').",
+    "Implement a slow, editorial logo marquee for Brands (Daikin, Mitsubishi Electric, Fujitsu, Panasonic, Rinnai).",
+    "Create a 'Manifesto' section with an asymmetrical layout and oversized chapter numbers ('01', '02').",
+    "Add a sticky Call CTA for mobile and desktop linking to 'tel:0414698435'.",
+    "DO NOT include an email field in the Contact Form or display an email address ANYWHERE on the site.",
+    "The Contact form must only collect: Name, Phone, Service, Suburb.",
+    "Use bright white backgrounds (#FFFFFF) with premium blue accents (#0055FF). Absolutely NO purple/violet gradients.",
+    "Apply generous internal padding (p-12 to p-24) to establish a luxury, breathing layout.",
+    "Use glassmorphism (bg-white/70 backdrop-blur-xl) for sticky navigational elements only, do NOT use 100% transparent backgrounds for headers over content.",
+    "Display Business ABN: 62 137 127 557 in the footer."
+  ],
+  "universal_guidelines_for_main_agent": [
+    "Do not use generic centered layouts or simplistic gradients. Prioritize optical alignment.",
+    "Create depth through layered design elements with precise z-index hierarchy and subtle ambient shadows.",
+    "Use high-end glass-morphism effects with strong backdrop filters (12-24px blur) combined with saturation boosts (saturate-150).",
+    "You MUST NOT apply universal transition (e.g., transition: all). Add transitions ONLY for specific interactive properties (transform, opacity).",
+    "You MUST NOT center align the app container. Do not add `.App { text-align: center; }`.",
+    "Always use modern button styles (pill-shaped) with interaction micro-animations (e.g., scale 0.98 on tap).",
+    "NEVER use AI assistant Emoji characters (🤖🧠💭💡🔮🎯) for icons. Use Phosphor or Lucide icons.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "All interactive and key informational elements MUST include a `data-testid` attribute (e.g., `data-testid='submit-quote-btn'`).",
+    "Use sonner for toasts, customized to match the Apple-inspired stark UI."
+  ]
+}
