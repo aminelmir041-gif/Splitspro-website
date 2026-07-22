@@ -75,7 +75,7 @@ export const Footer = () => (
       </div>
     </div>
 
-    <div className="border-t border-white/10 pb-16 md:pb-0">
+    <div className="border-t border-white/10 pb-24 md:pb-0">
       <div className="sp-container flex flex-col items-center justify-between gap-3 py-6 text-xs text-white/50 sm:flex-row">
         <p>© {new Date().getFullYear()} SplitsPro. All rights reserved.</p>
         <p>ABN {ABN} · Fully licensed &amp; insured</p>

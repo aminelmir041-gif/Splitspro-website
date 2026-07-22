@@ -1,0 +1,39 @@
+{
+  "summary": "Iteration 4 focused on CTA consolidation, header/hero spacing, and nav scroll behavior. Backend 8/8 pytest pass. Frontend: SINGLE GET-FREE-QUOTE verified (exactly 1 on homepage, and it is floating-quote-btn); hero-quote-btn, nav-get-quote-btn, and cta-quote-btn all confirmed removed. Navbar transparent at top (class has no bg-white and no backdrop-blur), gains 'bg-white/80 backdrop-blur-xl' after ~200px scroll. Navbar bottom is above hero H1 top on both desktop (68 < 254) and mobile (no overlap). Hero H1 'Crafted Comfort For Every Home' fully rendered and visible after 2.8s loader wait on both viewports. Logo image loads (naturalWidth>0). nav-call-btn shows '0414 698 435' on desktop. cta-section contains only Call button (no 'Get Free Quote'). Mobile menu ends with mobile-call-btn (Call 0414 698 435), no GFQ button. Floating-quote-btn is visible on load and navigates to /contact when clicked. All 12 routes render with ZERO pageerrors. Quote form on /contact: empty submit -> error toast, short phone (<8 digits) -> error toast, valid submission -> quote-success. No mailto:, no @splitspro email; phone 0414 698 435 and ABN 62 137 127 557 present in footer. ONE REAL BUG FOUND: on mobile (390px viewport) the floating-quote-btn is NOT horizontally centred — it sits at x=195 with width=195 (right half of the viewport). Root cause: the outer framer-motion wrapper (grand parent of the <a>) has class 'fixed bottom-6 left-1/2 z-40 -translate-x-1/2 ...' but framer-motion applies inline 'transform: none;' after the mount animation completes, which overrides Tailwind's -translate-x-1/2 utility. Result: 'left-1/2' anchors the element at x=195 but the -50% back-translate is lost, so the CTA hugs the right edge instead of being centred. This directly violates the iteration requirement '(4) on mobile it sits above the bottom edge ... centred'.",
+  "tested_scope": ["backend", "frontend", "integration"],
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "FloatingCTA (/app/frontend/src/components/FloatingCTA.jsx)",
+        "issue": "Mobile 390x844: floating-quote-btn is anchored to right half (bbox x=195, width=195, viewport=390) instead of being horizontally centred. framer-motion's animate={{ y: 0 }} on the outer motion.div writes inline 'transform: none;' which clobbers Tailwind class '-translate-x-1/2', so left-1/2 positions it without the -50% correction.",
+        "selector": "[data-testid=\"floating-quote-btn\"]",
+        "priority": "HIGH",
+        "suggested_fix": "Either (a) drive the mount animation with framer-motion's `x` motion value while keeping x centred (e.g. initial={{ opacity:0, y:24, x:'-50%' }} animate={{ opacity:1, y:0, x:'-50%' }} and remove the -translate-x-1/2 utility), or (b) split the wrapper: outer plain div holds 'fixed bottom-6 left-1/2 -translate-x-1/2 md:left-auto md:right-8 md:translate-x-0' with NO framer-motion transforms, inner motion.div handles opacity+y only. Then the CSS translate is not overwritten."
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Fix mobile centering of floating-quote-btn in /app/frontend/src/components/FloatingCTA.jsx (see suggested_fix above). Everything else in iteration 4 checks out."
+  ],
+  "critical_code_review_comments": [
+    "FloatingCTA.jsx: framer-motion inline transform overrides Tailwind translate utility — pattern to avoid. Prefer separating layout wrapper (CSS-only positioning) from motion wrapper (animation-only) whenever using -translate-* alongside framer-motion.",
+    "/app/frontend/src/components/StickyCallBar.jsx still exists in the repo but is no longer imported anywhere in App.js. Safe to delete to reduce dead code and prevent accidental re-introduction of a second bottom-CTA.",
+    "Home.jsx Hero uses pt-28/pb-36 on the content container plus justify-center — good breathing room, hero H1 measured at y=254 on 1920x900 (well below navbar bottom 68) confirming the fix.",
+    "Navbar.jsx correctly transitions from py-3+transparent -> py-2+bg-white/80+backdrop-blur-xl on scroll>40 — verified via getAttribute('class') snapshot before/after mouse.wheel."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (8/8)", "frontend": "~92% — 12/13 iteration-scoped assertions pass; mobile centering of floating CTA fails."},
+  "test_credentials": "None required — public marketing site.",
+  "seed_data_creation": "TEST FinalRun, TEST Playwright4 leads created via /api/quotes during regression.",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Only the floating-quote-btn mobile centering bug is open. To verify a fix quickly: (1) set viewport 390x844, (2) goto /, wait 2800ms, (3) read bounding box of [data-testid=floating-quote-btn]; center_x = x + width/2 should be within ~15px of 195. Also snapshot the outer wrapper's inline style — it should NOT show 'transform: none' overriding the -50% X translate. Reuse loader wait 2.6-2.8s (PageLoader). Lenis intercepts window.scrollTo — use page.mouse.wheel. shadcn Select for service field; custom cursor has pointer-events:none.",
+  "rca of the issue": "In FloatingCTA.jsx the OUTERMOST motion.div has both className='fixed bottom-6 left-1/2 z-40 -translate-x-1/2 md:...' and framer-motion props initial={{opacity:0,y:24}} animate={{opacity:1,y:0}}. Because framer-motion writes the transform to the element's inline style, after the mount animation lands at y:0 the inline style becomes 'transform: none;' (verified via DOM inspection: outerStyle='opacity: 1; transform: none;'). Inline style has higher specificity than the Tailwind '-translate-x-1/2' utility (which compiles to `transform: translateX(-50%)`), so the -50% shift is lost. On desktop it happens to work only because md:left-auto md:right-8 md:translate-x-0 already sets translate-x to 0 (matching what framer-motion writes), so no visible break. On mobile the negative translate is silently discarded. Mitigation: separate layout div (plain, keeps -translate-x-1/2) from animation div (motion, only opacity/y). This is a common framer-motion + Tailwind translate pitfall."
+}

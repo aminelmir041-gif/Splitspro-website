@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { NavLink, Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { NavLink, useLocation } from "react-router-dom";
+import { Menu, X, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { NAV } from "../lib/data";
+import { NAV, PHONE, PHONE_TEL } from "../lib/data";
 import Logo from "./Logo";
 
 export const Navbar = () => {
@@ -24,10 +24,10 @@ export const Navbar = () => {
     <header
       data-testid="navbar"
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        solid ? "border-b border-[#E5E5EA] bg-white/90 py-2.5 backdrop-blur-xl" : "py-4"
+        solid ? "border-b border-[#E5E5EA] bg-white/80 py-2 backdrop-blur-xl" : "py-3"
       }`}
     >
-      {!solid && <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/35 to-transparent" />}
+      {!solid && <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 to-transparent" />}
       <nav className="sp-container relative flex items-center justify-between gap-6">
         <Logo onDark={!solid} scrolled={scrolled} />
 
@@ -52,9 +52,10 @@ export const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <Link to="/contact" data-testid="nav-get-quote-btn" className="btn-glass hidden sm:inline-flex !px-6 !py-2.5">
-            Get Quote
-          </Link>
+          <a href={PHONE_TEL} data-testid="nav-call-btn"
+            className={`hidden items-center gap-2 text-sm font-semibold tracking-wide transition-colors duration-300 sm:flex ${solid ? "text-[#1E3A8A]" : "text-white"}`}>
+            <Phone className="h-4 w-4" /> {PHONE}
+          </a>
           <button
             data-testid="mobile-menu-toggle"
             onClick={() => setOpen((v) => !v)}
@@ -83,7 +84,9 @@ export const Navbar = () => {
                   {item.label}
                 </NavLink>
               ))}
-              <Link to="/contact" className="btn-glass mt-4 justify-center">Get Free Quote</Link>
+              <a href={PHONE_TEL} data-testid="mobile-call-btn" className="mt-4 flex items-center justify-center gap-2 rounded-full border border-[#1E3A8A] py-3.5 text-sm font-semibold uppercase tracking-wider text-[#1E3A8A]">
+                <Phone className="h-4 w-4" /> Call {PHONE}
+              </a>
             </div>
           </motion.div>
         )}

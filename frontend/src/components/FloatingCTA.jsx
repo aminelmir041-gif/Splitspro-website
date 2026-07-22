@@ -1,49 +1,30 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Phone } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { PHONE_TEL } from "../lib/data";
+import { ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
 
-export const FloatingCTA = () => {
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > 700);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  return (
-    <>
-      <AnimatePresence>
-        {show && (
-          <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed bottom-8 right-8 z-40 hidden md:block"
-          >
-            <Link to="/contact" data-testid="floating-quote-btn" className="btn-glass shadow-[0_16px_44px_rgba(30,58,138,0.4)]">
-              Get Free Quote
-            </Link>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Mobile sticky glass bar */}
-      <div className="fixed inset-x-3 bottom-3 z-40 grid grid-cols-2 gap-2 md:hidden">
-        <a href={PHONE_TEL} data-testid="sticky-call-btn"
-          className="glass-card flex items-center justify-center gap-2 rounded-full py-3.5 text-sm font-semibold uppercase tracking-wider text-[#0B1F3A]">
-          <Phone className="h-4 w-4" /> Call Now
-        </a>
-        <Link to="/contact" data-testid="sticky-quote-btn"
-          className="flex items-center justify-center rounded-full bg-[#1E3A8A] py-3.5 text-sm font-semibold uppercase tracking-wider text-white shadow-[0_10px_30px_rgba(30,58,138,0.4)]">
-          Free Quote
-        </Link>
-      </div>
-    </>
-  );
-};
+export const FloatingCTA = () => (
+  <motion.div
+    className="fixed bottom-6 left-1/2 z-40 -translate-x-1/2 md:bottom-8 md:left-auto md:right-8 md:translate-x-0"
+    initial={{ opacity: 0, y: 24 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
+  >
+    <motion.div
+      animate={{ scale: [1, 1.05, 1] }}
+      transition={{ duration: 1.3, repeat: Infinity, repeatDelay: 8, ease: "easeInOut" }}
+      whileHover={{ y: -4 }}
+      whileTap={{ scale: 0.97 }}
+    >
+      <Link
+        to="/contact"
+        data-testid="floating-quote-btn"
+        className="flex items-center gap-2 rounded-full border border-white/25 bg-[#1E3A8A]/90 px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-white shadow-[0_16px_44px_rgba(11,31,58,0.45)] backdrop-blur-xl transition-colors duration-300 hover:bg-[#1E3A8A]"
+      >
+        Get Free Quote
+        <ArrowUpRight className="h-4 w-4" />
+      </Link>
+    </motion.div>
+  </motion.div>
+);
 
 export default FloatingCTA;

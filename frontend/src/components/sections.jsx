@@ -1,6 +1,5 @@
-import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { Phone, Check, ArrowUpRight } from "lucide-react";
+import { useRef } from "react";
+import { Phone, Check } from "lucide-react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Reveal from "./Reveal";
 import { PHONE, PHONE_TEL, BRANDS, PROCESS, WHY } from "../lib/data";
@@ -85,8 +84,7 @@ export const CTASection = () => (
       <Reveal delay={0.12}><p className="mx-auto mt-6 max-w-xl text-lg text-blue-100/70">A considered consultation, an honest recommendation and a precise installation. Request your free, no-obligation quote today.</p></Reveal>
       <Reveal delay={0.18}>
         <div className="mt-10 flex flex-wrap justify-center gap-4">
-          <Link to="/contact" data-testid="cta-quote-btn" className="btn-glass-light">Get Free Quote <ArrowUpRight className="h-4 w-4" /></Link>
-          <a href={PHONE_TEL} className="btn-glass-outline"><Phone className="h-4 w-4" /> {PHONE}</a>
+          <a href={PHONE_TEL} className="btn-glass-light"><Phone className="h-4 w-4" /> Call {PHONE}</a>
         </div>
       </Reveal>
     </div>

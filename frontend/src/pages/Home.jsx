@@ -79,7 +79,7 @@ const Hero = () => {
         <FloatCard key={c.label} card={c} index={i} smx={smx} smy={smy} />
       ))}
 
-      <motion.div className="sp-container relative z-10 flex h-full flex-col justify-center" style={{ y: contentY, opacity: fade }}>
+      <motion.div className="sp-container relative z-10 flex h-full flex-col justify-center pt-28 pb-36 sm:pt-24 sm:pb-32" style={{ y: contentY, opacity: fade }}>
         <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.5 }}>
           <Overline light>Premium Residential Air Conditioning · Western Sydney</Overline>
         </motion.div>
@@ -100,7 +100,6 @@ const Hero = () => {
         </motion.p>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 1.05 }} className="mt-9 flex flex-wrap gap-4">
-          <Link to="/contact" data-testid="hero-quote-btn" className="btn-glass">Get Free Quote <ArrowUpRight className="h-4 w-4" /></Link>
           <a href={PHONE_TEL} data-testid="hero-call-btn" className="btn-glass-outline"><Phone className="h-4 w-4" /> Call Now</a>
         </motion.div>
       </motion.div>
