@@ -51,6 +51,24 @@ Awwwards-level motion (framer-motion + lenis), bright white + premium blue (#005
 - Quote form suburb placeholder = "Enter your suburb" (not pre-filled). Gallery = 7-tile masonry (installs, indoor/outdoor/ducted), no dupes on homepage.
 - Verified: iteration_7 100% pass (backend 8/8, frontend all criteria, zero regressions).
 
+## v8 — LEAD-GEN CONVERSION REDESIGN (2026-07-22)
+Goal: optimise the site for Google/Meta Ads lead generation while keeping the luxury aesthetic.
+- **Hero**: new premium living-room image (IMAGES.heroLiving), "Crafted Comfort For Every Home", buttons "Free Quote & Plan" (Lenis smooth-scroll to on-page enquiry form) + "Call 0414 698 435". Google rating badge (5.0 · 14 Verified Reviews) + featured Sia review directly under the CTA.
+- **Homepage enquiry form** directly below hero (id="enquiry"): Name, Phone, **Email (optional)**, Suburb, Service, Message + **optional photo upload**. Two-step: uploadPhoto → submitQuote with photo_url.
+- **Backend**: QuoteCreate/Quote extended with `email` + `photo_url`. New `/api/upload` (Emergent object storage, 10MB + image-type limits, 403 re-init retry) and `/api/files/{path}` (serves stored images). Reviews re-seeded (SEED_VERSION=3) with real reviewer names/texts + `category` + `featured` (Sia). EMERGENT_LLM_KEY added to backend/.env for object storage.
+- **Reviews distributed**: real Google reviews scattered site-wide via `ServiceReviews` (filters by category, falls back to general). Per-service page shows its matched reviewer (Split=Mustapha Hamed, Ducted=Charles Speights, Cleaning=Carolyn Hicks, Repairs=Mohammad Sowaid, Servicing=John Wick). /reviews page enriched with Google rating + avatar cards. NO external Google links (per client — reviews stay on-page).
+- **Service landing pages** (ServicePage.jsx + SERVICE_LANDING config per slug): hero, trust badges (5.0 Google / Licensed & Insured / Premium Brands / Western Sydney), benefits grid, real-installation gallery, matched reviews, process, tailored FAQ, **tailored quote form** (e.g. "Book Your Free Split System Quote & Plan"), service-areas map + CTA.
+- **SEO/Trust**: HVACBusiness + AggregateRating (5.0/14) JSON-LD schema + og:image in index.html; trust badges on every service page; local Western Sydney SEO retained.
+- Reusable components added to sections.jsx: `GoogleRating`, `TrustBadges`, `ServiceReviews`.
+- Verified: iteration_9 — backend 12/12 pytest PASS, frontend 11/11 acceptance PASS, zero bugs. Backend tests at /app/backend/tests/backend_test.py.
+
+## Backlog / Next (updated)
+- P1: Wire /api/quotes (+ photo_url) to GoHighLevel via webhook/API for real lead automation.
+- P2: Simple admin/lead view to review submitted leads + uploaded photos.
+- P2: Per-page unique meta tags (react-helmet) + sitemap.xml/robots.txt.
+- P3 (non-blocking, from code review): derive hero featured review from GET /api/reviews (featured=true) to avoid drift with data.js; add Cache-Control to /api/files responses.
+
+
 ## Backlog / Next
 - P1: Wire /api/quotes to GoHighLevel (webhook/API) for real lead automation
 - P1: Replace sample reviews with real GBP reviews (structure already in DB via /api/reviews)
