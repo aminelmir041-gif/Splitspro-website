@@ -1,0 +1,28 @@
+{
+  "summary": "Iteration 7 focused retest of the technician-crop fix (frontend-only, backend skipped per request). All primary and regression acceptance criteria PASS. /repairs hero: img.src contains '361ebd4d', naturalWidth=1086 (loaded), applied computed objectPosition is '50% 38%' with Tailwind class 'object-[50%_38%]' — technician image is now framed on head+torso instead of the previous ceiling-only crop. /servicing hero: same image (361ebd4d), naturalWidth=1086, objectPosition '50% 38%'. Home service-card-3 (Maintenance & Repairs) image also uses object-[50%_38%] (objectPosition '50% 38%'), naturalWidth=1086. /gallery now renders exactly 7 masonry tiles (previously 8), no broken images, and the technician tile (361ebd4d) is confirmed NOT present. REGRESSION: all 12 routes (/, /about, /split-systems, /ducted, /cleaning, /repairs, /servicing, /gallery, /reviews, /service-areas, /faq, /contact) render with 0 pageerrors and 0 broken images. Home hero contains only overline + H1 + supporting paragraph + hero-call-btn + hero-quote-btn — no 'Premium Installation', 'Licensed & Insured' or 'Western Sydney' floating badges. Mobile 390x844 CTA bar hidden at scrollY=0 and appears after full-viewport scroll (scrollY=1499) with sticky-call-btn and sticky-quote-btn both visible. /contact quote form: suburb placeholder='Enter your suburb', full submission (name/phone/suburb/service via shadcn Select/submit) → quote-success visible = true. Service areas page shows 'South Western Sydney' + 'PRIMARY' badge and 'all Sydney metropolitan suburbs' statement. Screenshot verified visually that the /service-areas page renders correctly (map + South Western Sydney primary chips).",
+  "tested_scope": ["frontend", "integration"],
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/test_reports/iteration_7.json"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Repairs.jsx and Servicing.jsx both pass imgPos='object-[50%_38%]' and ServicePage.jsx correctly plumbs it to PageHero (hero <img>) AND to the intro image — verified via computed style objectPosition='50% 38%' on the rendered element.",
+    "FEATURED_SERVICES entry for slug='repairs' uses pos='object-[50%_38%]' and Home.jsx applies `${s.pos}` on the card <img> — verified data-testid='service-card-3' img computed objectPosition='50% 38%'.",
+    "GALLERY array in data.js now contains 7 items with IMAGES.technician excluded — verified DOM count and absence of 361ebd4d in /gallery.",
+    "Dead file /app/frontend/src/components/StickyCallBar.jsx (flagged in iter 6) is still present and unused; still safe to delete for cleanliness but non-blocking."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "not tested (skipped per request)", "frontend": "100% — all 8 retest bullets pass"},
+  "test_credentials": "None required — public marketing site.",
+  "seed_data_creation": "One quote lead 'TEST Iter7 Playwright' with phone 0414698435, suburb Bankstown created via /contact form submission (POST /api/quotes).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Technician image is now correctly framed (object-[50%_38%]) on /repairs, /servicing hero, /repairs & /servicing intro image, and Home service-card-3. Gallery reduced to 7 items (technician tile removed). All other iter-6 assertions still hold. shadcn Select for /contact: click testid then click first role=option (or specific text). PageLoader ~2.6-3s; on /repairs allow ~4.5s for the 1.6MB technician PNG. Mobile CTA appears at scrollY >~ innerHeight*0.95 (verified appears at 1499 on 390x844).",
+  "rca of the issue": "N/A — previous iteration's crop bug has been fixed. Root cause was object-top on a 1086x1448 portrait scaled to fill a 1920x626 hero, which revealed only the top 24% (ceiling). Fix: change object-position to 50% 38% so the vertical slice reveals the technician's head (~30%) through mid-torso (~50%), which now correctly frames a person in the hero strip."
+}

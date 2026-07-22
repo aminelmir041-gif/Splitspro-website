@@ -82,7 +82,7 @@ export const FEATURED_SERVICES = [
     title: "Maintenance & Repairs",
     desc: "Careful servicing and accurate diagnostics that keep every brand running at its best.",
     image: IMAGES.technician,
-    pos: "object-top",
+    pos: "object-[50%_38%]",
     icon: Wrench,
   },
 ];
@@ -129,7 +129,6 @@ export const GALLERY = [
   { src: IMAGES.splitBedroom, title: "Daikin Zena Split", tag: "Split System" },
   { src: IMAGES.splitLiving, title: "Living Room Install", tag: "Residential" },
   { src: IMAGES.outdoorRinnai, title: "Rinnai Outdoor Unit", tag: "Outdoor" },
-  { src: IMAGES.technician, title: "On-Site Servicing", tag: "Technician" },
   { src: IMAGES.ductedVent, title: "Concealed Ducted Vent", tag: "Ducted" },
   { src: IMAGES.splitIndoor, title: "Rinnai Indoor Split", tag: "Split System" },
   { src: IMAGES.outdoorDaikin, title: "Daikin Condenser", tag: "Outdoor" },
