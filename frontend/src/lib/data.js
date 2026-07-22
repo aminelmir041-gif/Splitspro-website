@@ -170,6 +170,38 @@ export const TRUST_BADGES = [
   { icon: "map", label: "Western Sydney" },
 ];
 
+// ---- Home Comfort Plan™ (Split System + Ducted conversion pages) ----
+export const HOME_COMFORT_INCLUDES = [
+  "In-Home Comfort Consultation",
+  "Complete Property Assessment",
+  "Professional System Recommendation",
+  "Recommended Unit Placement",
+  "Airflow & Comfort Planning",
+  "Energy Efficiency Advice",
+  "Fixed Written Quote",
+  "Installation Timeline",
+  "Personalised Home Comfort Plan™",
+];
+
+export const HOME_COMFORT_GUARANTEES = [
+  "Minimum 5-Year Manufacturer's Warranty on all new systems",
+  "Splits Pro Workmanship Guarantee",
+  "Licensed & Insured",
+  "Installed with quality materials and attention to detail",
+  "Fixed Written Quote",
+];
+
+export const FORM_TRUST_STRIP = [
+  "Normally Valued At Over $200",
+  "Complimentary For Limited Monthly Appointments",
+  "Fixed Written Quote",
+  "Minimum 5-Year Manufacturer's Warranty",
+  "Workmanship Guarantee",
+  "Licensed & Insured",
+  "5.0\u2605 Google Rated",
+];
+
+
 // Per-service landing-page configuration.
 export const SERVICE_LANDING = {
   "split-systems": {

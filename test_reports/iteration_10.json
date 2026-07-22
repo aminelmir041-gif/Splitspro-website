@@ -1,0 +1,39 @@
+{
+  "summary": "Iteration 10 — Frontend-only regression + verification of the Home Comfort Plan enhancement on /split-systems and /ducted. All 9 acceptance bullets PASS. Backend was verified in iteration_9 (12/12) and unchanged; skipped per instructions. Public URL from REACT_APP_BACKEND_URL used throughout.",
+  "tested_scope": ["frontend", "integration"],
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "acceptance_bullets_results": {
+    "1_hero_and_trust_badges_preserved": "PASS — /split-systems shows h1 'Quiet comfort, room by room' and /ducted shows h1 'Whole-home comfort, elegantly hidden'. trust-badges strip appears directly below both heroes.",
+    "2_early_reserve_section_two_column": "PASS — reserve-section (id='reserve') appears right after trust-badges on both pages (y=2390, before benefits/gallery/process/FAQ). reserve-form-card contains GoogleRating (5.0 + 14 Verified Reviews) ABOVE the form, heading 'Reserve Your Complimentary Home Comfort Plan(TM)', a subheading, quote-form, and a 7-item trust strip below the form including 'Normally Valued At Over $200' and '5.0★ Google Rated'.",
+    "3_early_form_submit_flow": "PASS — Submit button label = 'RESERVE MY HOME COMFORT PLAN' (uppercase via CSS). Filled name/phone(0414698435)/email/suburb/message on both pages; quote-service-select is PRE-SELECTED ('Split System Installation' on /split-systems, 'Ducted Air Conditioning' on /ducted). quote-success appeared after submit. GET /api/quotes confirms 2 new leads (TEST HomeComfort Split, TEST HomeComfort Ducted) with correct pre-selected service values.",
+    "4_reserve_review_by_slug": "PASS — /split-systems reserve-review shows Mustapha Hamed. /ducted reserve-review shows Charles Speights.",
+    "5_full_section_order_and_data": "PASS — All 11 required sections render in the correct top-to-bottom order on both pages: reserve-section < service-benefits < home-comfort-plan < comfort-difference < service-gallery < guarantee-section < service-reviews < exclusivity-section < service-faq < service-areas-block < cta-section. home-comfort-plan has the 'Complimentary · Normally valued over $200' badge, title 'The Splits Pro Home Comfort Plan', and 9 inclusion cards. comfort-difference has heading 'Why is our Home Comfort Plan different?'. guarantee-section has heading 'Built to last. Backed with confidence.' and 5 guarantee cards.",
+    "6_exclusivity_scroll_up_to_reserve": "PASS — On both pages, clicking exclusivity-reserve-btn (label 'RESERVE MY HOME COMFORT PLAN') smooth-scrolls back UP to reserve-form-card via Lenis. Measured on /split-systems: rfc y went from -5965 (offscreen above) to 244 (in viewport) after ~3s wait; on /ducted same result (rfc y=244 after click).",
+    "7_service_specific_reviews_filter": "PASS — service-reviews on /split-systems contains only Mustapha Hamed (no Charles Speights); on /ducted contains only Charles Speights (no Mustapha). Reviews are inline on each service page, NOT a separate testimonials page.",
+    "8_regression_cleaning_repairs_servicing_unchanged": "PASS — /cleaning, /repairs, /servicing all render the OLD ServicePage template with data-testid='service-quote' near the BOTTOM (y≈6925–6981). None of them contain any of the new sections (reserve-section, home-comfort-plan, comfort-difference, guarantee-section, exclusivity-section all absent).",
+    "9_regression_homepage_unchanged": "PASS — /  still shows hero + hero-quote-btn + enquiry-section. hero-quote-btn smooth-scrolls the enquiry-section into view (y went 4000 -> 116 after Lenis scroll). Home enquiry form submits successfully (TEST Home Regression lead persisted in GET /api/quotes)."
+  },
+  "test_report_links": [
+    "/app/test_reports/iteration_10.json",
+    "/app/test_reports/iteration_9.json (previous backend + full-site verification, 12/12)"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "HomeComfortPage.jsx: The reserve section correctly uses id='reserve' + scroll-mt-24, and useLenis().scrollTo() with a DOM fallback — resilient to Lenis being uninitialised. Good pattern.",
+    "HomeComfortPage.jsx: The reserve-review falls back cleanly (rs.find(featured) then rs[0]) if the category-specific review is missing — prevents an empty proof block.",
+    "QuoteForm.jsx: defaultService is correctly threaded through the initial state; on submit it re-uses defaultService when resetting the form — so a user submitting again on /split-systems still sees Split System Installation pre-selected.",
+    "SplitSystems.jsx and Ducted.jsx are now thin wrappers around HomeComfortPage — the old ServicePage template is still used by Cleaning/Repairs/Servicing, so the two templates coexist cleanly with no duplicated logic in the page wrappers.",
+    "Non-blocking: reserve-section y ≈ 2390px means the section is technically below the first fold at 1080px but is fully visible after a single small scroll and is the FIRST section after hero+trust-badges — matches the intent of 'high on the page, before benefits/gallery/process/FAQ'.",
+    "Non-blocking: The exclusivity-reserve-btn label and quote-submit-btn label are both 'RESERVE MY HOME COMFORT PLAN' — the CSS uppercases them; underlying JSX matches the spec ('Reserve My Home Comfort Plan').",
+    "Non-blocking: HomeComfortPage's inline <Stars> component is a small duplicate of the star renderer used elsewhere in sections.jsx — could be extracted to a shared component but not required."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "not re-tested (previously 100%, 12/12)", "frontend": "100% (9/9 acceptance bullets)"},
+  "test_credentials": "None required — public marketing site.",
+  "seed_data_creation": "3 new test leads created via UI submissions on the deployed public URL: 'TEST HomeComfort Split' (Bass Hill, service='Split System Installation'), 'TEST HomeComfort Ducted' (Yagoona, service='Ducted Air Conditioning'), 'TEST Home Regression' (Bass Hill, service='Split System Installation'). All three visible in GET /api/quotes.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "The /split-systems and /ducted pages now use HomeComfortPage.jsx (not ServicePage.jsx). The reserve form lives at data-testid='reserve-form-card' (with id='reserve' on its containing section) high on the page; scope form selectors under [data-testid=reserve-form-card] since the same [data-testid=quote-form] also appears on /contact. Lenis smooth scroll is used — allow ~3s after clicking exclusivity-reserve-btn or hero-quote-btn before asserting bounding_box. QuoteForm's shadcn Select pre-selects defaultService via SERVICE_LANDING[slug].formService, so on these two pages you can submit without opening the dropdown. Cleaning/Repairs/Servicing still use ServicePage template with service-quote at the bottom of the page. FORM_TRUST_STRIP contains '5.0★ Google Rated' (unicode ★) — use `'5.0' in text and 'Google Rated' in text` if you need to assert it.",
+  "rca of the issue": "N/A — no bugs found."
+}

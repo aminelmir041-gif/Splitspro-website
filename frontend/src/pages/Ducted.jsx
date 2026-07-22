@@ -1,8 +1,8 @@
-import ServicePage from "./ServicePage";
+import HomeComfortPage from "./HomeComfortPage";
 import { IMAGES } from "../lib/data";
 
 const Ducted = () => (
-  <ServicePage
+  <HomeComfortPage
     slug="ducted"
     overline="Ducted Air Conditioning"
     title="Whole-home comfort, elegantly hidden"

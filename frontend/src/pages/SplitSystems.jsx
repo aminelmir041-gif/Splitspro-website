@@ -1,8 +1,8 @@
-import ServicePage from "./ServicePage";
+import HomeComfortPage from "./HomeComfortPage";
 import { IMAGES } from "../lib/data";
 
 const SplitSystems = () => (
-  <ServicePage
+  <HomeComfortPage
     slug="split-systems"
     overline="Split System Installation"
     title="Quiet comfort, room by room"
