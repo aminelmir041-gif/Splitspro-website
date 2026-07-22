@@ -1,0 +1,27 @@
+{
+  "summary": "Iteration 5 frontend-only regression on FloatingCTA refactor. ALL acceptance criteria PASS. (A) Hero contains BOTH hero-call-btn (Call Now) and hero-quote-btn (Get Free Quote) visible on desktop (row) and mobile (column stack) — verified via bounding-box, not fixed, scroll away with hero. (B) Floating action bar hidden at scrollY=0: on mobile sticky-call-btn/sticky-quote-btn DOM nodes absent (AnimatePresence unmount), on desktop floating-call-btn/floating-quote-btn absent. After scrolling ~4800px via page.mouse.wheel the bar appears; after scrolling back to top (scrollY=0) it unmounts again. (C) MOBILE 390x844 after scroll: full-width bar at bottom — sticky-call-btn bbox=(x=0,y=778,w=195,h=66) bg=rgb(29,29,31) charcoal, sticky-quote-btn bbox=(x=195,y=778,w=195,h=66) bg=rgb(30,58,138) navy, total width=390, height 66px, tel:0414698435 & /contact hrefs correct. (C) DESKTOP 1920x900 after scroll: compact lower-right group — floating-call-btn bbox=(x=1569.3,y=834,w=136.5,h=42), floating-quote-btn bbox=(x=1715.8,y=835,w=180.2,h=40); group_total_width=326.7 (well under 960 = half viewport), left edge 1569 > 960 (lower-right). Mobile sticky testids not visible on desktop (md:hidden confirmed). (D) Footer copyright '© 2026 SplitsPro. All rights reserved.' bottom=695.5 sits above sticky bar top=778 on mobile — pb-24 on footer works. Animation uses framer-motion opacity+y (no infinite pulse). REGRESSION: all 12 routes (/, /about, /split-systems, /ducted, /cleaning, /repairs, /servicing, /gallery, /reviews, /service-areas, /faq, /contact) render with ZERO pageerrors. Navbar bottom y=56 < Hero H1 top y=257 (no overlap on desktop). /contact quote form (name/phone/suburb/shadcn service select/submit) submits successfully -> quote-success visible.",
+  "tested_scope": ["frontend", "integration"],
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "FloatingCTA.jsx cleanly separates mobile (md:hidden full-width grid-cols-2) and desktop (hidden md:flex compact lower-right) — good responsive isolation, fixes the prior iteration's framer-motion + Tailwind translate conflict.",
+    "Scroll threshold Math.max(innerHeight*0.85, 480) is robust across viewports; verified hero (h-screen) fully clears before bar appears.",
+    "AnimatePresence unmounts the bar completely at top (DOM node removed) — this means test scripts should query after scroll (as expected), and there is no residual invisible overlay blocking clicks near the bottom of the hero.",
+    "Home.jsx hero CTA buttons now use !px-7 !py-3 override — works but the !important overrides on utility classes are a small maintenance smell; consider a dedicated btn size variant if reused elsewhere.",
+    "StickyCallBar.jsx (dead file) still present in /app/frontend/src/components/ and unused; safe to delete to reduce dead code (carry-over comment from iteration 4)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "not tested (per request)", "frontend": "100% — all iteration-5 acceptance assertions pass"},
+  "test_credentials": "None required — public marketing site. /app/memory/test_credentials.md not applicable.",
+  "seed_data_creation": "One quote lead 'TEST Iter5 Playwright' created via /api/quotes (from /contact form submission verification).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "FloatingCTA behavior fully verified. Key selectors: hero-call-btn/hero-quote-btn (inside hero), sticky-call-btn/sticky-quote-btn (mobile only, appear after scrollY>~717 on 844h viewport), floating-call-btn/floating-quote-btn (desktop only, appear after scrollY>~765 on 900h). Use page.mouse.wheel to scroll (Lenis intercepts window.scrollTo). PageLoader ~2.6-2.8s. shadcn Select for /contact service field — click testid then click [role=option]. The bar is AnimatePresence-controlled so DOM nodes are absent when hidden (not just invisible).",
+  "rca of the issue": "No open issues — the prior iteration's framer-motion transform vs Tailwind -translate-x-1/2 conflict is resolved by restructuring the mobile bar to be a full-width grid (inset-x-0) with no translate, and the desktop group to bottom-6 right-6 with no translate. Both wrappers now only animate opacity + y, so inline transforms never clash with layout classes."
+}

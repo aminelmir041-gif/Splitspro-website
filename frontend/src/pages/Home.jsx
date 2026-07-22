@@ -99,8 +99,9 @@ const Hero = () => {
           Every home deserves the right solution. We take the time to understand your home, recommend the perfect air conditioning system and install it with precision and care.
         </motion.p>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 1.05 }} className="mt-9 flex flex-wrap gap-4">
-          <a href={PHONE_TEL} data-testid="hero-call-btn" className="btn-glass-outline"><Phone className="h-4 w-4" /> Call Now</a>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 1.05 }} className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <a href={PHONE_TEL} data-testid="hero-call-btn" className="btn-glass-outline justify-center !px-7 !py-3"><Phone className="h-4 w-4" /> Call Now</a>
+          <Link to="/contact" data-testid="hero-quote-btn" className="btn-glass justify-center !px-7 !py-3">Get Free Quote <ArrowUpRight className="h-4 w-4" /></Link>
         </motion.div>
       </motion.div>
 
