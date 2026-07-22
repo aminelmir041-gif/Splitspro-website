@@ -1,12 +1,11 @@
 import ServicePage from "./ServicePage";
-import { IMAGES } from "../lib/data";
 
 const Servicing = () => (
   <ServicePage
     overline="Air Conditioning Maintenance"
     title="Protect your comfort, year after year"
     sub="Considered, preventative servicing that keeps your system efficient, reliable and running at its best through every season."
-    image={IMAGES.techIndoor}
+    image={null}
     intro={{
       heading: "Small, regular care prevents big, costly problems",
       body: "Preventative maintenance keeps your air conditioner efficient, protects your warranty and helps avoid breakdowns when you need comfort most. We check, clean and fine-tune every component with care.",
@@ -19,7 +18,6 @@ const Servicing = () => (
       "Scheduled maintenance plans",
       "Reliable after-sales support",
     ]}
-    gallery={[IMAGES.technician]}
   />
 );
 

@@ -1,6 +1,5 @@
-import { PageHero, SectionHeading, TrustList, ProcessTimeline, BrandStrip, CTASection } from "../components/sections";
+import { PageHero, SectionHeading, WhyGrid, ProcessTimeline, BrandStrip, CTASection } from "../components/sections";
 import Reveal from "../components/Reveal";
-import { IMAGES, TRUST } from "../lib/data";
 
 const About = () => (
   <>
@@ -8,7 +7,6 @@ const About = () => (
       overline="About SplitsPro"
       title="Craftsmen of comfort"
       sub="We're Western Sydney air conditioning specialists who believe every home deserves a considered, precise solution — not a one-size-fits-all sell."
-      image={IMAGES.philosophy}
     />
 
     <section className="bg-white py-28 sm:py-36">
@@ -23,35 +21,22 @@ const About = () => (
     </section>
 
     <section className="bg-[#F5F5F7] py-28 sm:py-36">
-      <div className="sp-container grid items-center gap-16 lg:grid-cols-2">
-        <Reveal>
-          <div className="img-reveal overflow-hidden rounded-sm">
-            <img src={IMAGES.home} alt="Premium Australian home" loading="lazy" className="aspect-[4/5] w-full object-cover" />
-          </div>
-        </Reveal>
-        <div>
-          <SectionHeading overline="How We Work" title="The feeling of hiring true craftsmen" sub="Working with SplitsPro should feel like engaging a premium architect or bespoke builder — thoughtful planning, precise workmanship and genuine respect for your home." />
-        </div>
-      </div>
-    </section>
-
-    <section className="bg-white py-28 sm:py-36">
-      <div className="sp-container grid gap-16 lg:grid-cols-[0.8fr_1.2fr]">
-        <SectionHeading overline="What We Stand For" title="Principles we won't compromise" />
-        <TrustList items={TRUST} />
+      <div className="sp-container">
+        <SectionHeading overline="What We Stand For" title="Trust earned through craftsmanship" sub="No inflated claims. No rushed installations. Just thoughtful planning, quality workmanship and genuine care." />
+        <div className="mt-16"><WhyGrid /></div>
       </div>
     </section>
 
     <BrandStrip />
 
-    <section className="bg-[#F5F5F7] py-28 sm:py-36">
+    <section className="bg-white py-28 sm:py-36">
       <div className="sp-container">
         <SectionHeading overline="Our Process" title="Considered from start to finish" />
         <div className="mt-16"><ProcessTimeline /></div>
       </div>
     </section>
 
-    <CTASection image={IMAGES.philosophy} />
+    <CTASection />
   </>
 );
 

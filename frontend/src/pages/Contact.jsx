@@ -2,7 +2,7 @@ import { Phone, MapPin, Clock } from "lucide-react";
 import { PageHero } from "../components/sections";
 import Reveal from "../components/Reveal";
 import QuoteForm from "../components/QuoteForm";
-import { PHONE, PHONE_TEL, ABN, HOURS, IMAGES } from "../lib/data";
+import { PHONE, PHONE_TEL, ABN, HOURS } from "../lib/data";
 
 const Contact = () => (
   <>
@@ -10,7 +10,6 @@ const Contact = () => (
       overline="Contact"
       title="Let's craft your comfort"
       sub="Request your free, no-obligation quote below or call us directly. Thoughtful advice, precise workmanship, lasting comfort."
-      image={IMAGES.philosophy}
     />
 
     <section className="bg-white py-24 sm:py-32" data-testid="contact-section">
@@ -43,7 +42,7 @@ const Contact = () => (
         </div>
 
         <Reveal delay={0.12}>
-          <div className="rounded-sm border border-[#E5E5EA] bg-white p-8 soft-shadow sm:p-10">
+          <div className="rounded-2xl border border-[#E5E5EA] bg-white p-8 soft-shadow sm:p-10">
             <h2 className="font-serif text-3xl text-[#1D1D1F]">Get your free quote</h2>
             <p className="mt-2 text-[#6E6E73]">We&apos;ll call you back — no email needed.</p>
             <div className="mt-8"><QuoteForm /></div>

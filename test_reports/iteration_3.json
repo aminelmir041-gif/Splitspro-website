@@ -1,0 +1,27 @@
+{
+  "summary": "Full regression + luxury-redesign re-test of SplitsPro. Backend 8/8 pytest tests pass (POST/GET /api/quotes valid+invalid, 422 for empty body / short phone / blank name, /api/reviews returns exactly 8 Western Sydney seed reviews at SEED_VERSION=2). Frontend all-clear: (1) All 12 routes (/, /about, /split-systems, /ducted, /cleaning, /repairs, /servicing, /gallery, /reviews, /service-areas, /faq, /contact) render after ~2.6s loader with ZERO pageerrors. (2) Luxury hero shows 'Crafted Comfort For Every Home', 3 floating glass cards (Premium Installation, Licensed & Insured, Western Sydney), hero-quote-btn + hero-call-btn, transparent /logo.png loads (no broken image, complete && naturalWidth>0). (3) Exactly 4 service cards in correct order — Split System Installation, Ducted Air Conditioning, Air Conditioner Cleaning, Maintenance & Repairs; Ducted card renders 'Project image coming soon' placeholder with 0 img elements (no broken image). (4) /ducted and /servicing pages both render placeholder text as intended. (5) Interactive service areas: all 8 new suburbs present (Bass Hill, Bankstown, Chester Hill, Condell Park, Greenacre, Guildford, Panania, Revesby) — clicking area-0 updates areas-map iframe src to include 'Bass Hill'. (6) Quote form: empty submit -> error toast + no success; short-phone (<8 digits) -> error toast + no success; valid submit through shadcn Select -> quote-success shown. (7) Home + /faq accordion expands (aria-expanded false->true). (8) /gallery has masonry with 5 images including one 'coming soon' placeholder tile; NO 'Before / After' text anywhere. (9) Business rules: NO email or mailto:, NO fake stats ('10+ years', '2500+', '5-star reviews', 'Happy Customers', 'Installations Completed', 'Projects Completed' all absent), phone 0414 698 435 + ABN 62 137 127 557 in footer, footer-map iframe present. (10) floating-quote-btn appears on desktop after ~800px scroll and links to /contact; mobile 390-wide viewport shows sticky-call-btn + sticky-quote-btn. hero-quote-btn and nav-get-quote-btn both navigate to /contact. Zero regressions found.",
+  "tested_scope": ["backend", "frontend", "integration"],
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "server.py remains compact and clean (~160 lines). db.meta version-gated re-seed is idempotent — good.",
+    "Home.jsx is ~305 lines with several sub-components (Hero, Services, Reviews, ServiceAreas, HomeFAQ). Acceptable for a marketing landing page but nearing the 700-line split threshold if more sections are added; consider splitting into /pages/home/*.jsx modules in a future iteration.",
+    "Mongo _id correctly excluded via {'_id': 0} projection in both list endpoints — no leakage.",
+    "QuoteForm client-side validation duplicates server Pydantic validators (defence in depth) — good. Consider surfacing 422 field errors in the toast if a bad payload ever slips past client validation.",
+    "Hero uses mouse-follow parallax via framer-motion useTransform on useSpring values — smooth and well-damped, no console warnings observed. Lenis + custom cursor coexist cleanly (pointer-events:none on cursor overlay, verified clicks pass through).",
+    "Google Maps iframes emit expected non-critical console messages (allowfullscreen deprecation, cross-origin) — not actionable."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (8/8)", "frontend": "100% (all assertions passed across 3 browser runs)"},
+  "test_credentials": "None required — public marketing site.",
+  "seed_data_creation": "Multiple TEST-prefixed quote leads (TEST Alice, TEST Bob, TEST Carol, TEST Persistence Check, TEST Playwright User) created via /api/quotes during pytest and playwright runs. Reviews collection is auto-seeded by backend at SEED_VERSION=2.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Everything in iteration 3 review request is verified. Notes for future runs: (a) Use wait_until='domcontentloaded' + wait_for_timeout(2600) — networkidle times out because Google Maps iframe keeps polling. (b) There is a ~1.25s PageLoader overlay (loader-wrap) — always wait ~2.5s before asserting hero content. (c) Lenis intercepts window.scrollTo — use page.mouse.wheel or element.scrollIntoView. (d) Service field is shadcn/radix Select — click [data-testid=quote-service-select], wait ~400ms, then click [role=option]. (e) Custom cursor overlay has pointer-events:none so it never blocks clicks. Toast selector that works: li[data-type=\"error\"]. Backend regression suite: pytest /app/backend/tests/backend_test.py.",
+  "rca of the issue": "No issues found — iteration 3 is a clean pass. All ~30 discrete assertions across backend and frontend succeeded."
+}

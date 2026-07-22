@@ -19,7 +19,6 @@ const Cleaning = () => (
       "Extends the life of your system",
       "Ideal before summer",
     ]}
-    gallery={[IMAGES.techIndoor]}
   />
 );
 

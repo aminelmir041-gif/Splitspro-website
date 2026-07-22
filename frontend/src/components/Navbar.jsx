@@ -9,6 +9,7 @@ export const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const solid = scrolled || open;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -23,13 +24,14 @@ export const Navbar = () => {
     <header
       data-testid="navbar"
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled || open ? "border-b border-[#E5E5EA] bg-white py-4" : "bg-transparent py-6"
+        solid ? "border-b border-[#E5E5EA] bg-white/90 py-2.5 backdrop-blur-xl" : "py-4"
       }`}
     >
-      <nav className="sp-container flex items-center justify-between gap-6">
-        <Logo scrolled={scrolled} />
+      {!solid && <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/35 to-transparent" />}
+      <nav className="sp-container relative flex items-center justify-between gap-6">
+        <Logo onDark={!solid} scrolled={scrolled} />
 
-        <div className="hidden items-center gap-7 lg:flex">
+        <div className="hidden items-center gap-6 lg:flex">
           {NAV.map((item) => (
             <NavLink
               key={item.to}
@@ -38,7 +40,9 @@ export const Navbar = () => {
               data-testid={`nav-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
               className={({ isActive }) =>
                 `link-line text-sm font-medium tracking-wide transition-colors duration-300 ${
-                  isActive ? "text-[#1E3A8A]" : "text-[#1D1D1F] hover:text-[#1E3A8A]"
+                  solid
+                    ? isActive ? "text-[#1E3A8A]" : "text-[#1D1D1F] hover:text-[#1E3A8A]"
+                    : isActive ? "text-white" : "text-white/85 hover:text-white"
                 }`
               }
             >
@@ -48,17 +52,13 @@ export const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <Link
-            to="/contact"
-            data-testid="nav-get-quote-btn"
-            className="hidden rounded-sm bg-[#1E3A8A] px-6 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-white transition-transform duration-300 hover:scale-[1.02] sm:block"
-          >
+          <Link to="/contact" data-testid="nav-get-quote-btn" className="btn-glass hidden sm:inline-flex !px-6 !py-2.5">
             Get Quote
           </Link>
           <button
             data-testid="mobile-menu-toggle"
             onClick={() => setOpen((v) => !v)}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-[#E5E5EA] text-[#1D1D1F] lg:hidden"
+            className={`flex h-10 w-10 items-center justify-center rounded-full border lg:hidden ${solid ? "border-[#E5E5EA] text-[#1D1D1F]" : "border-white/40 text-white"}`}
             aria-label="Toggle menu"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -74,26 +74,16 @@ export const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden bg-white lg:hidden"
+            className="relative overflow-hidden bg-white lg:hidden"
           >
-            <div className="sp-container grid gap-1 py-6">
+            <div className="sp-container grid gap-0.5 py-5">
               {NAV.map((item) => (
-                <NavLink
-                  key={item.to}
-                  to={item.to}
-                  end={item.to === "/"}
-                  className={({ isActive }) =>
-                    `border-b border-[#F5F5F7] py-4 font-serif text-xl ${
-                      isActive ? "text-[#1E3A8A]" : "text-[#1D1D1F]"
-                    }`
-                  }
-                >
+                <NavLink key={item.to} to={item.to} end={item.to === "/"}
+                  className={({ isActive }) => `border-b border-[#F5F5F7] py-3.5 font-serif text-lg ${isActive ? "text-[#1E3A8A]" : "text-[#1D1D1F]"}`}>
                   {item.label}
                 </NavLink>
               ))}
-              <Link to="/contact" className="mt-4 rounded-sm bg-[#1E3A8A] px-6 py-4 text-center text-sm font-semibold uppercase tracking-wider text-white">
-                Get Free Quote
-              </Link>
+              <Link to="/contact" className="btn-glass mt-4 justify-center">Get Free Quote</Link>
             </div>
           </motion.div>
         )}

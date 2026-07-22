@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { PageHero, CTASection } from "../components/sections";
 import Reveal from "../components/Reveal";
-import { IMAGES } from "../lib/data";
 import { getReviews } from "../lib/api";
 
 const Reviews = () => {
@@ -18,7 +17,6 @@ const Reviews = () => {
         overline="Google Reviews"
         title="Kind words from local homeowners"
         sub="Real feedback from Western Sydney customers who trusted SplitsPro with their comfort."
-        image={IMAGES.living}
       />
 
       <section className="bg-white py-24 sm:py-32" data-testid="reviews-grid">
@@ -44,7 +42,7 @@ const Reviews = () => {
         </div>
       </section>
 
-      <CTASection image={IMAGES.home} />
+      <CTASection />
     </>
   );
 };
