@@ -1,62 +1,51 @@
-import { Phone, MapPin, Clock, ShieldCheck } from "lucide-react";
+import { Phone, MapPin, Clock } from "lucide-react";
 import { PageHero } from "../components/sections";
 import Reveal from "../components/Reveal";
 import QuoteForm from "../components/QuoteForm";
-import { PHONE, PHONE_TEL, ABN } from "../lib/data";
-
-const INFO = [
-  { icon: Phone, label: "Call us", value: PHONE, href: PHONE_TEL },
-  { icon: MapPin, label: "Service area", value: "Greater Sydney & surrounds" },
-  { icon: Clock, label: "Hours", value: "Mon–Sat, plus emergency call-outs" },
-  { icon: ShieldCheck, label: "ABN", value: ABN },
-];
+import { PHONE, PHONE_TEL, ABN, HOURS, IMAGES } from "../lib/data";
 
 const Contact = () => (
   <>
     <PageHero
-      eyebrow="Contact"
-      title="Let's get you comfortable"
-      sub="Request your free, no-obligation quote below or call us directly. Fast response, honest advice, premium results."
+      overline="Contact"
+      title="Let's craft your comfort"
+      sub="Request your free, no-obligation quote below or call us directly. Thoughtful advice, precise workmanship, lasting comfort."
+      image={IMAGES.philosophy}
     />
 
-    <section className="pb-24" data-testid="contact-section">
-      <div className="sp-container grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+    <section className="bg-white py-24 sm:py-32" data-testid="contact-section">
+      <div className="sp-container grid gap-16 lg:grid-cols-[0.85fr_1.15fr]">
         <div>
           <Reveal>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {INFO.map((item) => {
-                const Comp = item.href ? "a" : "div";
-                return (
-                  <Comp key={item.label} {...(item.href ? { href: item.href } : {})}
-                    data-testid={`contact-info-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition-colors hover:border-[#0055FF]/30">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#EBF3FF] text-[#0055FF]">
-                      <item.icon className="h-5 w-5" />
-                    </span>
-                    <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-slate-400">{item.label}</p>
-                    <p className="mt-1 font-display text-lg font-semibold text-[#0A0A0A]">{item.value}</p>
-                  </Comp>
-                );
-              })}
-            </div>
+            <span className="overline">Speak With Us</span>
+            <a href={PHONE_TEL} data-testid="contact-call-btn" className="mt-5 flex items-center gap-3 font-serif text-4xl text-[#1D1D1F] transition-colors hover:text-[#1E3A8A]">
+              <Phone className="h-7 w-7 text-[#1E3A8A]" /> {PHONE}
+            </a>
           </Reveal>
 
-          <Reveal delay={0.1}>
-            <div className="mt-6 rounded-3xl bg-[#002244] p-8 text-white">
-              <h3 className="font-display text-2xl font-bold">Prefer to talk?</h3>
-              <p className="mt-2 text-blue-100/70">Speak directly with our team for immediate help and honest advice.</p>
-              <a href={PHONE_TEL} data-testid="contact-call-btn"
-                className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#0055FF] px-7 py-4 font-semibold text-white transition-transform duration-300 hover:scale-[1.03]">
-                <Phone className="h-5 w-5" /> {PHONE}
-              </a>
+          <Reveal delay={0.08}>
+            <div className="mt-12 space-y-8">
+              <div className="border-t border-[#E5E5EA] pt-6">
+                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#6E6E73]"><Clock className="h-4 w-4" /> Opening Hours</p>
+                <div className="mt-4 space-y-2">
+                  {HOURS.map((h) => (
+                    <p key={h.day} className="flex justify-between text-[#1D1D1F]"><span>{h.day}</span><span className="text-[#6E6E73]">{h.time}</span></p>
+                  ))}
+                </div>
+              </div>
+              <div className="border-t border-[#E5E5EA] pt-6">
+                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#6E6E73]"><MapPin className="h-4 w-4" /> Service Area</p>
+                <p className="mt-4 text-[#1D1D1F]">Western Sydney & surrounds</p>
+                <p className="mt-2 text-sm text-[#6E6E73]">ABN {ABN}</p>
+              </div>
             </div>
           </Reveal>
         </div>
 
-        <Reveal delay={0.15}>
-          <div className="rounded-[2rem] border border-slate-100 bg-white p-8 shadow-[0_20px_60px_rgba(0,34,68,0.08)] sm:p-10">
-            <h2 className="font-display text-2xl font-bold">Get your free quote</h2>
-            <p className="mt-2 text-slate-500">We&apos;ll call you back — no email needed.</p>
+        <Reveal delay={0.12}>
+          <div className="rounded-sm border border-[#E5E5EA] bg-white p-8 soft-shadow sm:p-10">
+            <h2 className="font-serif text-3xl text-[#1D1D1F]">Get your free quote</h2>
+            <p className="mt-2 text-[#6E6E73]">We&apos;ll call you back — no email needed.</p>
             <div className="mt-8"><QuoteForm /></div>
           </div>
         </Reveal>

@@ -3,24 +3,23 @@ import { IMAGES } from "../lib/data";
 
 const Servicing = () => (
   <ServicePage
-    eyebrow="Servicing & Cleaning"
-    title="Air Conditioning Servicing"
-    sub="Keep your system running at peak efficiency with professional servicing and deep cleaning for healthier air and lower bills."
+    overline="Air Conditioning Maintenance"
+    title="Protect your comfort, year after year"
+    sub="Considered, preventative servicing that keeps your system efficient, reliable and running at its best through every season."
     image={IMAGES.techIndoor}
     intro={{
-      heading: "Protect your investment",
-      body: "Regular servicing keeps your air conditioner efficient, extends its life and maintains warranty compliance. Our deep coil and filter cleaning also improves air quality — ideal before the summer rush.",
+      heading: "Small, regular care prevents big, costly problems",
+      body: "Preventative maintenance keeps your air conditioner efficient, protects your warranty and helps avoid breakdowns when you need comfort most. We check, clean and fine-tune every component with care.",
     }}
     features={[
       "Comprehensive performance service",
-      "Deep coil and filter cleaning",
-      "Improved air quality and efficiency",
       "Preventative checks to avoid breakdowns",
       "Maintains manufacturer warranty",
-      "Scheduled servicing plans available",
+      "Improved efficiency and lower bills",
+      "Scheduled maintenance plans",
+      "Reliable after-sales support",
     ]}
-    gallery={[IMAGES.techIndoor, IMAGES.interior]}
-    processTitle="Simple, thorough servicing"
+    gallery={[IMAGES.technician]}
   />
 );
 

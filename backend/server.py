@@ -72,23 +72,25 @@ class Review(BaseModel):
 
 
 # ---------------- Seed data ----------------
+SEED_VERSION = 2
+
 SEED_REVIEWS = [
-    {"name": "Sarah M.", "suburb": "Bondi, NSW", "rating": 5, "service": "Split System Installation",
-     "text": "SplitsPro installed a Daikin split in our bedroom and the finish is immaculate. Punctual, tidy and the quote was exactly what we paid. Highly recommend.", "date": "2025-11-02"},
-    {"name": "James T.", "suburb": "Parramatta, NSW", "rating": 5, "service": "Ducted Installation",
-     "text": "Full ducted Mitsubishi Electric system through our two-storey home. The team mapped every zone perfectly and the house is now beautifully even. Faultless job.", "date": "2025-10-18"},
-    {"name": "Priya K.", "suburb": "Chatswood, NSW", "rating": 5, "service": "AC Servicing",
-     "text": "Booked a service and clean before summer. Technician was professional, explained everything and our old unit runs like new. Great value.", "date": "2025-09-30"},
-    {"name": "Daniel R.", "suburb": "Cronulla, NSW", "rating": 5, "service": "Emergency AC",
-     "text": "Called on a 40 degree day when our system died. They came out same day and had us cool again by evening. Absolute lifesavers.", "date": "2025-12-01"},
-    {"name": "Olivia W.", "suburb": "Manly, NSW", "rating": 5, "service": "AC Replacement",
-     "text": "Replaced a 15 year old unit with a quiet Fujitsu. Honest advice, no upsell, and a spotless clean-up. This is how a trade should be run.", "date": "2025-11-20"},
-    {"name": "Michael C.", "suburb": "Penrith, NSW", "rating": 5, "service": "Split System Replacement",
-     "text": "Two rooms done in an afternoon. The pricing was transparent and the workmanship is genuinely premium. Will use again for our office.", "date": "2025-10-05"},
-    {"name": "Emma L.", "suburb": "Newtown, NSW", "rating": 5, "service": "AC Repairs",
-     "text": "Diagnosed a fault three other companies missed. Fixed it properly the first time. Communication was excellent throughout.", "date": "2025-08-22"},
-    {"name": "Tom H.", "suburb": "Hornsby, NSW", "rating": 5, "service": "Commercial AC",
-     "text": "Fitted out our cafe with a commercial system. Minimal disruption, on schedule and the space is comfortable all day now. Brilliant work.", "date": "2025-09-11"},
+    {"name": "Sarah M.", "suburb": "Bass Hill, NSW", "rating": 5, "service": "Split System Installation",
+     "text": "SplitsPro took the time to understand our home before recommending anything. The Daikin split they installed is beautifully finished and whisper quiet. Genuine craftsmen.", "date": "2025-11-02"},
+    {"name": "James T.", "suburb": "Parramatta, NSW", "rating": 5, "service": "Ducted Air Conditioning",
+     "text": "Full ducted Mitsubishi Electric system through our two-storey home. Every zone was planned carefully and the finish is immaculate. You can tell they care about the detail.", "date": "2025-10-18"},
+    {"name": "Priya K.", "suburb": "Bankstown, NSW", "rating": 5, "service": "Air Conditioner Cleaning",
+     "text": "Booked a clean and service before summer. Professional, tidy and honest — our older unit runs like new. Couldn't recommend them more highly.", "date": "2025-09-30"},
+    {"name": "Daniel R.", "suburb": "Revesby, NSW", "rating": 5, "service": "Emergency Air Conditioning",
+     "text": "Called on a 40 degree day when our system failed. Same-day response and cool again by evening. Calm, respectful and thorough. Absolute professionals.", "date": "2025-12-01"},
+    {"name": "Olivia W.", "suburb": "Liverpool, NSW", "rating": 5, "service": "Air Conditioner Replacement",
+     "text": "Replaced a tired old unit with a quiet Fujitsu. Honest advice, no pressure and a spotless clean-up. This is how a premium trade should operate.", "date": "2025-11-20"},
+    {"name": "Michael C.", "suburb": "Fairfield, NSW", "rating": 5, "service": "Split System Installation",
+     "text": "Two rooms done in an afternoon. Transparent pricing and genuinely premium workmanship. Already booked them for our office.", "date": "2025-10-05"},
+    {"name": "Emma L.", "suburb": "Granville, NSW", "rating": 5, "service": "Air Conditioning Repairs",
+     "text": "Diagnosed a fault two other companies missed and fixed it properly first time. Communication was excellent throughout. Trustworthy and skilled.", "date": "2025-08-22"},
+    {"name": "Tom H.", "suburb": "Guildford, NSW", "rating": 5, "service": "Commercial Air Conditioning",
+     "text": "Fitted out our cafe with a commercial system. Minimal disruption, on schedule and beautifully finished. The space is comfortable all day now.", "date": "2025-09-11"},
 ]
 
 SEEDED = False
@@ -98,11 +100,14 @@ async def seed_reviews():
     global SEEDED
     if SEEDED:
         return
-    count = await db.reviews.count_documents({})
-    if count == 0:
+    meta = await db.meta.find_one({"key": "reviews_seed"})
+    current = meta.get("version") if meta else 0
+    if current != SEED_VERSION:
+        await db.reviews.delete_many({})
         docs = [Review(**r).model_dump() for r in SEED_REVIEWS]
         await db.reviews.insert_many(docs)
-        logging.info("Seeded %d reviews", len(docs))
+        await db.meta.update_one({"key": "reviews_seed"}, {"$set": {"version": SEED_VERSION}}, upsert=True)
+        logging.info("(Re)seeded %d reviews at version %d", len(docs), SEED_VERSION)
     SEEDED = True
 
 

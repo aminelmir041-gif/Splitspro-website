@@ -6,12 +6,13 @@ import { Toaster } from "@/components/ui/sonner";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import StickyCallBar from "@/components/StickyCallBar";
+import FloatingCTA from "@/components/FloatingCTA";
 
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import SplitSystems from "@/pages/SplitSystems";
 import Ducted from "@/pages/Ducted";
+import Cleaning from "@/pages/Cleaning";
 import Repairs from "@/pages/Repairs";
 import Servicing from "@/pages/Servicing";
 import Gallery from "@/pages/Gallery";
@@ -43,6 +44,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/split-systems" element={<SplitSystems />} />
               <Route path="/ducted" element={<Ducted />} />
+              <Route path="/cleaning" element={<Cleaning />} />
               <Route path="/repairs" element={<Repairs />} />
               <Route path="/servicing" element={<Servicing />} />
               <Route path="/gallery" element={<Gallery />} />
@@ -53,7 +55,7 @@ function App() {
             </Routes>
           </main>
           <Footer />
-          <StickyCallBar />
+          <FloatingCTA />
           <Toaster position="top-center" richColors />
         </BrowserRouter>
       </ReactLenis>

@@ -3,24 +3,23 @@ import { IMAGES } from "../lib/data";
 
 const Repairs = () => (
   <ServicePage
-    eyebrow="Repairs & Emergency"
-    title="Air Conditioning Repairs"
-    sub="Fast, accurate diagnostics and lasting repairs for every brand — including same-day emergency call-outs when the heat won't wait."
-    image={IMAGES.techOutdoor}
+    overline="Air Conditioning Repairs"
+    title="Diagnosed properly, fixed for good"
+    sub="Accurate diagnostics and lasting repairs across every major brand — including same-day emergency call-outs when comfort can't wait."
+    image={IMAGES.technician}
     intro={{
-      heading: "Back to comfort, fast",
-      body: "Not cooling, making noise, or leaking? Our licensed technicians diagnose the real problem the first time and fix it properly. We repair all major brands and offer honest advice on repair versus replacement.",
+      heading: "We find the real problem, then fix it right",
+      body: "Not cooling, noisy or leaking? We diagnose the underlying cause rather than treating symptoms, and give honest advice on whether a repair or replacement makes better sense for your home.",
     }}
     features={[
       "Same-day emergency response available",
-      "All brands diagnosed and repaired",
+      "All major brands repaired",
       "Honest repair-vs-replace advice",
-      "Air conditioner replacements when needed",
-      "Upfront pricing before any work begins",
-      "Workmanship you can rely on",
+      "Upfront pricing before any work",
+      "Reliable, lasting fixes",
+      "Respect for your home",
     ]}
-    gallery={[IMAGES.techOutdoor, IMAGES.techIndoor]}
-    processTitle="Diagnose, fix, done"
+    gallery={[IMAGES.techIndoor]}
   />
 );
 

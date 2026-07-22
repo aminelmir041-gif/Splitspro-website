@@ -1,57 +1,84 @@
 import { Link } from "react-router-dom";
-import { Phone, MapPin } from "lucide-react";
-import { NAV, SERVICES, PHONE, PHONE_TEL, ABN } from "../lib/data";
+import { Phone, Instagram, Facebook, MapPin } from "lucide-react";
+import { NAV, AREAS, HOURS, PHONE, PHONE_TEL, ABN } from "../lib/data";
 import Logo from "./Logo";
 
+const MAPS_SRC =
+  "https://www.google.com/maps?q=Bass+Hill+NSW+Australia&z=11&output=embed";
+
 export const Footer = () => (
-  <footer data-testid="footer" className="border-t border-slate-100 bg-[#002244] text-white">
-    <div className="sp-container grid gap-12 py-16 md:grid-cols-4">
-      <div className="md:col-span-1">
+  <footer data-testid="footer" className="bg-[#1D1D1F] text-white">
+    <div className="sp-container grid gap-12 py-20 lg:grid-cols-12">
+      <div className="lg:col-span-4">
         <Logo light />
-        <p className="mt-5 max-w-xs text-sm leading-relaxed text-blue-100/70">
-          Premium air conditioning installation, repairs and servicing across Sydney. Licensed, insured and finished to a luxury standard.
+        <p className="mt-6 max-w-sm font-serif text-2xl leading-snug text-white/90">
+          We craft comfort for every home.
         </p>
-        <a href={PHONE_TEL} className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#0055FF] px-5 py-3 text-sm font-semibold text-white transition-transform duration-300 hover:scale-[1.03]">
-          <Phone className="h-4 w-4" /> {PHONE}
-        </a>
+        <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/55">
+          Premium air conditioning installation, cleaning, repairs and maintenance across Western Sydney. Thoughtfully planned, precisely installed.
+        </p>
+        <div className="mt-6 flex items-center gap-4">
+          <a href="#" aria-label="Instagram" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 transition-colors hover:border-white/60">
+            <Instagram className="h-4 w-4" />
+          </a>
+          <a href="#" aria-label="Facebook" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 transition-colors hover:border-white/60">
+            <Facebook className="h-4 w-4" />
+          </a>
+        </div>
       </div>
 
-      <div>
-        <h4 className="font-display text-sm font-semibold uppercase tracking-widest text-blue-100/60">Explore</h4>
+      <div className="lg:col-span-2">
+        <h4 className="overline text-white/50">Explore</h4>
         <ul className="mt-5 space-y-3">
-          {NAV.slice(0, 6).map((n) => (
+          {NAV.map((n) => (
             <li key={n.to}>
-              <Link to={n.to} className="text-sm text-blue-100/80 transition-colors hover:text-white">{n.label}</Link>
+              <Link to={n.to} className="text-sm text-white/70 transition-colors hover:text-white">{n.label}</Link>
             </li>
           ))}
         </ul>
       </div>
 
-      <div>
-        <h4 className="font-display text-sm font-semibold uppercase tracking-widest text-blue-100/60">Services</h4>
-        <ul className="mt-5 space-y-3">
-          {SERVICES.slice(0, 6).map((s) => (
-            <li key={s.title}>
-              <Link to={`/${s.slug}`} className="text-sm text-blue-100/80 transition-colors hover:text-white">{s.title}</Link>
-            </li>
+      <div className="lg:col-span-2">
+        <h4 className="overline text-white/50">Service Areas</h4>
+        <ul className="mt-5 grid grid-cols-1 gap-3">
+          {AREAS.map((a) => (
+            <li key={a} className="text-sm text-white/70">{a}</li>
           ))}
         </ul>
       </div>
 
-      <div>
-        <h4 className="font-display text-sm font-semibold uppercase tracking-widest text-blue-100/60">Get in touch</h4>
-        <div className="mt-5 space-y-4 text-sm text-blue-100/80">
-          <p className="flex items-start gap-3"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#0055FF]" /> Servicing Greater Sydney & surrounds</p>
-          <p className="flex items-start gap-3"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-[#0055FF]" /> {PHONE}</p>
-          <p className="text-blue-100/60">ABN {ABN}</p>
+      <div className="lg:col-span-4">
+        <h4 className="overline text-white/50">Get In Touch</h4>
+        <a href={PHONE_TEL} className="mt-5 flex items-center gap-3 font-serif text-2xl text-white transition-colors hover:text-white/80">
+          <Phone className="h-5 w-5 text-white/60" /> {PHONE}
+        </a>
+        <div className="mt-5 space-y-1.5 text-sm text-white/70">
+          {HOURS.map((h) => (
+            <p key={h.day} className="flex justify-between gap-6"><span>{h.day}</span><span className="text-white/50">{h.time}</span></p>
+          ))}
+        </div>
+        <p className="mt-4 flex items-center gap-2 text-sm text-white/55">
+          <MapPin className="h-4 w-4" /> Western Sydney, NSW
+        </p>
+        <div className="mt-5 overflow-hidden rounded-sm border border-white/10">
+          <iframe
+            title="SplitsPro service area map"
+            src={MAPS_SRC}
+            width="100%"
+            height="180"
+            style={{ border: 0, filter: "grayscale(1) invert(0.92) contrast(0.9)" }}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            data-testid="footer-map"
+          />
         </div>
       </div>
     </div>
 
-    <div className="border-t border-white/10">
-      <div className="sp-container flex flex-col items-center justify-between gap-3 py-6 text-xs text-blue-100/60 sm:flex-row">
+    <div className="border-t border-white/10 pb-16 md:pb-0">
+      <div className="sp-container flex flex-col items-center justify-between gap-3 py-6 text-xs text-white/50 sm:flex-row">
         <p>© {new Date().getFullYear()} SplitsPro. All rights reserved.</p>
-        <p>ABN {ABN} · Fully licensed & insured</p>
+        <p>ABN {ABN} · Fully licensed &amp; insured</p>
       </div>
     </div>
   </footer>

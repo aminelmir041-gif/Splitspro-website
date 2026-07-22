@@ -1,46 +1,51 @@
-import { MapPin, Phone } from "lucide-react";
-import { PageHero, CTASection } from "../components/sections";
+import { Phone } from "lucide-react";
+import { PageHero, CTASection, SectionHeading } from "../components/sections";
 import Reveal from "../components/Reveal";
-import { AREAS, PHONE, PHONE_TEL } from "../lib/data";
+import { AREAS, IMAGES, PHONE, PHONE_TEL } from "../lib/data";
+
+const MAPS_SRC = "https://www.google.com/maps?q=Bass+Hill+NSW+Australia&z=11&output=embed";
 
 const ServiceAreas = () => (
   <>
     <PageHero
-      eyebrow="Service Areas"
-      title="Proudly servicing Greater Sydney"
-      sub="From the Eastern Suburbs to the west and everywhere between — if you're in Sydney, we've got your comfort covered. Not sure if we cover you? Just call."
+      overline="Service Areas"
+      title="Western Sydney specialists"
+      sub="We know the homes and streets we work in. Local knowledge, premium workmanship and a genuinely personal service."
+      image={IMAGES.home}
     />
 
-    <section className="pb-24" data-testid="areas-grid">
-      <div className="sp-container grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {AREAS.map((a, i) => (
-          <Reveal key={a.region} delay={(i % 3) * 0.08}>
-            <div data-testid={`area-card-${i}`} className="hover-lift h-full rounded-3xl border border-slate-100 bg-white p-8 shadow-sm hover:border-[#0055FF]/30">
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#EBF3FF] text-[#0055FF]">
-                <MapPin className="h-6 w-6" />
-              </span>
-              <h3 className="mt-5 font-display text-xl font-bold">{a.region}</h3>
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {a.suburbs.map((s) => (
-                  <li key={s} className="rounded-full bg-slate-50 px-3 py-1 text-sm text-slate-600">{s}</li>
-                ))}
-              </ul>
-            </div>
+    <section className="bg-white py-28 sm:py-36" data-testid="areas-grid">
+      <div className="sp-container grid gap-16 lg:grid-cols-2 lg:items-center">
+        <div>
+          <SectionHeading overline="Where We Work" title="Proudly serving your suburb" />
+          <div className="mt-10 flex flex-wrap gap-x-2 gap-y-4">
+            {AREAS.map((a, i) => (
+              <Reveal key={a} delay={(i % 5) * 0.04}>
+                <span data-testid={`area-${i}`} className="font-serif text-2xl text-[#1D1D1F] sm:text-3xl">
+                  {a}{i < AREAS.length - 1 && <span className="mx-2.5 text-[#1E3A8A]">·</span>}
+                </span>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal delay={0.2}>
+            <p className="mt-10 text-[#6E6E73]">
+              Outside these suburbs? We often travel further for the right project.
+            </p>
+            <a href={PHONE_TEL} data-testid="areas-call-btn" className="mt-5 inline-flex items-center gap-2 rounded-sm bg-[#1E3A8A] px-8 py-4 text-sm font-semibold uppercase tracking-wider text-white transition-transform duration-300 hover:scale-[1.02]">
+              <Phone className="h-4 w-4" /> {PHONE}
+            </a>
           </Reveal>
-        ))}
-      </div>
-
-      <div className="sp-container mt-14">
-        <div className="flex flex-col items-center justify-between gap-5 rounded-3xl bg-[#002244] p-10 text-center sm:flex-row sm:text-left">
-          <p className="max-w-lg text-lg text-blue-100/80">Outside these areas? We often travel further for the right project — give us a call to check availability.</p>
-          <a href={PHONE_TEL} className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[#0055FF] px-7 py-4 font-semibold text-white transition-transform duration-300 hover:scale-[1.03]" data-testid="areas-call-btn">
-            <Phone className="h-5 w-5" /> {PHONE}
-          </a>
         </div>
+
+        <Reveal delay={0.1}>
+          <div className="overflow-hidden rounded-sm border border-[#E5E5EA] soft-shadow-sm">
+            <iframe title="SplitsPro service map" src={MAPS_SRC} width="100%" height="460" style={{ border: 0 }} loading="lazy" referrerPolicy="no-referrer-when-downgrade" data-testid="areas-map" />
+          </div>
+        </Reveal>
       </div>
     </section>
 
-    <CTASection />
+    <CTASection image={IMAGES.philosophy} />
   </>
 );
 

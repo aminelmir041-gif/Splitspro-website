@@ -3,24 +3,23 @@ import { IMAGES } from "../lib/data";
 
 const Ducted = () => (
   <ServicePage
-    eyebrow="Ducted Air Conditioning"
-    title="Ducted Installation"
-    sub="Zoned, concealed ducted air conditioning that cools your entire home evenly — beautifully integrated and barely seen."
-    image={IMAGES.heroHome}
+    overline="Ducted Air Conditioning"
+    title="Whole-home comfort, elegantly hidden"
+    sub="Zoned ducted air conditioning concealed within your ceiling — seamless comfort with discreet vents and intelligent control."
+    image={IMAGES.ducted}
     intro={{
-      heading: "Whole-home comfort, elegantly hidden",
-      body: "Ducted systems deliver seamless climate control across every room with discreet ceiling vents and smart zoning. We plan each install carefully to minimise disruption and deliver a premium, architectural finish.",
+      heading: "Designed around your home, not the other way around",
+      body: "Ducted systems reward careful planning. We map zones to how you live, plan ceiling access to minimise disruption and integrate vents so they sit quietly within your architecture. The result is even, effortless comfort throughout.",
     }}
     features={[
       "Custom zoning for room-by-room control",
       "Discreet ductwork and designer vents",
       "Ideal for new builds and established homes",
-      "Ducted system replacements and upgrades",
+      "Ducted replacements and upgrades",
+      "Energy-efficient inverter technology",
       "Commercial ducted solutions available",
-      "Energy-smart inverter technology",
     ]}
-    gallery={[IMAGES.heroHome, IMAGES.living]}
-    processTitle="Designed around your home"
+    gallery={[IMAGES.home]}
   />
 );
 

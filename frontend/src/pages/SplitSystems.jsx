@@ -3,24 +3,23 @@ import { IMAGES } from "../lib/data";
 
 const SplitSystems = () => (
   <ServicePage
-    eyebrow="Split Systems"
-    title="Split System Installation"
-    sub="Whisper-quiet, energy-efficient split systems installed and replaced to a flawless premium standard across Sydney."
-    image={IMAGES.acWall}
+    overline="Split System Installation"
+    title="Quiet comfort, room by room"
+    sub="Expertly sized and installed split systems that suit the space they serve — beautifully finished and barely heard."
+    image={IMAGES.wallUnit}
     intro={{
-      heading: "The perfect split for every room",
-      body: "From compact bedrooms to open-plan living, we size, position and install your split system for maximum comfort and minimal running costs — with a spotless, professional finish every time.",
+      heading: "The right split, in exactly the right place",
+      body: "We never guess. We assess the room, its orientation and how you use it, then recommend a system sized precisely for the space. Every install is planned for tidy pipe runs, discreet placement and a flawless finish.",
     }}
     features={[
-      "Expert sizing so your system is never over or under-powered",
-      "Premium brands: Daikin, Mitsubishi Electric, Fujitsu, Panasonic",
-      "Tidy back-to-back and concealed pipe runs",
-      "Split system replacements and upgrades",
-      "Fixed, transparent quotes with no hidden fees",
-      "Fully licensed, insured and refrigerant certified",
+      "Correct sizing for each room",
+      "Premium brands — Daikin, Mitsubishi Electric, Fujitsu, Panasonic",
+      "Tidy, concealed pipe runs",
+      "Split system replacements & upgrades",
+      "Clean, professional finish",
+      "Manufacturer warranty",
     ]}
-    gallery={[IMAGES.acWall, IMAGES.interior]}
-    processTitle="From consult to cool in four steps"
+    gallery={[IMAGES.split]}
   />
 );
 
