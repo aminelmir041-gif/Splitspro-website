@@ -6,7 +6,9 @@ const Repairs = () => (
     overline="Maintenance & Repairs"
     title="Diagnosed properly, fixed for good"
     sub="Careful servicing and accurate diagnostics that keep every brand running at its best — including emergency call-outs when comfort can't wait."
-    image={IMAGES.controller}
+    image={IMAGES.technician}
+    introImage={IMAGES.outdoorDaikin}
+    imgPos="object-top"
     intro={{
       heading: "We find the real problem, then fix it right",
       body: "Not cooling, noisy or leaking? We diagnose the underlying cause rather than treating symptoms, and give honest advice on whether a repair or replacement makes better sense for your home. Preventative maintenance keeps things running smoothly all year.",

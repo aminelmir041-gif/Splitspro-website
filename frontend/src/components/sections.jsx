@@ -43,12 +43,12 @@ export const Airflow = ({ className = "" }) => (
 );
 
 // Deep-navy hero used by interior pages (no photo reuse)
-export const PageHero = ({ overline, title, sub, image, note }) => {
+export const PageHero = ({ overline, title, sub, image, note, imgPos = "object-center" }) => {
   if (image) {
     return (
       <section className="relative flex min-h-[58vh] items-end overflow-hidden">
         <div className="img-reveal absolute inset-0 -z-10">
-          <motion.img src={image} alt={title} initial={{ scale: 1.1 }} animate={{ scale: 1 }} transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }} className="h-full w-full object-cover" />
+          <motion.img src={image} alt={title} initial={{ scale: 1.1 }} animate={{ scale: 1 }} transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }} className={`h-full w-full object-cover ${imgPos}`} />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0B1F3A]/85 via-[#0B1F3A]/40 to-[#0B1F3A]/20" />
         </div>
         <div className="sp-container pb-16 pt-40">

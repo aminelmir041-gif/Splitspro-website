@@ -41,9 +41,10 @@ export const Footer = () => (
       <div className="lg:col-span-2">
         <h4 className="overline text-white/50">Service Areas</h4>
         <ul className="mt-5 grid grid-cols-1 gap-3">
-          {AREAS.map((a) => (
+          {AREAS.slice(0, 9).map((a) => (
             <li key={a} className="text-sm text-white/70">{a}</li>
           ))}
+          <li className="text-sm text-white/50">…and all Sydney metro</li>
         </ul>
       </div>
 

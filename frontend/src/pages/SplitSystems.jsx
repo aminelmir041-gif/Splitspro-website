@@ -6,7 +6,8 @@ const SplitSystems = () => (
     overline="Split System Installation"
     title="Quiet comfort, room by room"
     sub="Expertly sized and installed split systems that suit the space they serve — beautifully finished and barely heard."
-    image={IMAGES.livingSplit}
+    image={IMAGES.splitBedroom}
+    introImage={IMAGES.splitLiving}
     intro={{
       heading: "The right split, in exactly the right place",
       body: "We never guess. We assess the room, its orientation and how you use it, then recommend a system sized precisely for the space. Every install is planned for tidy pipe runs, discreet placement and a flawless finish.",

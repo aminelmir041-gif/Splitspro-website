@@ -1,11 +1,13 @@
 import ServicePage from "./ServicePage";
+import { IMAGES } from "../lib/data";
 
 const Ducted = () => (
   <ServicePage
     overline="Ducted Air Conditioning"
     title="Whole-home comfort, elegantly hidden"
     sub="Zoned ducted air conditioning concealed within your ceiling — seamless comfort with discreet vents and intelligent control."
-    image={null}
+    image={IMAGES.ductedHall}
+    introImage={IMAGES.ductedVent}
     intro={{
       heading: "Designed around your home, not the other way around",
       body: "Ducted systems reward careful planning. We map zones to how you live, plan ceiling access to minimise disruption and integrate vents so they sit quietly within your architecture. The result is even, effortless comfort throughout.",

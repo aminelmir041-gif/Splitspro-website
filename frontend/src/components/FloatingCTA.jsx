@@ -9,8 +9,8 @@ export const FloatingCTA = () => {
 
   useEffect(() => {
     const onScroll = () => {
-      // Appear only once the user has scrolled past the (full-height) hero.
-      const threshold = Math.max(window.innerHeight * 0.85, 480);
+      // Appear only once the hero has completely scrolled off screen (hero is full viewport height).
+      const threshold = window.innerHeight * 0.95;
       setShow(window.scrollY > threshold);
     };
     onScroll();

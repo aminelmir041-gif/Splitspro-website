@@ -81,7 +81,7 @@ export const QuoteForm = ({ onDark = false }) => {
         <div>
           <label htmlFor="q-suburb" className={labelClass}>Suburb</label>
           <Input id="q-suburb" data-testid="quote-suburb-input" value={form.suburb}
-            onChange={(e) => update("suburb", e.target.value)} placeholder="e.g. Bankstown" className={fieldClass} />
+            onChange={(e) => update("suburb", e.target.value)} placeholder="Enter your suburb" className={fieldClass} />
         </div>
         <div>
           <label className={labelClass}>Service Required</label>

@@ -1,47 +1,18 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion";
-import { ArrowUpRight, Phone, Check, MapPin, ImageIcon } from "lucide-react";
+import { ArrowUpRight, Phone, MapPin } from "lucide-react";
 import Reveal from "../components/Reveal";
 import {
   SectionHeading, Overline, CTASection, ProcessTimeline, BrandStrip, WhyGrid, TiltCard, Airflow,
 } from "../components/sections";
 import {
-  IMAGES, FEATURED_SERVICES, AREAS, FAQS, PHONE, PHONE_TEL,
+  IMAGES, FEATURED_SERVICES, AREAS_REGIONS, FAQS, PHONE, PHONE_TEL,
 } from "../lib/data";
 import { getReviews } from "../lib/api";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "../components/ui/accordion";
-
-const FLOAT_CARDS = [
-  { label: "Premium Installation", style: "left-4 top-[24%] sm:left-8", depth: 26, delay: 0.7 },
-  { label: "Licensed & Insured", style: "right-6 top-[40%] sm:right-10", depth: 40, delay: 0.9 },
-  { label: "Western Sydney", style: "left-8 bottom-[16%] sm:left-16", depth: 18, delay: 1.1 },
-];
-
-const FloatCard = ({ card, index, smx, smy }) => {
-  const cx = useTransform(smx, [-0.5, 0.5], [-card.depth, card.depth]);
-  const cy = useTransform(smy, [-0.5, 0.5], [-card.depth, card.depth]);
-  return (
-    <motion.div
-      className={`absolute z-10 hidden md:block ${card.style}`}
-      style={{ x: cx, y: cy }}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.9, delay: card.delay, ease: [0.16, 1, 0.3, 1] }}
-    >
-      <motion.div
-        className="glass-card flex items-center gap-2.5 rounded-full px-5 py-3"
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 5 + index, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#1E3A8A] text-white"><Check className="h-3.5 w-3.5" strokeWidth={3} /></span>
-        <span className="text-sm font-semibold text-[#0B1F3A]">{card.label}</span>
-      </motion.div>
-    </motion.div>
-  );
-};
 
 const Hero = () => {
   const ref = useRef(null);
@@ -74,14 +45,9 @@ const Hero = () => {
 
       <Airflow className="z-0 opacity-50" />
 
-      {/* Floating glass cards */}
-      {FLOAT_CARDS.map((c, i) => (
-        <FloatCard key={c.label} card={c} index={i} smx={smx} smy={smy} />
-      ))}
-
       <motion.div className="sp-container relative z-10 flex h-full flex-col justify-center pt-28 pb-36 sm:pt-24 sm:pb-32" style={{ y: contentY, opacity: fade }}>
         <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.5 }}>
-          <Overline light>Premium Residential Air Conditioning · Western Sydney</Overline>
+          <Overline light>Premium Residential Air Conditioning · South West Sydney</Overline>
         </motion.div>
 
         <h1 className="mt-6 max-w-4xl font-serif text-5xl font-medium leading-[1.0] tracking-tight text-white sm:text-6xl lg:text-8xl">
@@ -137,14 +103,7 @@ const Services = () => (
             <TiltCard className="h-full [transform-style:preserve-3d]">
               <Link to={`/${s.slug}`} data-testid={`service-card-${i}`} className="group block h-full overflow-hidden rounded-2xl border border-[#E5E5EA] bg-white soft-shadow-sm">
                 <div className="img-reveal relative aspect-[16/10] overflow-hidden">
-                  {s.placeholder ? (
-                    <div className="flex h-full w-full flex-col items-center justify-center bg-[#0B1F3A] text-blue-100/70">
-                      <ImageIcon className="h-8 w-8" strokeWidth={1.5} />
-                      <span className="mt-3 text-sm">Project image coming soon</span>
-                    </div>
-                  ) : (
-                    <img src={s.image} alt={s.title} loading="lazy" className="img-zoom h-full w-full object-cover" />
-                  )}
+                  <img src={s.image} alt={s.title} loading="lazy" className={`img-zoom h-full w-full object-cover ${s.pos || "object-center"}`} />
                   <span className="absolute left-5 top-5 flex h-11 w-11 items-center justify-center rounded-full glass-card text-[#1E3A8A]">
                     <s.icon className="h-5 w-5" strokeWidth={1.8} />
                   </span>
@@ -183,9 +142,9 @@ const GalleryPreview = () => (
       </div>
       <div className="mt-14 grid gap-6 md:grid-cols-3">
         {[
-          { src: IMAGES.rinnaiIndoor, t: "Rinnai Indoor Split" },
-          { src: IMAGES.daikinOutdoor, t: "Daikin Condenser" },
-          { src: IMAGES.rinnaiOutdoor, t: "Rinnai Outdoor Unit" },
+          { src: IMAGES.splitLiving, t: "Living Room Install" },
+          { src: IMAGES.outdoorRinnai, t: "Rinnai Outdoor Unit" },
+          { src: IMAGES.outdoorDaikin, t: "Daikin Condenser" },
         ].map((g, i) => (
           <Reveal key={i} delay={i * 0.08}>
             <div className="group img-reveal relative overflow-hidden rounded-2xl soft-shadow-sm">
@@ -234,34 +193,44 @@ const Process = () => (
   </section>
 );
 
-const MAPS_SRC = "https://www.google.com/maps?q=Bankstown+NSW+Australia&z=12&output=embed";
+const MAPS_SRC = "https://www.google.com/maps?q=Bankstown+NSW+Australia&z=11&output=embed";
 
 const ServiceAreas = () => {
   const [active, setActive] = useState(null);
   return (
     <section className="bg-[#F5F5F7] py-28 sm:py-36" data-testid="areas-section">
-      <div className="sp-container grid gap-14 lg:grid-cols-2 lg:items-center">
+      <div className="sp-container grid gap-14 lg:grid-cols-2 lg:items-start">
         <div>
-          <SectionHeading overline="Service Areas" title="Proudly serving Western Sydney" sub="Local knowledge, premium workmanship and a genuinely personal service across our suburbs." />
-          <div className="mt-10 flex flex-wrap gap-3">
-            {AREAS.map((a, i) => (
-              <Reveal key={a} delay={(i % 4) * 0.05}>
-                <button
-                  data-testid={`area-${i}`}
-                  onMouseEnter={() => setActive(a)}
-                  onFocus={() => setActive(a)}
-                  className={`rounded-full border px-5 py-2.5 text-sm transition-all duration-300 ${active === a ? "border-[#1E3A8A] bg-[#1E3A8A] text-white" : "border-[#E5E5EA] bg-white text-[#1D1D1F] hover:border-[#1E3A8A]"}`}
-                >
-                  <MapPin className="mr-1.5 inline h-3.5 w-3.5" />{a}
-                </button>
+          <SectionHeading overline="Service Areas" title="Based in South West Sydney, serving all of Sydney" sub="Local knowledge and premium workmanship across South Western Sydney, the Inner West, Eastern Suburbs, Sutherland Shire, Canterbury-Bankstown, Liverpool and Macarthur." />
+          <div className="mt-10 space-y-6">
+            {AREAS_REGIONS.map((grp) => (
+              <Reveal key={grp.region} delay={0.03}>
+                <div>
+                  <h3 className={`font-serif text-lg ${grp.primary ? "text-[#1E3A8A]" : "text-[#1D1D1F]"}`}>
+                    {grp.region}{grp.primary && <span className="ml-2 rounded-full bg-[#1E3A8A] px-2 py-0.5 align-middle text-[10px] font-semibold uppercase tracking-wider text-white">Primary</span>}
+                  </h3>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {grp.suburbs.map((a, i) => (
+                      <button
+                        key={a}
+                        data-testid={`area-${grp.region.replace(/\s+/g, "-").toLowerCase()}-${i}`}
+                        onMouseEnter={() => setActive(a)}
+                        onFocus={() => setActive(a)}
+                        className={`rounded-full border px-3.5 py-1.5 text-sm transition-all duration-300 ${active === a ? "border-[#1E3A8A] bg-[#1E3A8A] text-white" : "border-[#E5E5EA] bg-white text-[#6E6E73] hover:border-[#1E3A8A] hover:text-[#1D1D1F]"}`}
+                      >
+                        {a}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </Reveal>
             ))}
           </div>
-          <p className="mt-8 text-[#6E6E73]">Not sure if we cover your suburb? <a href={PHONE_TEL} className="font-semibold text-[#1E3A8A] link-line">Call {PHONE}</a></p>
+          <p className="mt-8 text-[#6E6E73]"><MapPin className="mr-1 inline h-4 w-4 text-[#1E3A8A]" /> SplitsPro services <span className="font-semibold text-[#1D1D1F]">all Sydney metropolitan suburbs</span>. Not sure if we cover you? <a href={PHONE_TEL} className="font-semibold text-[#1E3A8A] link-line">Call {PHONE}</a></p>
         </div>
         <Reveal delay={0.1}>
-          <div className="overflow-hidden rounded-2xl border border-[#E5E5EA] soft-shadow">
-            <iframe title="SplitsPro service areas map" src={active ? `https://www.google.com/maps?q=${encodeURIComponent(active + " NSW Australia")}&z=13&output=embed` : MAPS_SRC} width="100%" height="440" style={{ border: 0 }} loading="lazy" referrerPolicy="no-referrer-when-downgrade" data-testid="areas-map" />
+          <div className="overflow-hidden rounded-2xl border border-[#E5E5EA] soft-shadow lg:sticky lg:top-28">
+            <iframe title="SplitsPro service areas map" src={active ? `https://www.google.com/maps?q=${encodeURIComponent(active + " NSW Australia")}&z=13&output=embed` : MAPS_SRC} width="100%" height="520" style={{ border: 0 }} loading="lazy" referrerPolicy="no-referrer-when-downgrade" data-testid="areas-map" />
           </div>
         </Reveal>
       </div>

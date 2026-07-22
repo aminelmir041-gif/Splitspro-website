@@ -8,6 +8,8 @@ export const PHONE_TEL = "tel:0414698435";
 export const ABN = "62 137 127 557";
 export const LOGO = "/logo.png";
 
+const A = "https://customer-assets-lxgj4vgw.emergentagent.net/job_splitspro-preview/artifacts/";
+
 export const HOURS = [
   { day: "Monday – Friday", time: "7:00am – 6:00pm" },
   { day: "Saturday", time: "8:00am – 4:00pm" },
@@ -35,15 +37,19 @@ export const SERVICE_OPTIONS = [
   "Commercial Air Conditioning",
 ];
 
-// Real client photography (uploaded). No stock, no reuse across sections.
+// Real client photography (uploaded).
 export const IMAGES = {
-  heroInterior: "https://customer-assets-lxgj4vgw.emergentagent.net/job_splitspro-preview/artifacts/q6fmbwv0_AdobeStock_569217207.webp",
-  livingSplit: "https://customer-assets-lxgj4vgw.emergentagent.net/job_splitspro-preview/artifacts/g2e5o1an_AdobeStock_2001823238.webp",
-  rinnaiIndoor: "https://customer-assets-lxgj4vgw.emergentagent.net/job_splitspro-preview/artifacts/iai8aofm_20260716_183258%281%29.webp",
-  daikinOutdoor: "https://customer-assets-lxgj4vgw.emergentagent.net/job_splitspro-preview/artifacts/8sn2d27k_AdobeStock_1222382516_Editorial_Use_Only.webp",
-  rinnaiOutdoor: "https://customer-assets-lxgj4vgw.emergentagent.net/job_splitspro-preview/artifacts/meyqoj4d_file_000000004bf881fbb2fa04727afb3b11.png",
-  cleaning: "https://customer-assets-lxgj4vgw.emergentagent.net/job_splitspro-preview/artifacts/lf1angzr_AdobeStock_2014887759.webp",
-  controller: "https://customer-assets-lxgj4vgw.emergentagent.net/job_splitspro-preview/artifacts/micwrs4g_AdobeStock_709351486_Editorial_Use_Only.webp",
+  heroInterior: A + "q6fmbwv0_AdobeStock_569217207.webp",
+  splitBedroom: A + "4gx7zwbm_Daikin-Zena-Split-System-sq.jpg",
+  splitLiving: A + "g2e5o1an_AdobeStock_2001823238.webp",
+  splitIndoor: A + "iai8aofm_20260716_183258%281%29.webp",
+  ductedHall: A + "2tkheqar_ducted-air-conditioning-01.jpg",
+  ductedVent: A + "dq00wh00_ducted-720.webp",
+  cleaning: A + "lf1angzr_AdobeStock_2014887759.webp",
+  technician: A + "361ebd4d_file_0000000002b081faa42489c6f6c612a3.png",
+  outdoorRinnai: A + "tvk64ify_Rinnai-reverse-cycle-split-system-aircon-outdoor-unit.jpg",
+  outdoorRinnai2: A + "meyqoj4d_file_000000004bf881fbb2fa04727afb3b11.png",
+  outdoorDaikin: A + "8sn2d27k_AdobeStock_1222382516_Editorial_Use_Only.webp",
 };
 
 export const FEATURED_SERVICES = [
@@ -51,16 +57,16 @@ export const FEATURED_SERVICES = [
     slug: "split-systems",
     title: "Split System Installation",
     desc: "Quiet, energy-efficient split systems, expertly sized and installed for the room they serve.",
-    image: IMAGES.livingSplit,
-    placeholder: false,
+    image: IMAGES.splitBedroom,
+    pos: "object-center",
     icon: Snowflake,
   },
   {
     slug: "ducted",
     title: "Ducted Air Conditioning",
     desc: "Whole-home comfort concealed within your ceiling, with discreet vents and intelligent zoning.",
-    image: null,
-    placeholder: true,
+    image: IMAGES.ductedHall,
+    pos: "object-center",
     icon: Wind,
   },
   {
@@ -68,15 +74,15 @@ export const FEATURED_SERVICES = [
     title: "Air Conditioner Cleaning",
     desc: "Thorough coil and filter cleaning for healthier air, cleaner systems and better efficiency.",
     image: IMAGES.cleaning,
-    placeholder: false,
+    pos: "object-center",
     icon: Sparkles,
   },
   {
     slug: "repairs",
     title: "Maintenance & Repairs",
     desc: "Careful servicing and accurate diagnostics that keep every brand running at its best.",
-    image: IMAGES.controller,
-    placeholder: false,
+    image: IMAGES.technician,
+    pos: "object-top",
     icon: Wrench,
   },
 ];
@@ -105,16 +111,29 @@ export const PROCESS = [
   { step: "04", title: "Enjoy Lasting Comfort", desc: "Balanced, efficient comfort backed by reliable after-sales support." },
 ];
 
-export const AREAS = [
-  "Bass Hill", "Bankstown", "Chester Hill", "Condell Park",
-  "Greenacre", "Guildford", "Panania", "Revesby",
+// Local-SEO service areas — primary: South Western Sydney, then secondary regions.
+export const AREAS_REGIONS = [
+  { region: "South Western Sydney", primary: true, suburbs: ["Bass Hill", "Bankstown", "Yagoona", "Condell Park", "Greenacre", "Chester Hill", "Guildford", "Fairfield", "Cabramatta"] },
+  { region: "Canterbury-Bankstown", suburbs: ["Punchbowl", "Belmore", "Lakemba", "Roselands", "Padstow", "Revesby", "Panania", "Milperra"] },
+  { region: "Liverpool Region", suburbs: ["Liverpool", "Moorebank", "Casula", "Prestons", "Edmondson Park"] },
+  { region: "Macarthur", suburbs: ["Campbelltown", "Camden", "Oran Park", "Gregory Hills", "Leppington"] },
+  { region: "Western Sydney", suburbs: ["Parramatta", "Auburn", "Lidcombe", "Wentworth Point", "Homebush", "Blacktown", "Castle Hill", "Kellyville", "Baulkham Hills"] },
+  { region: "Inner West", suburbs: ["Strathfield", "Burwood", "Ashfield", "Ryde"] },
+  { region: "Sutherland Shire & Southern", suburbs: ["Peakhurst", "Hurstville", "Rockdale", "Cronulla", "Miranda", "Sylvania"] },
+  { region: "Eastern Suburbs", suburbs: ["Mascot", "Maroubra", "Randwick", "Bondi Junction"] },
 ];
 
+export const AREAS = AREAS_REGIONS.flatMap((r) => r.suburbs);
+
 export const GALLERY = [
-  { src: IMAGES.rinnaiIndoor, title: "Rinnai Indoor Split", tag: "Split System", placeholder: false },
-  { src: IMAGES.daikinOutdoor, title: "Daikin Condenser Install", tag: "Installation", placeholder: false },
-  { src: IMAGES.rinnaiOutdoor, title: "Rinnai Outdoor Unit", tag: "Installation", placeholder: false },
-  { src: null, title: "Project image coming soon", tag: "New Project", placeholder: true },
+  { src: IMAGES.splitBedroom, title: "Daikin Zena Split", tag: "Split System" },
+  { src: IMAGES.splitLiving, title: "Living Room Install", tag: "Residential" },
+  { src: IMAGES.outdoorRinnai, title: "Rinnai Outdoor Unit", tag: "Outdoor" },
+  { src: IMAGES.technician, title: "On-Site Servicing", tag: "Technician" },
+  { src: IMAGES.ductedVent, title: "Concealed Ducted Vent", tag: "Ducted" },
+  { src: IMAGES.splitIndoor, title: "Rinnai Indoor Split", tag: "Split System" },
+  { src: IMAGES.outdoorDaikin, title: "Daikin Condenser", tag: "Outdoor" },
+  { src: IMAGES.ductedHall, title: "Ducted Hallway Vent", tag: "Ducted" },
 ];
 
 export const FAQS = [
@@ -124,5 +143,5 @@ export const FAQS = [
   { q: "Are you licensed and insured?", a: "Absolutely. SplitsPro is fully licensed, insured and refrigerant-handling certified. ABN 62 137 127 557." },
   { q: "How long does an installation take?", a: "A standard split system is typically completed within a few hours. Ducted systems usually take one to two days depending on the size of the home. We confirm timing at the planning stage." },
   { q: "Do you clean up after the installation?", a: "Always. A clean, professional finish and respect for your home are part of the SplitsPro standard — we leave your space spotless." },
-  { q: "Which areas do you service?", a: "We specialise across Western Sydney including Bass Hill, Bankstown, Chester Hill, Condell Park, Greenacre, Guildford, Panania and Revesby. Call us to confirm your suburb." },
+  { q: "Which areas do you service?", a: "We're based in South Western Sydney and service all Sydney metropolitan suburbs — from Liverpool, Bankstown and Fairfield through to the Inner West, Eastern Suburbs, Sutherland Shire and Macarthur. Call us to confirm your suburb." },
 ];
