@@ -42,7 +42,14 @@ Awwwards-level motion (framer-motion + lenis), bright white + premium blue (#005
 
 ## Awaiting from client
 - Real Google review text (name/rating/text) to replace sample reviews.
-- Ducted ceiling-vent photos + a maintenance/technician photo to replace the "coming soon" placeholders.
+
+## v4–v7 (polish + real photography + SEO)
+- Real client photos wired per section: Split=Daikin Zena + living-room split; Ducted=ducted hallway vent + concealed vent (no controller); Cleaning=filter clean; Maintenance & Repairs hero=technician-on-ladder (focal object-[50%_38%] so the person is framed, not the ceiling). Skipped AI/smart-home graphic + browser screenshots.
+- CTA UX: hero keeps Call Now + Get Free Quote; single scroll-triggered action bar appears only after the full-height hero scrolls off (mobile full-width dual bar charcoal+navy; desktop compact lower-right group); removed the old centred pill and hero glass badges.
+- Header: larger transparent logo (h-14 desktop), transparent→frosted-white on scroll, shrinks on scroll, no overlap with hero H1.
+- Local SEO service areas: grouped regions, PRIMARY South Western Sydney, secondary Western Sydney/Inner West/Eastern/Sutherland/Canterbury-Bankstown/Liverpool/Macarthur; interactive map; "services all Sydney metropolitan suburbs". Meta/keywords updated.
+- Quote form suburb placeholder = "Enter your suburb" (not pre-filled). Gallery = 7-tile masonry (installs, indoor/outdoor/ducted), no dupes on homepage.
+- Verified: iteration_7 100% pass (backend 8/8, frontend all criteria, zero regressions).
 
 ## Backlog / Next
 - P1: Wire /api/quotes to GoHighLevel (webhook/API) for real lead automation
