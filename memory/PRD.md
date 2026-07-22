@@ -62,6 +62,15 @@ Goal: optimise the site for Google/Meta Ads lead generation while keeping the lu
 - Reusable components added to sections.jsx: `GoogleRating`, `TrustBadges`, `ServiceReviews`.
 - Verified: iteration_9 — backend 12/12 pytest PASS, frontend 11/11 acceptance PASS, zero bugs. Backend tests at /app/backend/tests/backend_test.py.
 
+## v9 — HOME COMFORT PLAN™ CONVERSION UPGRADE (Split + Ducted only, 2026-07-22)
+Goal: lift Google/Meta Ads conversions on the two highest-intent pages WITHOUT redesigning them.
+- New template `HomeComfortPage.jsx` used ONLY by /split-systems and /ducted (Cleaning/Repairs/Servicing keep the original ServicePage.jsx with bottom form — unchanged).
+- Compact enquiry form moved HIGH on the page: premium two-column `reserve-section` (id="reserve") right after hero + trust badges. Left = Home Comfort Plan value copy + Google rating + one service-specific review + trust bullets; right = form card with Google rating above form, heading "Reserve Your Complimentary Home Comfort Plan™", submit "Reserve My Home Comfort Plan", and a 7-item trust strip below.
+- Added reinforcement sections below the form: Home Comfort Plan™ premium block (badge "Complimentary · valued over $200" + 9 inclusion cards), curiosity ("Why is our Home Comfort Plan different?"), guarantee ("Built to last. Backed with confidence." — 5 cards), exclusivity ("Complimentary for a limited number of homeowners each month" + scroll-to-form CTA), plus existing benefits/gallery/process/FAQ/service-areas/CTA reused with identical styling.
+- Reviews are service-specific: /split-systems shows only split reviewer(s), /ducted only ducted — inline, no separate testimonials page.
+- Shared content in data.js: HOME_COMFORT_INCLUDES (9), HOME_COMFORT_GUARANTEES (5), FORM_TRUST_STRIP (7).
+- Verified: iteration_10 — frontend 9/9 acceptance PASS, zero regressions (Cleaning/Repairs/Servicing + Home unaffected). Backend unchanged (iteration_9 12/12).
+
 ## Backlog / Next (updated)
 - P1: Wire /api/quotes (+ photo_url) to GoHighLevel via webhook/API for real lead automation.
 - P2: Simple admin/lead view to review submitted leads + uploaded photos.
