@@ -1,10 +1,12 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, UploadFile, File, Header, Query
+from fastapi.responses import Response
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import re
 import logging
+import requests
 from pathlib import Path
 from pydantic import BaseModel, Field, field_validator
 from typing import List, Optional
@@ -27,13 +29,64 @@ def now_iso():
     return datetime.now(timezone.utc).isoformat()
 
 
+# ---------------- Object storage ----------------
+STORAGE_URL = "https://integrations.emergentagent.com/objstore/api/v1/storage"
+EMERGENT_KEY = os.environ.get("EMERGENT_LLM_KEY")
+APP_NAME = "splitspro"
+MAX_UPLOAD_BYTES = 10 * 1024 * 1024  # 10MB
+ALLOWED_IMAGE_TYPES = {"image/jpeg", "image/png", "image/webp", "image/gif", "image/heic", "image/heif"}
+storage_key = None
+
+
+def init_storage():
+    global storage_key
+    if storage_key:
+        return storage_key
+    resp = requests.post(f"{STORAGE_URL}/init", json={"emergent_key": EMERGENT_KEY}, timeout=30)
+    resp.raise_for_status()
+    storage_key = resp.json()["storage_key"]
+    return storage_key
+
+
+def put_object(path: str, data: bytes, content_type: str) -> dict:
+    key = init_storage()
+    resp = requests.put(
+        f"{STORAGE_URL}/objects/{path}",
+        headers={"X-Storage-Key": key, "Content-Type": content_type},
+        data=data, timeout=120,
+    )
+    if resp.status_code == 403:
+        # storage_key expired — refresh once and retry
+        globals()["storage_key"] = None
+        key = init_storage()
+        resp = requests.put(
+            f"{STORAGE_URL}/objects/{path}",
+            headers={"X-Storage-Key": key, "Content-Type": content_type},
+            data=data, timeout=120,
+        )
+    resp.raise_for_status()
+    return resp.json()
+
+
+def get_object(path: str):
+    key = init_storage()
+    resp = requests.get(
+        f"{STORAGE_URL}/objects/{path}",
+        headers={"X-Storage-Key": key}, timeout=60,
+    )
+    resp.raise_for_status()
+    return resp.content, resp.headers.get("Content-Type", "application/octet-stream")
+
+
 # ---------------- Models ----------------
 class QuoteCreate(BaseModel):
     name: str
     phone: str
     service: str
     suburb: str
+    email: Optional[str] = ""
     message: Optional[str] = ""
+    photo_url: Optional[str] = ""
 
     @field_validator("name", "phone", "service", "suburb")
     @classmethod
@@ -57,40 +110,42 @@ class Quote(BaseModel):
     phone: str
     service: str
     suburb: str
+    email: str = ""
     message: str = ""
+    photo_url: str = ""
     created_at: str = Field(default_factory=now_iso)
 
 
 class Review(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
-    suburb: str
+    suburb: str = ""
     rating: int = 5
     text: str
     service: str = ""
+    category: str = "general"
+    featured: bool = False
     date: str = ""
 
 
 # ---------------- Seed data ----------------
-SEED_VERSION = 2
+SEED_VERSION = 3
 
 SEED_REVIEWS = [
-    {"name": "Sarah M.", "suburb": "Bass Hill, NSW", "rating": 5, "service": "Split System Installation",
-     "text": "SplitsPro took the time to understand our home before recommending anything. The Daikin split they installed is beautifully finished and whisper quiet. Genuine craftsmen.", "date": "2025-11-02"},
-    {"name": "James T.", "suburb": "Parramatta, NSW", "rating": 5, "service": "Ducted Air Conditioning",
-     "text": "Full ducted Mitsubishi Electric system through our two-storey home. Every zone was planned carefully and the finish is immaculate. You can tell they care about the detail.", "date": "2025-10-18"},
-    {"name": "Priya K.", "suburb": "Bankstown, NSW", "rating": 5, "service": "Air Conditioner Cleaning",
-     "text": "Booked a clean and service before summer. Professional, tidy and honest — our older unit runs like new. Couldn't recommend them more highly.", "date": "2025-09-30"},
-    {"name": "Daniel R.", "suburb": "Revesby, NSW", "rating": 5, "service": "Emergency Air Conditioning",
-     "text": "Called on a 40 degree day when our system failed. Same-day response and cool again by evening. Calm, respectful and thorough. Absolute professionals.", "date": "2025-12-01"},
-    {"name": "Olivia W.", "suburb": "Liverpool, NSW", "rating": 5, "service": "Air Conditioner Replacement",
-     "text": "Replaced a tired old unit with a quiet Fujitsu. Honest advice, no pressure and a spotless clean-up. This is how a premium trade should operate.", "date": "2025-11-20"},
-    {"name": "Michael C.", "suburb": "Fairfield, NSW", "rating": 5, "service": "Split System Installation",
-     "text": "Two rooms done in an afternoon. Transparent pricing and genuinely premium workmanship. Already booked them for our office.", "date": "2025-10-05"},
-    {"name": "Emma L.", "suburb": "Granville, NSW", "rating": 5, "service": "Air Conditioning Repairs",
-     "text": "Diagnosed a fault two other companies missed and fixed it properly first time. Communication was excellent throughout. Trustworthy and skilled.", "date": "2025-08-22"},
-    {"name": "Tom H.", "suburb": "Guildford, NSW", "rating": 5, "service": "Commercial Air Conditioning",
-     "text": "Fitted out our cafe with a commercial system. Minimal disruption, on schedule and beautifully finished. The space is comfortable all day now.", "date": "2025-09-11"},
+    {"name": "Sia", "rating": 5, "service": "Split System Installation", "category": "general", "featured": True,
+     "text": "We had the most fantastic experience with Splits Pro. They were professional from the initial quote through to installation, explained every option clearly, and completed the job to an exceptionally high standard. The workmanship was clean, efficient and we couldn't be happier. Highly recommended."},
+    {"name": "Mustapha Hamed", "rating": 5, "service": "Split System Installation", "category": "split-systems",
+     "text": "Very professional and reliable. The team completed our split system installation perfectly, left everything spotless and made the whole process easy from start to finish."},
+    {"name": "Charles Speights", "rating": 5, "service": "Ducted Air Conditioning", "category": "ducted",
+     "text": "Outstanding communication and workmanship. The ducted installation was completed on time, everything was explained clearly and the final result exceeded our expectations."},
+    {"name": "Carolyn Hicks", "rating": 5, "service": "Air Conditioner Cleaning", "category": "cleaning",
+     "text": "Exceptional service and attention to detail. Our air conditioner is noticeably cleaner, quieter and performs better than ever. Highly recommend Splits Pro."},
+    {"name": "Mohammad Sowaid", "rating": 5, "service": "Repairs & Diagnostics", "category": "repairs",
+     "text": "From diagnosing the issue to completing the repair, everything was handled professionally. Honest advice, fair pricing and outstanding workmanship."},
+    {"name": "John Wick", "rating": 5, "service": "Maintenance", "category": "servicing",
+     "text": "Reliable, punctual and knowledgeable. Splits Pro serviced our system thoroughly and explained everything they were doing. Our air conditioner is running like new again."},
+    {"name": "Analisa Sanders", "rating": 5, "service": "General", "category": "general",
+     "text": "Very happy with the service from start to finish. Friendly team, excellent communication and quality workmanship. We'll definitely use Splits Pro again."},
 ]
 
 SEEDED = False
@@ -125,6 +180,43 @@ async def create_quote(payload: QuoteCreate):
     return quote
 
 
+@api_router.post("/upload")
+async def upload(file: UploadFile = File(...)):
+    data = await file.read()
+    if len(data) > MAX_UPLOAD_BYTES:
+        raise HTTPException(status_code=413, detail="Image must be 10MB or smaller.")
+    content_type = file.content_type or "application/octet-stream"
+    if content_type not in ALLOWED_IMAGE_TYPES:
+        raise HTTPException(status_code=400, detail="Please upload an image file (JPG, PNG, WEBP).")
+    ext = file.filename.split(".")[-1].lower() if file.filename and "." in file.filename else "jpg"
+    path = f"{APP_NAME}/uploads/{uuid.uuid4()}.{ext}"
+    try:
+        result = put_object(path, data, content_type)
+    except Exception as e:
+        logging.error("Upload failed: %s", e)
+        raise HTTPException(status_code=502, detail="Upload failed. Please try again.")
+    stored_path = result["path"]
+    await db.files.insert_one({
+        "id": str(uuid.uuid4()),
+        "storage_path": stored_path,
+        "original_filename": file.filename,
+        "content_type": content_type,
+        "size": result.get("size", len(data)),
+        "is_deleted": False,
+        "created_at": now_iso(),
+    })
+    return {"path": stored_path, "url": f"/api/files/{stored_path}"}
+
+
+@api_router.get("/files/{path:path}")
+async def download(path: str):
+    record = await db.files.find_one({"storage_path": path, "is_deleted": False})
+    if not record:
+        raise HTTPException(status_code=404, detail="File not found")
+    data, content_type = get_object(path)
+    return Response(content=data, media_type=record.get("content_type", content_type))
+
+
 @api_router.get("/quotes", response_model=List[Quote])
 async def list_quotes():
     docs = await db.quotes.find({}, {"_id": 0}).sort("created_at", -1).to_list(1000)
@@ -155,6 +247,11 @@ logger = logging.getLogger(__name__)
 @app.on_event("startup")
 async def startup():
     await seed_reviews()
+    try:
+        init_storage()
+        logging.info("Storage initialized")
+    except Exception as e:
+        logging.error("Storage init failed: %s", e)
 
 
 @app.on_event("shutdown")

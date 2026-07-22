@@ -3,6 +3,7 @@ import { IMAGES } from "../lib/data";
 
 const Ducted = () => (
   <ServicePage
+    slug="ducted"
     overline="Ducted Air Conditioning"
     title="Whole-home comfort, elegantly hidden"
     sub="Zoned ducted air conditioning concealed within your ceiling — seamless comfort with discreet vents and intelligent control."

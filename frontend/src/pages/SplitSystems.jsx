@@ -3,6 +3,7 @@ import { IMAGES } from "../lib/data";
 
 const SplitSystems = () => (
   <ServicePage
+    slug="split-systems"
     overline="Split System Installation"
     title="Quiet comfort, room by room"
     sub="Expertly sized and installed split systems that suit the space they serve — beautifully finished and barely heard."

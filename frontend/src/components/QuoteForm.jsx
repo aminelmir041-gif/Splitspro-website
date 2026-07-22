@@ -1,25 +1,51 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { toast } from "sonner";
-import { Loader2, Check, Phone } from "lucide-react";
+import { Loader2, Check, Phone, Upload, X } from "lucide-react";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "./ui/select";
-import { SERVICE_OPTIONS, PHONE, PHONE_TEL } from "../lib/data";
-import { submitQuote } from "../lib/api";
+import { SERVICE_OPTIONS, PHONE_TEL } from "../lib/data";
+import { submitQuote, uploadPhoto } from "../lib/api";
 
-const initial = { name: "", phone: "", suburb: "", service: "", message: "" };
+const buildInitial = (defaultService = "") => ({
+  name: "", phone: "", email: "", suburb: "", service: defaultService, message: "",
+});
 
 const fieldClass =
   "h-12 rounded-sm border-0 border-b border-[#E5E5EA] bg-transparent px-0 text-[#1D1D1F] shadow-none focus-visible:border-[#1E3A8A] focus-visible:ring-0 placeholder:text-[#6E6E73]/60";
 
-export const QuoteForm = ({ onDark = false }) => {
-  const [form, setForm] = useState(initial);
+export const QuoteForm = ({ onDark = false, defaultService = "", submitLabel = "Get Free Quote & Plan" }) => {
+  const [form, setForm] = useState(buildInitial(defaultService));
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const [photo, setPhoto] = useState(null);
+  const [photoPreview, setPhotoPreview] = useState("");
+  const fileRef = useRef(null);
 
   const update = (k, v) => setForm((f) => ({ ...f, [k]: v }));
+
+  const onPickPhoto = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      toast.error("Please choose an image file.");
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error("Image must be 10MB or smaller.");
+      return;
+    }
+    setPhoto(file);
+    setPhotoPreview(URL.createObjectURL(file));
+  };
+
+  const clearPhoto = () => {
+    setPhoto(null);
+    setPhotoPreview("");
+    if (fileRef.current) fileRef.current.value = "";
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,9 +59,15 @@ export const QuoteForm = ({ onDark = false }) => {
     }
     setLoading(true);
     try {
-      await submitQuote(form);
+      let photo_url = "";
+      if (photo) {
+        const res = await uploadPhoto(photo);
+        photo_url = res.url;
+      }
+      await submitQuote({ ...form, photo_url });
       setDone(true);
-      setForm(initial);
+      setForm(buildInitial(defaultService));
+      clearPhoto();
       toast.success("Thank you — we'll be in touch shortly.");
     } catch (err) {
       toast.error("Something went wrong. Please call us instead.");
@@ -50,8 +82,8 @@ export const QuoteForm = ({ onDark = false }) => {
         <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#1E3A8A] text-white">
           <Check className="h-7 w-7" />
         </div>
-        <h3 className="mt-6 font-serif text-2xl text-[#1D1D1F]">Request received</h3>
-        <p className="mt-2 text-[#6E6E73]">One of our team will call you shortly to arrange your free quote.</p>
+        <h3 className={`mt-6 font-serif text-2xl ${onDark ? "text-white" : "text-[#1D1D1F]"}`}>Request received</h3>
+        <p className={`mt-2 ${onDark ? "text-blue-100/70" : "text-[#6E6E73]"}`}>One of our team will call you shortly to arrange your free quote and plan.</p>
         <button onClick={() => setDone(false)} data-testid="quote-another-btn"
           className="mt-6 text-sm font-semibold text-[#1E3A8A] link-line">
           Submit another request
@@ -79,22 +111,28 @@ export const QuoteForm = ({ onDark = false }) => {
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
+          <label htmlFor="q-email" className={labelClass}>Email (optional)</label>
+          <Input id="q-email" type="email" data-testid="quote-email-input" value={form.email}
+            onChange={(e) => update("email", e.target.value)} placeholder="you@email.com" className={fieldClass} />
+        </div>
+        <div>
           <label htmlFor="q-suburb" className={labelClass}>Suburb</label>
           <Input id="q-suburb" data-testid="quote-suburb-input" value={form.suburb}
             onChange={(e) => update("suburb", e.target.value)} placeholder="Enter your suburb" className={fieldClass} />
         </div>
-        <div>
-          <label className={labelClass}>Service Required</label>
-          <Select value={form.service} onValueChange={(v) => update("service", v)}>
-            <SelectTrigger data-testid="quote-service-select"
-              className="h-12 rounded-sm border-0 border-b border-[#E5E5EA] bg-transparent px-0 text-[#1D1D1F] shadow-none focus:ring-0 data-[placeholder]:text-[#6E6E73]/60">
-              <SelectValue placeholder="Select a service" />
-            </SelectTrigger>
-            <SelectContent>
-              {SERVICE_OPTIONS.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}
-            </SelectContent>
-          </Select>
-        </div>
+      </div>
+
+      <div>
+        <label className={labelClass}>Service Required</label>
+        <Select value={form.service} onValueChange={(v) => update("service", v)}>
+          <SelectTrigger data-testid="quote-service-select"
+            className="h-12 rounded-sm border-0 border-b border-[#E5E5EA] bg-transparent px-0 text-[#1D1D1F] shadow-none focus:ring-0 data-[placeholder]:text-[#6E6E73]/60">
+            <SelectValue placeholder="Select a service" />
+          </SelectTrigger>
+          <SelectContent>
+            {SERVICE_OPTIONS.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}
+          </SelectContent>
+        </Select>
       </div>
 
       <div>
@@ -104,10 +142,30 @@ export const QuoteForm = ({ onDark = false }) => {
           className="min-h-24 rounded-sm border-0 border-b border-[#E5E5EA] bg-transparent px-0 text-[#1D1D1F] shadow-none focus-visible:border-[#1E3A8A] focus-visible:ring-0 placeholder:text-[#6E6E73]/60" />
       </div>
 
+      <div>
+        <label className={labelClass}>Photo of your space or unit (optional)</label>
+        <input ref={fileRef} type="file" accept="image/*" onChange={onPickPhoto} data-testid="quote-photo-input" className="hidden" />
+        {!photoPreview ? (
+          <button type="button" onClick={() => fileRef.current?.click()} data-testid="quote-photo-btn"
+            className={`flex h-12 w-full items-center gap-3 rounded-sm border border-dashed px-4 text-sm transition-colors ${onDark ? "border-white/30 text-white/70 hover:border-white/60" : "border-[#C7C7CC] text-[#6E6E73] hover:border-[#1E3A8A] hover:text-[#1E3A8A]"}`}>
+            <Upload className="h-4 w-4" /> Add a photo — it helps us quote accurately
+          </button>
+        ) : (
+          <div className="flex items-center gap-3">
+            <img src={photoPreview} alt="Upload preview" className="h-14 w-14 rounded-md object-cover" />
+            <span className={`flex-1 truncate text-sm ${onDark ? "text-white/80" : "text-[#1D1D1F]"}`}>{photo?.name}</span>
+            <button type="button" onClick={clearPhoto} data-testid="quote-photo-clear"
+              className={`flex h-8 w-8 items-center justify-center rounded-full ${onDark ? "text-white/70 hover:bg-white/10" : "text-[#6E6E73] hover:bg-[#F5F5F7]"}`}>
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+        )}
+      </div>
+
       <div className="mt-1 flex flex-col gap-3 sm:flex-row">
         <button type="submit" disabled={loading} data-testid="quote-submit-btn"
           className="flex h-[52px] flex-1 items-center justify-center rounded-sm bg-[#1E3A8A] px-8 py-4 text-sm font-semibold uppercase tracking-wider text-white transition-transform duration-300 hover:scale-[1.01] disabled:opacity-70">
-          {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : "Get Free Quote"}
+          {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : submitLabel}
         </button>
         <a href={PHONE_TEL} data-testid="quote-call-btn"
           className={`flex items-center justify-center gap-2 rounded-sm border px-6 py-4 text-sm font-semibold uppercase tracking-wider transition-colors ${onDark ? "border-white/40 text-white hover:bg-white/10" : "border-[#1D1D1F] text-[#1D1D1F] hover:bg-[#1D1D1F] hover:text-white"}`}>

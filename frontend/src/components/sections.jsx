@@ -1,8 +1,9 @@
-import { useRef } from "react";
-import { Phone, Check } from "lucide-react";
+import { useRef, useEffect, useState } from "react";
+import { Phone, Check, Star, ShieldCheck, BadgeCheck, MapPin } from "lucide-react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Reveal from "./Reveal";
-import { PHONE, PHONE_TEL, BRANDS, PROCESS, WHY } from "../lib/data";
+import { PHONE, PHONE_TEL, BRANDS, PROCESS, WHY, GOOGLE_RATING } from "../lib/data";
+import { getReviews } from "../lib/api";
 
 export const Overline = ({ children, light = false }) => (
   <span className={`overline ${light ? "text-blue-300" : ""}`}>{children}</span>
@@ -193,3 +194,90 @@ export const FeatureList = ({ items }) => (
     ))}
   </ul>
 );
+
+const Stars = ({ n = 5, className = "" }) => (
+  <span className={`inline-flex items-center gap-0.5 ${className}`}>
+    {Array.from({ length: n }).map((_, i) => (
+      <Star key={i} className="h-4 w-4 fill-[#FBBC04] text-[#FBBC04]" />
+    ))}
+  </span>
+);
+
+// Google rating badge (5.0 · 14 verified reviews)
+export const GoogleRating = ({ light = false, className = "" }) => (
+  <div data-testid="google-rating" className={`inline-flex items-center gap-3 rounded-full border px-4 py-2 ${light ? "border-white/20 bg-white/10 backdrop-blur-md" : "border-[#E5E5EA] bg-white soft-shadow-sm"} ${className}`}>
+    <svg viewBox="0 0 48 48" className="h-5 w-5" aria-hidden><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC04" d="M11.69 28.18c-.44-1.32-.69-2.73-.69-4.18s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>
+    <span className={`text-sm font-semibold ${light ? "text-white" : "text-[#1D1D1F]"}`}>{GOOGLE_RATING.score}</span>
+    <Stars />
+    <span className={`text-sm ${light ? "text-blue-100/70" : "text-[#6E6E73]"}`}>{GOOGLE_RATING.count} Verified Reviews</span>
+  </div>
+);
+
+// Trust badges strip for service pages
+export const TrustBadges = () => {
+  const items = [
+    { icon: Star, label: `${GOOGLE_RATING.score} Google Rating` },
+    { icon: ShieldCheck, label: "Licensed & Insured" },
+    { icon: BadgeCheck, label: "Premium Brands" },
+    { icon: MapPin, label: "Western Sydney" },
+  ];
+  return (
+    <div className="border-y border-[#E5E5EA] bg-[#F5F5F7]" data-testid="trust-badges">
+      <div className="sp-container flex flex-wrap items-center justify-center gap-x-10 gap-y-4 py-6">
+        {items.map((b) => (
+          <span key={b.label} className="inline-flex items-center gap-2 text-sm font-semibold text-[#1D1D1F]">
+            <b.icon className="h-4 w-4 text-[#1E3A8A]" strokeWidth={2} /> {b.label}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const Avatar = ({ name }) => (
+  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#EEF3FF] font-serif text-lg font-medium text-[#1E3A8A]">
+    {name?.trim()?.charAt(0)?.toUpperCase() || "S"}
+  </span>
+);
+
+// Reviews section that filters by category. Falls back to any reviews if none match.
+export const ServiceReviews = ({ category, title = "What local homeowners say", light = false, max = 3 }) => {
+  const [reviews, setReviews] = useState([]);
+  useEffect(() => { getReviews().then(setReviews).catch(() => setReviews([])); }, []);
+
+  let list = reviews;
+  if (category) {
+    const matched = reviews.filter((r) => r.category === category);
+    list = matched.length ? matched : reviews.filter((r) => r.category === "general");
+  }
+  list = list.slice(0, max);
+  if (!list.length) return null;
+
+  return (
+    <section className={`py-24 sm:py-32 ${light ? "bg-[#0B1F3A]" : "bg-white"}`} data-testid="service-reviews">
+      <div className="sp-container">
+        <div className="flex flex-col items-start gap-4">
+          <GoogleRating light={light} />
+          <SectionHeading overline="Google Reviews" title={title} light={light} />
+        </div>
+        <div className="mt-14 grid gap-8 md:grid-cols-3">
+          {list.map((r, i) => (
+            <Reveal key={r.id || i} delay={i * 0.08}>
+              <figure data-testid={`review-${i}`} className={`flex h-full flex-col rounded-2xl border p-8 ${light ? "border-white/10 bg-white/5" : "border-[#E5E5EA] bg-white soft-shadow-sm"}`}>
+                <Stars />
+                <blockquote className={`mt-5 flex-1 text-base leading-relaxed ${light ? "text-white/85" : "text-[#1D1D1F]"}`}>&ldquo;{r.text}&rdquo;</blockquote>
+                <figcaption className="mt-6 flex items-center gap-3">
+                  <Avatar name={r.name} />
+                  <span>
+                    <span className={`block text-sm font-semibold ${light ? "text-white" : "text-[#1D1D1F]"}`}>{r.name}</span>
+                    <span className={`block text-xs ${light ? "text-blue-100/60" : "text-[#6E6E73]"}`}>Verified Google Review</span>
+                  </span>
+                </figcaption>
+              </figure>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};

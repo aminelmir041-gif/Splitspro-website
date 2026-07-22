@@ -3,6 +3,7 @@ import { IMAGES } from "../lib/data";
 
 const Cleaning = () => (
   <ServicePage
+    slug="cleaning"
     overline="Air Conditioner Cleaning"
     title="Cleaner air, healthier systems"
     sub="Thorough coil and filter cleaning that restores efficiency, improves air quality and extends the life of your system."

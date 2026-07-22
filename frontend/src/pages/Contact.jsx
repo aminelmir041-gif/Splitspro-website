@@ -44,7 +44,7 @@ const Contact = () => (
         <Reveal delay={0.12}>
           <div className="rounded-2xl border border-[#E5E5EA] bg-white p-8 soft-shadow sm:p-10">
             <h2 className="font-serif text-3xl text-[#1D1D1F]">Get your free quote</h2>
-            <p className="mt-2 text-[#6E6E73]">We&apos;ll call you back — no email needed.</p>
+            <p className="mt-2 text-[#6E6E73]">Prefer we call you back? Just leave your details below.</p>
             <div className="mt-8"><QuoteForm /></div>
           </div>
         </Reveal>

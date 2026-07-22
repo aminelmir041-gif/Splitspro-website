@@ -39,6 +39,7 @@ export const SERVICE_OPTIONS = [
 
 // Real client photography (uploaded).
 export const IMAGES = {
+  heroLiving: A + "q03928px_hero1.png",
   heroInterior: A + "q6fmbwv0_AdobeStock_569217207.webp",
   splitBedroom: A + "4gx7zwbm_Daikin-Zena-Split-System-sq.jpg",
   splitLiving: A + "g2e5o1an_AdobeStock_2001823238.webp",
@@ -145,3 +146,90 @@ export const FAQS = [
   { q: "Do you clean up after the installation?", a: "Always. A clean, professional finish and respect for your home are part of the SplitsPro standard — we leave your space spotless." },
   { q: "Which areas do you service?", a: "We're based in South Western Sydney and service all Sydney metropolitan suburbs — from Liverpool, Bankstown and Fairfield through to the Inner West, Eastern Suburbs, Sutherland Shire and Macarthur. Call us to confirm your suburb." },
 ];
+
+
+// ---- Trust / social proof ----
+export const GOOGLE_RATING = { score: "5.0", count: 14 };
+
+// Featured hero review (shown directly under hero CTA).
+export const FEATURED_REVIEW = {
+  name: "Sia",
+  rating: 5,
+  service: "Split System Installation",
+  text: "We had the most fantastic experience with Splits Pro. They were professional from the initial quote through to installation, explained every option clearly, and completed the job to an exceptionally high standard. The workmanship was clean, efficient and we couldn't be happier. Highly recommended.",
+};
+
+// Short testimonial shown beside the homepage enquiry form.
+export const TRUST_QUOTE =
+  "Professional, punctual and meticulous. Splits Pro genuinely care about getting the installation right the first time.";
+
+export const TRUST_BADGES = [
+  { icon: "star", label: "5.0 Google Rating" },
+  { icon: "shield", label: "Licensed & Insured" },
+  { icon: "badge", label: "Premium Brands" },
+  { icon: "map", label: "Western Sydney" },
+];
+
+// Per-service landing-page configuration.
+export const SERVICE_LANDING = {
+  "split-systems": {
+    reviewCategory: "split-systems",
+    formHeading: "Book Your Free Split System Quote & Plan",
+    formService: "Split System Installation",
+    benefits: [
+      { icon: Snowflake, title: "Precisely Sized", desc: "Systems matched to each room's size, orientation and how you use it — never guessed." },
+      { icon: BadgeCheck, title: "Premium Brands", desc: "Daikin, Mitsubishi Electric, Panasonic, Fujitsu and Rinnai — the right fit for your home." },
+      { icon: Brush, title: "Flawless Finish", desc: "Concealed pipe runs, tidy placement and a spotless clean-up on every install." },
+    ],
+    gallery: [IMAGES.splitBedroom, IMAGES.splitLiving, IMAGES.splitIndoor, IMAGES.outdoorRinnai],
+    faqs: [FAQS[0], FAQS[1], FAQS[4], FAQS[5]],
+  },
+  ducted: {
+    reviewCategory: "ducted",
+    formHeading: "Book Your Free Ducted Design & Quote",
+    formService: "Ducted Air Conditioning",
+    benefits: [
+      { icon: Wind, title: "Whole-Home Comfort", desc: "Even, effortless temperature throughout every room, controlled from one place." },
+      { icon: HomeIcon, title: "Custom Zoning", desc: "Zones mapped to how you live, with discreet designer vents concealed in the ceiling." },
+      { icon: BadgeCheck, title: "Energy Efficient", desc: "Inverter technology and intelligent control keep running costs down." },
+    ],
+    gallery: [IMAGES.ductedHall, IMAGES.ductedVent, IMAGES.controller, IMAGES.outdoorDaikin],
+    faqs: [FAQS[0], FAQS[1], FAQS[4], FAQS[5]],
+  },
+  cleaning: {
+    reviewCategory: "cleaning",
+    formHeading: "Book Your Air Conditioner Clean & Service",
+    formService: "Air Conditioner Cleaning",
+    benefits: [
+      { icon: Sparkles, title: "Healthier Air", desc: "Deep coil and filter cleaning removes dust, mould and grime for cleaner air." },
+      { icon: BadgeCheck, title: "Better Efficiency", desc: "A clean system runs cooler, quieter and cheaper — noticeable straight away." },
+      { icon: ShieldCheck, title: "Longer Lifespan", desc: "Regular cleaning protects your investment and extends the life of your unit." },
+    ],
+    gallery: [IMAGES.cleaning, IMAGES.splitIndoor, IMAGES.splitBedroom, IMAGES.controller],
+    faqs: [FAQS[2], FAQS[3], FAQS[5], FAQS[6]],
+  },
+  repairs: {
+    reviewCategory: "repairs",
+    formHeading: "Book Your Air Conditioning Repair & Diagnosis",
+    formService: "Maintenance & Repairs",
+    benefits: [
+      { icon: Wrench, title: "Accurate Diagnostics", desc: "We find the underlying cause, not just the symptom — and fix it right first time." },
+      { icon: MessageSquareQuote, title: "Honest Advice", desc: "Straight guidance on repair-vs-replace, with upfront pricing before any work." },
+      { icon: ShieldCheck, title: "All Brands Serviced", desc: "Skilled diagnostics and repairs across every major air conditioning brand." },
+    ],
+    gallery: [IMAGES.technician, IMAGES.outdoorDaikin, IMAGES.outdoorRinnai2, IMAGES.controller],
+    faqs: [FAQS[3], FAQS[4], FAQS[5], FAQS[6]],
+  },
+  servicing: {
+    reviewCategory: "servicing",
+    formHeading: "Book Your Air Conditioning Maintenance Service",
+    formService: "Maintenance & Repairs",
+    benefits: [
+      { icon: ShieldCheck, title: "Prevent Breakdowns", desc: "Regular preventative care catches small issues before they become costly problems." },
+      { icon: BadgeCheck, title: "Protect Your Warranty", desc: "Scheduled servicing keeps your manufacturer warranty valid and your system reliable." },
+      { icon: HeartHandshake, title: "Lower Running Costs", desc: "A well-maintained system runs more efficiently, keeping your energy bills down." },
+    ],
+    gallery: [IMAGES.technician, IMAGES.cleaning, IMAGES.controller, IMAGES.splitIndoor],
+    faqs: [FAQS[3], FAQS[4], FAQS[5], FAQS[6]],
+  },
+};

@@ -1,21 +1,31 @@
-import { useEffect, useState, useRef } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
+import { useLenis } from "lenis/react";
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion";
 import { ArrowUpRight, Phone } from "lucide-react";
 import Reveal from "../components/Reveal";
 import {
   SectionHeading, Overline, CTASection, ProcessTimeline, BrandStrip, WhyGrid, Airflow,
+  GoogleRating, ServiceReviews,
 } from "../components/sections";
 import ServiceAreasMap from "../components/ServiceAreasMap";
+import QuoteForm from "../components/QuoteForm";
 import {
-  IMAGES, FEATURED_SERVICES, FAQS, PHONE_TEL,
+  IMAGES, FEATURED_SERVICES, FAQS, PHONE, PHONE_TEL, FEATURED_REVIEW, TRUST_QUOTE,
 } from "../lib/data";
-import { getReviews } from "../lib/api";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "../components/ui/accordion";
 
+const scrollToEnquiry = (lenis) => {
+  const el = document.getElementById("enquiry");
+  if (!el) return;
+  if (lenis) lenis.scrollTo(el, { offset: -20 });
+  else el.scrollIntoView({ behavior: "smooth", block: "start" });
+};
+
 const Hero = () => {
+  const lenis = useLenis();
   const ref = useRef(null);
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -39,7 +49,7 @@ const Hero = () => {
   return (
     <section ref={ref} onMouseMove={onMove} data-testid="hero" className="relative h-screen min-h-[680px] overflow-hidden">
       <motion.div className="absolute inset-0 -z-10" style={{ scale: zoom, x: imgX, y: imgY }}>
-        <img src={IMAGES.heroInterior} alt="Luxury modern Australian home interior" className="h-full w-full scale-110 object-cover" />
+        <img src={IMAGES.heroLiving} alt="Premium modern Australian living room with wall-mounted split system air conditioning" className="h-full w-full scale-110 object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0B1F3A]/80 via-[#0B1F3A]/45 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B1F3A]/70 via-transparent to-[#0B1F3A]/20" />
       </motion.div>
@@ -67,8 +77,17 @@ const Hero = () => {
         </motion.p>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 1.05 }} className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <a href={PHONE_TEL} data-testid="hero-call-btn" className="btn-glass-outline justify-center !px-7 !py-3"><Phone className="h-4 w-4" /> Call Now</a>
-          <Link to="/contact" data-testid="hero-quote-btn" className="btn-glass justify-center !px-7 !py-3">Get Free Quote <ArrowUpRight className="h-4 w-4" /></Link>
+          <button onClick={() => scrollToEnquiry(lenis)} data-testid="hero-quote-btn" className="btn-glass justify-center !px-7 !py-3">Free Quote &amp; Plan <ArrowUpRight className="h-4 w-4" /></button>
+          <a href={PHONE_TEL} data-testid="hero-call-btn" className="btn-glass-outline justify-center !px-7 !py-3"><Phone className="h-4 w-4" /> Call {PHONE}</a>
+        </motion.div>
+
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 1.25 }} className="mt-9 max-w-lg">
+          <GoogleRating light />
+          <figure data-testid="hero-featured-review" className="mt-5 border-l-2 border-[#FBBC04] pl-4">
+            <p className="text-yellow-400 tracking-widest text-sm">{"★".repeat(FEATURED_REVIEW.rating)}</p>
+            <blockquote className="mt-2 text-sm leading-relaxed text-blue-100/85 line-clamp-3">&ldquo;{FEATURED_REVIEW.text}&rdquo;</blockquote>
+            <figcaption className="mt-2 text-xs font-semibold text-white/70">— {FEATURED_REVIEW.name}, Verified Google Review</figcaption>
+          </figure>
         </motion.div>
       </motion.div>
 
@@ -80,6 +99,43 @@ const Hero = () => {
     </section>
   );
 };
+
+const EnquirySection = () => (
+  <section id="enquiry" className="scroll-mt-24 bg-white py-24 sm:py-32" data-testid="enquiry-section">
+    <div className="sp-container grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+      <div>
+        <Reveal><Overline>Free Quote &amp; Plan</Overline></Reveal>
+        <Reveal delay={0.05}>
+          <h2 className="mt-5 font-serif text-4xl font-medium leading-[1.08] tracking-tight text-[#1D1D1F] md:text-5xl text-balance">
+            Trusted by homeowners across Western Sydney
+          </h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <div className="mt-7"><GoogleRating /></div>
+        </Reveal>
+        <Reveal delay={0.15}>
+          <figure className="mt-8 border-l-2 border-[#1E3A8A] pl-5">
+            <p className="text-[#FBBC04] tracking-widest">{"★".repeat(5)}</p>
+            <blockquote className="mt-3 font-serif text-xl leading-relaxed text-[#1D1D1F]">&ldquo;{TRUST_QUOTE}&rdquo;</blockquote>
+          </figure>
+        </Reveal>
+        <Reveal delay={0.2}>
+          <p className="mt-8 max-w-md leading-relaxed text-[#6E6E73]">
+            Tell us a little about your home. Add a photo of your space or unit and we&apos;ll call you back to arrange a considered consultation and honest quote — no obligation.
+          </p>
+        </Reveal>
+      </div>
+      <Reveal delay={0.12}>
+        <div className="rounded-2xl border border-[#E5E5EA] bg-white p-8 soft-shadow sm:p-10">
+          <h3 className="font-serif text-2xl text-[#1D1D1F]">Request your free quote</h3>
+          <p className="mt-2 text-sm text-[#6E6E73]">We&apos;ll be in touch shortly.</p>
+          <div className="mt-8"><QuoteForm /></div>
+        </div>
+      </Reveal>
+    </div>
+  </section>
+);
+
 
 const Philosophy = () => (
   <section className="bg-white py-28 sm:py-36" data-testid="philosophy-section">
@@ -161,29 +217,9 @@ const GalleryPreview = () => (
   </section>
 );
 
-const Reviews = () => {
-  const [reviews, setReviews] = useState([]);
-  useEffect(() => { getReviews().then(setReviews).catch(() => setReviews([])); }, []);
-  return (
-    <section className="relative overflow-hidden bg-[#0B1F3A] py-28 sm:py-36" data-testid="reviews-section">
-      <Airflow className="opacity-25" />
-      <div className="sp-container relative">
-        <SectionHeading overline="Google Reviews" title="Kind words from local homeowners" light />
-        <div className="mt-16 grid gap-12 md:grid-cols-3">
-          {reviews.slice(0, 3).map((r, i) => (
-            <Reveal key={r.id} delay={i * 0.1}>
-              <figure data-testid={`review-${i}`}>
-                <p className="text-yellow-400 tracking-widest">{"★".repeat(r.rating)}</p>
-                <blockquote className="mt-5 font-serif text-xl leading-relaxed text-white/90">&ldquo;{r.text}&rdquo;</blockquote>
-                <figcaption className="mt-6 text-sm text-blue-100/60">{r.name} · {r.suburb}</figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
+const Reviews = () => (
+  <ServiceReviews title="Kind words from local homeowners" light max={6} />
+);
 
 const Process = () => (
   <section className="bg-white py-28 sm:py-36" data-testid="process-section">
@@ -230,6 +266,7 @@ const HomeFAQ = () => (
 const Home = () => (
   <>
     <Hero />
+    <EnquirySection />
     <BrandStrip />
     <Philosophy />
     <Services />

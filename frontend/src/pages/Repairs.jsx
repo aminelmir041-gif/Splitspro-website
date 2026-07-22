@@ -3,6 +3,7 @@ import { IMAGES } from "../lib/data";
 
 const Repairs = () => (
   <ServicePage
+    slug="repairs"
     overline="Maintenance & Repairs"
     title="Diagnosed properly, fixed for good"
     sub="Careful servicing and accurate diagnostics that keep every brand running at its best — including emergency call-outs when comfort can't wait."

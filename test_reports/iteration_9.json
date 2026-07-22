@@ -1,0 +1,30 @@
+{
+  "summary": "Iteration 9 — full end-to-end verification of the lead-gen redesign (hero + Google rating + featured review + on-page enquiry form with photo upload + per-service landing pages + distributed reviews). Backend: 12/12 pytest tests PASS. Frontend: all 11 acceptance bullets PASS. Hero on / shows 'Crafted Comfort For Every Home' + hero-quote-btn + hero-call-btn (text 'CALL 0414 698 435') + google-rating ('5.0' + '14 Verified Reviews') + hero-featured-review (Sia). Clicking hero-quote-btn smooth-scrolls the enquiry-section into view via Lenis (measured y: 900 -> 116). Home enquiry form (data-testid quote-form inside enquiry-section) submitted successfully with all fields + 1x1 PNG upload -> quote-success visible, toast 'Thank you — we'll be in touch shortly.', and backend GET /api/quotes shows the new lead with photo_url='/api/files/splitspro/uploads/<uuid>.png'. All 5 service pages (/split-systems, /ducted, /cleaning, /repairs, /servicing) render trust-badges + service-benefits + service-gallery + service-reviews (with review-0) + service-faq (with faq-item-0) + service-quote + service-areas-block, and each service-quote h2 matches the expected tailored heading (Split System / Ducted Design / Air Conditioner Clean / Air Conditioning Repair / Air Conditioning Maintenance). Distributed reviewers correct: /split-systems -> Mustapha Hamed, /ducted -> Charles Speights, /cleaning -> Carolyn Hicks, /repairs -> Mohammad Sowaid, /servicing -> John Wick. Tailored form on /split-systems submitted successfully (POST /api/quotes -> 200, quote-success visible, service pre-filled to 'Split System Installation'). Home ServiceReviews section shows 6 review cards. /reviews page renders google-rating badge + 7 review-card-* cards.",
+  "tested_scope": ["backend", "frontend", "integration"],
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml",
+    "/app/test_reports/iteration_9.json"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "server.py: /api/upload correctly enforces MAX_UPLOAD_BYTES (10MB, returns 413) and ALLOWED_IMAGE_TYPES (returns 400). init_storage() lazily initialises + retries once on 403 which is a good resilience pattern.",
+    "server.py: SEED_VERSION=3 correctly re-seeds 7 reviews with 'category' and 'featured' (only Sia featured=true, category='general'). Startup calls seed_reviews() so a fresh DB is populated on boot.",
+    "QuoteForm.jsx: client-side validation for name/phone/suburb/service + phone digit-length matches backend validators; photo is uploaded first via uploadPhoto and photo_url is passed to submitQuote — clean two-step flow.",
+    "ServicePage.jsx: uses SERVICE_LANDING[slug] with a safe {} fallback, so an unknown slug renders the base template without crashing. Tailored formHeading + formService (defaultService) propagate correctly to QuoteForm.",
+    "ServiceReviews (sections.jsx): filters by category and falls back to 'general' category when no match — good UX so no landing page ends up with an empty reviews block.",
+    "Non-blocking: /api/files/{path} calls the object storage on every request. For hot images consider a short-lived cache or setting Cache-Control on the Response for perf/cost.",
+    "Non-blocking: FEATURED_REVIEW in data.js is a duplicate of the Sia review in the backend seed. Consider deriving the hero featured review from GET /api/reviews (where featured=true) to avoid drift.",
+    "Non-blocking: hero-featured-review uses `line-clamp-3` — the Sia quote is clamped on hero; acceptable but worth confirming with the client."
+  ],
+  "updated_files": ["/app/backend/tests/backend_test.py"],
+  "success_rate": {"backend": "100% (12/12)", "frontend": "100% (11/11 acceptance bullets)"},
+  "test_credentials": "None required — public marketing site.",
+  "seed_data_creation": "Two test leads created via UI form submissions: 'TEST Playwright Lead' (Bass Hill, Split System Installation, photo_url set to uploaded PNG) and 'TEST Split Landing Lead' (Yagoona, Split System Installation, no photo). Multiple 'TEST *' leads also created by the pytest backend suite.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Lenis smooth-scroll still intercepts window.scrollTo — use page.mouse.wheel(0, N) to scroll manually and give ~2.5s after clicking hero-quote-btn before asserting the enquiry-section's bounding box. QuoteForm's shadcn Select on service pages pre-selects `defaultService`, so no need to open the dropdown when the tailored service already matches. On /reviews the outer wrapper is [data-testid=reviews-grid] and each card is [data-testid=review-card-N]. On /split-systems, /ducted, /cleaning, /repairs and /servicing use `section[data-testid=\"service-quote\"] form[data-testid=\"quote-form\"] ...` to scope selectors — the same [data-testid=quote-form] appears in the enquiry section on Home and in the /contact page too. Upload endpoint reliably completes within a few seconds; give the browser test at least 4s after clicking submit before asserting quote-success.",
+  "rca of the issue": "N/A — no bugs found. All lead-gen redesign features (hero, google rating badge, featured review, on-page enquiry form with photo upload, 5 tailored service landing pages, distributed Google reviews, /reviews page, backend upload/files/quotes/reviews) work end-to-end and match the spec."
+}

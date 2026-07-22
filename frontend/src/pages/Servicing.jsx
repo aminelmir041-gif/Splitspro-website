@@ -3,6 +3,7 @@ import { IMAGES } from "../lib/data";
 
 const Servicing = () => (
   <ServicePage
+    slug="servicing"
     overline="Air Conditioning Maintenance"
     title="Protect your comfort, year after year"
     sub="Considered, preventative servicing that keeps your system efficient, reliable and running at its best through every season."
