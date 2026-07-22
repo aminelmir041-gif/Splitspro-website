@@ -22,9 +22,15 @@ Awwwards-level motion (framer-motion + lenis), bright white + premium blue (#005
 - Fonts: Outfit (headings) + Satoshi (body)
 
 ## Implemented (2026-07-21)
-- All 11 pages, kinetic hero, brands marquee, services bento grid, numbered manifesto, gallery masonry,
-  reviews from API, service areas, FAQ accordion, contact + home quote forms, glass navbar, mobile menu,
-  sticky call bar, SEO meta/title. Tested: 23/23 checks pass (backend 100%, frontend 100%).
+- v1: All 11 pages, kinetic hero, services grid, forms. Tested 23/23.
+- v2 (LUXURY REDESIGN): Ground-up editorial redesign into a premium home-services/architectural brand.
+  - New art direction: Playfair Display + Manrope, minimal white/light-grey/charcoal/blue palette, no cards/dashboards/gradients/fake stats.
+  - Editorial hero "Crafted Comfort For Every Home" with in-hero quote form (Name, Phone, Suburb, Service, Message) + trust points.
+  - Homepage: Hero, Brand Philosophy, alternating Featured Services (incl. Cleaning), Why Choose (genuine trust markers), Gallery preview, Before/After slider, Google Reviews (dark), 4-step Process, Service Areas, FAQ, Final CTA.
+  - Region switched to Western Sydney (Bass Hill, Bankstown, Chester Hill, Guildford, Granville, Fairfield, Liverpool, Parramatta, Panania, Revesby); reviews re-seeded (SEED_VERSION=2).
+  - New nav (Home/Split Systems/Ducted/Cleaning/Gallery/Service Areas/About/Contact + Get Quote), transparent→white on scroll.
+  - Floating persistent Get-Free-Quote (desktop) + sticky Call/Quote (mobile). Rich footer: Google Maps, opening hours, social, ABN, phone. NO email, NO fake stats.
+  - New /cleaning page. Tested: backend 8/8, frontend 62/62 — 100% pass.
 
 ## Backlog / Next
 - P1: Wire /api/quotes to GoHighLevel (webhook/API) for real lead automation

@@ -27,6 +27,10 @@ export const QuoteForm = ({ onDark = false }) => {
       toast.error("Please complete your name, phone, suburb and service.");
       return;
     }
+    if (form.phone.replace(/\D/g, "").length < 8) {
+      toast.error("Please enter a valid phone number.");
+      return;
+    }
     setLoading(true);
     try {
       await submitQuote(form);
