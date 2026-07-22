@@ -1,13 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion";
-import { ArrowUpRight, Phone, MapPin } from "lucide-react";
+import { ArrowUpRight, Phone } from "lucide-react";
 import Reveal from "../components/Reveal";
 import {
-  SectionHeading, Overline, CTASection, ProcessTimeline, BrandStrip, WhyGrid, TiltCard, Airflow,
+  SectionHeading, Overline, CTASection, ProcessTimeline, BrandStrip, WhyGrid, Airflow,
 } from "../components/sections";
+import ServiceAreasMap from "../components/ServiceAreasMap";
 import {
-  IMAGES, FEATURED_SERVICES, AREAS_REGIONS, FAQS, PHONE, PHONE_TEL,
+  IMAGES, FEATURED_SERVICES, FAQS, PHONE_TEL,
 } from "../lib/data";
 import { getReviews } from "../lib/api";
 import {
@@ -100,23 +101,23 @@ const Services = () => (
       <div className="mt-16 grid gap-8 md:grid-cols-2">
         {FEATURED_SERVICES.map((s, i) => (
           <Reveal key={s.slug} delay={(i % 2) * 0.1}>
-            <TiltCard className="h-full [transform-style:preserve-3d]">
-              <Link to={`/${s.slug}`} data-testid={`service-card-${i}`} className="group block h-full overflow-hidden rounded-2xl border border-[#E5E5EA] bg-white soft-shadow-sm">
-                <div className="img-reveal relative aspect-[16/10] overflow-hidden">
-                  <img src={s.image} alt={s.title} loading="lazy" className={`img-zoom h-full w-full object-cover ${s.pos || "object-center"}`} />
-                  <span className="absolute left-5 top-5 flex h-11 w-11 items-center justify-center rounded-full glass-card text-[#1E3A8A]">
+            <Link to={`/${s.slug}`} data-testid={`service-card-${i}`} className="hover-rise group block h-full overflow-hidden rounded-2xl border border-[#E5E5EA] bg-white soft-shadow-sm">
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <img src={s.image} alt={s.title} loading="lazy" className={`h-full w-full object-cover ${s.pos || "object-center"}`} />
+              </div>
+              <div className="p-8">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#EEF3FF] text-[#1E3A8A]">
                     <s.icon className="h-5 w-5" strokeWidth={1.8} />
                   </span>
-                </div>
-                <div className="p-8">
                   <h3 className="font-serif text-2xl text-[#1D1D1F]">{s.title}</h3>
-                  <p className="mt-3 text-[#6E6E73]">{s.desc}</p>
-                  <span className="link-line mt-6 inline-flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wider text-[#1E3A8A]">
-                    Explore <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </span>
                 </div>
-              </Link>
-            </TiltCard>
+                <p className="mt-4 text-[#6E6E73]">{s.desc}</p>
+                <span className="link-line mt-6 inline-flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wider text-[#1E3A8A]">
+                  Explore <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+              </div>
+            </Link>
           </Reveal>
         ))}
       </div>
@@ -193,50 +194,20 @@ const Process = () => (
   </section>
 );
 
-const MAPS_SRC = "https://www.google.com/maps?q=Bankstown+NSW+Australia&z=11&output=embed";
-
-const ServiceAreas = () => {
-  const [active, setActive] = useState(null);
-  return (
-    <section className="bg-[#F5F5F7] py-28 sm:py-36" data-testid="areas-section">
-      <div className="sp-container grid gap-14 lg:grid-cols-2 lg:items-start">
-        <div>
-          <SectionHeading overline="Service Areas" title="Based in South West Sydney, serving all of Sydney" sub="Local knowledge and premium workmanship across South Western Sydney, the Inner West, Eastern Suburbs, Sutherland Shire, Canterbury-Bankstown, Liverpool and Macarthur." />
-          <div className="mt-10 space-y-6">
-            {AREAS_REGIONS.map((grp) => (
-              <Reveal key={grp.region} delay={0.03}>
-                <div>
-                  <h3 className={`font-serif text-lg ${grp.primary ? "text-[#1E3A8A]" : "text-[#1D1D1F]"}`}>
-                    {grp.region}{grp.primary && <span className="ml-2 rounded-full bg-[#1E3A8A] px-2 py-0.5 align-middle text-[10px] font-semibold uppercase tracking-wider text-white">Primary</span>}
-                  </h3>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {grp.suburbs.map((a, i) => (
-                      <button
-                        key={a}
-                        data-testid={`area-${grp.region.replace(/\s+/g, "-").toLowerCase()}-${i}`}
-                        onMouseEnter={() => setActive(a)}
-                        onFocus={() => setActive(a)}
-                        className={`rounded-full border px-3.5 py-1.5 text-sm transition-all duration-300 ${active === a ? "border-[#1E3A8A] bg-[#1E3A8A] text-white" : "border-[#E5E5EA] bg-white text-[#6E6E73] hover:border-[#1E3A8A] hover:text-[#1D1D1F]"}`}
-                      >
-                        {a}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-          <p className="mt-8 text-[#6E6E73]"><MapPin className="mr-1 inline h-4 w-4 text-[#1E3A8A]" /> SplitsPro services <span className="font-semibold text-[#1D1D1F]">all Sydney metropolitan suburbs</span>. Not sure if we cover you? <a href={PHONE_TEL} className="font-semibold text-[#1E3A8A] link-line">Call {PHONE}</a></p>
-        </div>
-        <Reveal delay={0.1}>
-          <div className="overflow-hidden rounded-2xl border border-[#E5E5EA] soft-shadow lg:sticky lg:top-28">
-            <iframe title="SplitsPro service areas map" src={active ? `https://www.google.com/maps?q=${encodeURIComponent(active + " NSW Australia")}&z=13&output=embed` : MAPS_SRC} width="100%" height="520" style={{ border: 0 }} loading="lazy" referrerPolicy="no-referrer-when-downgrade" data-testid="areas-map" />
-          </div>
-        </Reveal>
+const ServiceAreas = () => (
+  <section className="bg-[#F5F5F7] py-28 pb-40 sm:py-36" data-testid="areas-section">
+    <div className="sp-container">
+      <SectionHeading
+        overline="Service Areas"
+        title="Air Conditioning Across Western Sydney"
+        sub="Based in Bass Hill and providing professional split-system and ducted air conditioning services across Western Sydney and surrounding suburbs."
+      />
+      <div className="mt-14">
+        <ServiceAreasMap />
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 const HomeFAQ = () => (
   <section className="bg-white py-28 sm:py-36" data-testid="faq-section">

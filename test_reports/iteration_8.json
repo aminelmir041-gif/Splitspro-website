@@ -1,0 +1,27 @@
+{
+  "summary": "Iteration 8 full-stack verification of the SplitsPro scoped changes: (1) flat services cards, (2) Ducted controller image, (3) real Leaflet service-areas map. All 8 acceptance criteria PASS. Backend: 8/8 pytest tests pass (POST /api/quotes valid=200 & short-phone=422, GET /api/reviews=8 Western Sydney). Frontend: Home service-card-0..3 present, computed transform='none', perspective='none', transformStyle='flat' (NO 3D), 0 absolute overlays inside the image container (NO glass icon badge on image). service-card-0 image loads (naturalWidth=620, Daikin Zena). service-card-1 (Ducted) src contains '709351486' (controller photo), naturalWidth=2000. /ducted page: exactly 2 visible <img> elements point to the 709351486 controller photo (hero + intro), both naturalWidth=2000. Home areas-section: heading 'Air Conditioning Across Western Sydney' + 'Based in Bass Hill' text present, [data-testid=service-map-wrap] present, .leaflet-container visible, height=520px desktop / 440px mobile, 18/18 desktop tiles + 6/6 mobile tiles loaded (naturalWidth>0), .leaflet-control-zoom rendered, [data-testid=check-suburb-btn] text='CHECK YOUR SUBURB' navigates to /contact (confirmed via click). 'Nearby suburb not listed? Contact us to confirm availability.' present. /service-areas page also renders the same Leaflet map + check-suburb-btn. REGRESSION: all 12 routes (/, /about, /split-systems, /ducted, /cleaning, /repairs, /servicing, /gallery, /reviews, /service-areas, /faq, /contact) render with 0 pageerrors — no leaflet JS errors. Hero has hero-call-btn + hero-quote-btn, no floating badges. /contact quote form: suburb placeholder='Enter your suburb', full submission -> quote-success visible. MOBILE 390x844: body.scrollWidth=390 (no horizontal scroll), leaflet height=440, check-suburb-btn bottom=444.125 well above sticky CTA top=778 (NOT covered), 0 pageerrors.",
+  "tested_scope": ["backend", "frontend", "integration"],
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml",
+    "/app/test_reports/iteration_8.json"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "ServiceAreasMap.jsx correctly uses react-leaflet with CartoDB Positron light tiles, scrollWheelZoom disabled, home-base CircleMarker with permanent tooltip, 12 suburb CircleMarkers with hover tooltip, navy Circle radius=11km, check-suburb-btn links to /contact — clean and complete.",
+    "Home.jsx Services cards are now flat: no TiltCard wrapper, no absolute glass icon badge inside the image container, icon sits next to the title in the card body (verified via computed styles and DOM inspection). Cards still link to /split-systems, /ducted, /cleaning, /repairs.",
+    "FEATURED_SERVICES[1].image = IMAGES.controller (micwrs4g_AdobeStock_709351486) and Ducted.jsx passes IMAGES.controller for both image and introImage — confirmed rendered on /ducted (2 visible <img> with 709351486, naturalWidth=2000).",
+    "areas-section on Home uses pb-40 giving sufficient bottom padding so mobile sticky CTA bar (y=778) does NOT overlap the Check Your Suburb button (bottom=444) — verified.",
+    "Non-blocking cleanup carryover from prior iterations: /app/frontend/src/components/StickyCallBar.jsx is still unused and can be deleted."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (8/8)", "frontend": "100% (all 8 acceptance bullets)"},
+  "test_credentials": "None required — public marketing site.",
+  "seed_data_creation": "One quote lead 'TEST Iter8 Playwright' with phone 0414698435, suburb 'Bass Hill', service (first option) created via /contact form submission (POST /api/quotes).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "react-leaflet@5 + leaflet@1.9.4 tiles reliably load from basemaps.cartocdn.com within ~2.5s after DOM ready; give at least 3s wait after page load before asserting tile naturalWidth. MapContainer/CircleMarker do NOT forward data-testid to DOM — use '.leaflet-container', 'img.leaflet-tile', '.leaflet-control-zoom' plus wrapper testids ('service-map-wrap', 'check-suburb-btn'). Lenis intercepts window.scrollTo — use page.mouse.wheel to scroll. Mobile sticky CTA appears once user scrolls past ~1 viewport; areas-section pb-40 spacing keeps it clear of the map's Check Your Suburb button.",
+  "rca of the issue": "N/A — no bugs found. All three scoped changes (flat services cards, Ducted controller image, Leaflet service-areas map) are correctly implemented and verified end-to-end."
+}
