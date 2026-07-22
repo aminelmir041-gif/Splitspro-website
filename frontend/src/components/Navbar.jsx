@@ -27,7 +27,7 @@ export const Navbar = () => {
       }`}
     >
       <nav className="sp-container flex items-center justify-between gap-6">
-        <Logo />
+        <Logo scrolled={scrolled} />
 
         <div className="hidden items-center gap-7 lg:flex">
           {NAV.map((item) => (

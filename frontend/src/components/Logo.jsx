@@ -1,14 +1,21 @@
 import { Link } from "react-router-dom";
-import { Snowflake } from "lucide-react";
 
-export const Logo = ({ light = false }) => (
-  <Link to="/" data-testid="logo-link" className="flex items-center gap-2.5">
-    <span className={`flex h-8 w-8 items-center justify-center rounded-full ${light ? "bg-white text-[#1E3A8A]" : "bg-[#1E3A8A] text-white"}`}>
-      <Snowflake className="h-4 w-4" strokeWidth={2} />
-    </span>
-    <span className={`font-serif text-2xl font-semibold tracking-tight ${light ? "text-white" : "text-[#1D1D1F]"}`}>
-      SplitsPro
-    </span>
+export const LOGO_SRC =
+  "https://customer-assets-lxgj4vgw.emergentagent.net/job_splitspro-preview/artifacts/a55k1vny_file_0000000066a4820ba3e92654f08d7669.jpg";
+
+export const Logo = ({ light = false, scrolled = false }) => (
+  <Link to="/" data-testid="logo-link" className="flex items-center">
+    {light ? (
+      <span className="inline-flex rounded-sm bg-white p-2.5">
+        <img src={LOGO_SRC} alt="SplitsPro Airconditioning" className="h-12 w-auto object-contain" />
+      </span>
+    ) : (
+      <img
+        src={LOGO_SRC}
+        alt="SplitsPro Airconditioning"
+        className={`w-auto object-contain transition-all duration-500 ${scrolled ? "h-11" : "h-14"}`}
+      />
+    )}
   </Link>
 );
 

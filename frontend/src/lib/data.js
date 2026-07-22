@@ -36,19 +36,25 @@ export const SERVICE_OPTIONS = [
 ];
 
 export const IMAGES = {
-  heroInterior: "https://images.pexels.com/photos/29012619/pexels-photo-29012619.jpeg",
-  philosophy: "https://images.unsplash.com/photo-1628012209120-d9db7abf7eab",
-  split: "https://images.unsplash.com/photo-1762341123870-d706f257a12e",
-  ducted: "https://images.pexels.com/photos/8297856/pexels-photo-8297856.jpeg",
-  technician: "https://images.pexels.com/photos/6471911/pexels-photo-6471911.jpeg",
-  cleaning: "https://images.pexels.com/photos/5463581/pexels-photo-5463581.jpeg",
-  // proven luxury/detail shots
+  // Real SplitsPro project photography (client-supplied)
+  livingSplit: "https://customer-assets-lxgj4vgw.emergentagent.net/job_splitspro-preview/artifacts/g2e5o1an_AdobeStock_2001823238.webp",
+  controller: "https://customer-assets-lxgj4vgw.emergentagent.net/job_splitspro-preview/artifacts/micwrs4g_AdobeStock_709351486_Editorial_Use_Only.webp",
+  cleaning: "https://customer-assets-lxgj4vgw.emergentagent.net/job_splitspro-preview/artifacts/lf1angzr_AdobeStock_2014887759.webp",
+  // Supporting genuine architectural photography
   home: "https://images.unsplash.com/photo-1706808849780-7a04fbac83ef",
-  living: "https://images.unsplash.com/flagged/photo-1556438758-872c68902f60",
-  wallUnit: "https://images.unsplash.com/photo-1718203862467-c33159fdc504",
   interiorLight: "https://images.pexels.com/photos/7870751/pexels-photo-7870751.jpeg",
-  techIndoor: "https://images.pexels.com/photos/32588555/pexels-photo-32588555.jpeg",
+  livingAlt: "https://images.unsplash.com/flagged/photo-1556438758-872c68902f60",
 };
+
+// Convenience aliases used across pages
+IMAGES.heroInterior = IMAGES.livingSplit;
+IMAGES.philosophy = IMAGES.interiorLight;
+IMAGES.split = IMAGES.livingSplit;
+IMAGES.ducted = IMAGES.controller;
+IMAGES.technician = IMAGES.cleaning;
+IMAGES.wallUnit = IMAGES.livingSplit;
+IMAGES.living = IMAGES.livingAlt;
+IMAGES.techIndoor = IMAGES.cleaning;
 
 export const FEATURED_SERVICES = [
   {
@@ -76,14 +82,14 @@ export const FEATURED_SERVICES = [
     slug: "repairs",
     title: "Air Conditioning Repairs",
     desc: "Accurate diagnostics and lasting repairs across every major brand, done right the first time.",
-    image: IMAGES.technician,
+    image: IMAGES.cleaning,
     icon: Wrench,
   },
   {
     slug: "servicing",
     title: "Air Conditioning Maintenance",
     desc: "Considered, preventative servicing that protects your investment and your comfort year-round.",
-    image: IMAGES.techIndoor,
+    image: IMAGES.controller,
     icon: Settings2,
   },
 ];
@@ -123,19 +129,17 @@ export const AREAS = [
 ];
 
 export const GALLERY = [
-  { src: IMAGES.wallUnit, title: "Master Bedroom Split", tag: "Split System" },
-  { src: IMAGES.ducted, title: "Concealed Ducted Vents", tag: "Ducted" },
-  { src: IMAGES.living, title: "Open-Plan Living", tag: "Residential" },
-  { src: IMAGES.split, title: "Precision Wall Fit", tag: "Installation" },
-  { src: IMAGES.interiorLight, title: "Minimal Interior Zone", tag: "Commercial" },
-  { src: IMAGES.technician, title: "Outdoor Condenser", tag: "Installation" },
+  { src: IMAGES.livingSplit, title: "Living Room Split Install", tag: "Split System" },
+  { src: IMAGES.controller, title: "Daikin Zone Controller", tag: "Ducted" },
+  { src: IMAGES.cleaning, title: "Filter Clean & Service", tag: "Cleaning" },
+  { src: IMAGES.livingAlt, title: "Open-Plan Living", tag: "Residential" },
   { src: IMAGES.home, title: "Contemporary Residence", tag: "Ducted" },
-  { src: IMAGES.techIndoor, title: "Service & Clean", tag: "Maintenance" },
+  { src: IMAGES.interiorLight, title: "Minimal Interior Zone", tag: "Commercial" },
 ];
 
 export const BEFORE_AFTER = {
-  before: IMAGES.techIndoor,
-  after: IMAGES.wallUnit,
+  before: IMAGES.cleaning,
+  after: IMAGES.livingSplit,
 };
 
 export const FAQS = [
