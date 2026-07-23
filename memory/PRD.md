@@ -84,6 +84,14 @@ Goal: elevate the entire site to a timeless, architectural, Apple/Porsche/B&O lu
 
 
 
+## v11 — DESKTOP HEADER + PREMIUM MAP (2026-07-23)
+- **Desktop header** (lg only, mobile/tablet unchanged): logo enlarged to `lg:h-[70px]` scrolled (+30%) and `lg:h-[94px]` unscrolled (+34%), vertically centred via existing `items-center`. Padding zeroed on desktop (`lg:py-0`) so header height stays identical while the logo becomes the visual anchor. Spacing widened for a Porsche/Apple feel: outer nav `gap-6 → lg:gap-14` (logo↔nav / nav↔phone), inner nav-links `gap-6 → lg:gap-10`.
+- **Service Areas map** (`ServiceAreasMap.jsx`): removed the misleading 11 km Circle around Bass Hill. Expanded coverage markers from 12 → 20 suburbs across Western Sydney and surrounds (Parramatta, Liverpool, Fairfield, Cabramatta, Bankstown, Blacktown, Campbelltown, Penrith, Auburn, Merrylands, Wetherill Park, Guildford, Granville, Chester Hill, Regents Park, Greenacre, Revesby, Panania, Oran Park, Woodcroft). Zoom widened 11 → 10 to communicate a broader region. Markers restyled in the palette: **gold fill + white border** for suburbs, **black fill + gold border** (radius 13) for the HQ marker with permanent tooltip "Splits Pro HQ · Based in Bass Hill". Added subtle hover animation (radius +3, fillOpacity 1) on every marker for a premium interactive feel.
+- **Map CTA**: button re-labelled "Check Your Suburb" → **"Check Availability"** and restyled to rich-black with gold border + hover glow.
+- **Service-areas intro copy** unified across HomeComfortPage, ServicePage, Home and ServiceAreas pages: "Based in Bass Hill, Splits Pro proudly services homes across Western Sydney and surrounding suburbs. If your suburb isn't listed, contact us — we regularly travel outside our primary service areas."
+- Functionality unchanged; compile clean; verified via screenshot (logo prominent + centred with generous spacing, map wider zoom, gold markers rendering).
+
+
 ## Backlog / Next (updated)
 - P1: Wire /api/quotes (+ photo_url) to GoHighLevel via webhook/API for real lead automation.
 - P2: Simple admin/lead view to review submitted leads + uploaded photos.

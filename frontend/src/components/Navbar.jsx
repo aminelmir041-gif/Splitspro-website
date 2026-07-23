@@ -24,14 +24,14 @@ export const Navbar = () => {
     <header
       data-testid="navbar"
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        solid ? "border-b border-[#E5E5EA] bg-[#F8F7F5]/95 py-2 backdrop-blur-xl" : "py-3"
+        solid ? "border-b border-[#E5E5EA] bg-[#F8F7F5]/95 py-2 lg:py-0 backdrop-blur-xl" : "py-3 lg:py-0"
       }`}
     >
       {!solid && <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 to-transparent" />}
-      <nav className="sp-container relative flex items-center justify-between gap-6">
+      <nav className="sp-container relative flex items-center justify-between gap-6 lg:gap-14">
         <Logo onDark={!solid} scrolled={scrolled} />
 
-        <div className="hidden items-center gap-6 lg:flex">
+        <div className="hidden items-center gap-6 lg:flex lg:gap-10">
           {NAV.map((item) => (
             <NavLink
               key={item.to}

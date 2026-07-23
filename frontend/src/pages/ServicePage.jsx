@@ -133,7 +133,7 @@ const ServicePage = ({ slug, overline, title, sub, image, introImage, intro, fea
       <section className="bg-white py-24 pb-32 sm:py-32" data-testid="service-areas-block">
         <div className="sp-container">
           <SectionHeading overline="Service Areas" title="Air Conditioning Across Western Sydney"
-            sub="Based in Bass Hill and servicing all Sydney metropolitan suburbs — call us to confirm your area." />
+            sub="Based in Bass Hill, Splits Pro proudly services homes across Western Sydney and surrounding suburbs. If your suburb isn't listed, contact us — we regularly travel outside our primary service areas." />
           <div className="mt-14"><ServiceAreasMap /></div>
         </div>
       </section>

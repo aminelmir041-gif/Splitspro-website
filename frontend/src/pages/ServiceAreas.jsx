@@ -9,7 +9,7 @@ const ServiceAreas = () => (
     <PageHero
       overline="Service Areas"
       title="Air Conditioning Across Western Sydney"
-      sub="Based in Bass Hill and providing professional split-system and ducted air conditioning services across Western Sydney and the wider Sydney metropolitan area."
+      sub="Based in Bass Hill, Splits Pro proudly services homes across Western Sydney and surrounding suburbs. If your suburb isn't listed, contact us — we regularly travel outside our primary service areas."
     />
 
     <section className="bg-white py-28 pb-40 sm:py-36" data-testid="areas-grid">
