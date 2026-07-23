@@ -86,9 +86,23 @@ const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro,
             </Reveal>
           </div>
 
-          {/* Right — compact form */}
-          <Reveal delay={0.12}>
-            <div className="rounded-2xl border border-[#E5E5EA] bg-white p-8 soft-shadow sm:p-10" data-testid="reserve-form-card">
+          {/* Right — featured image (if provided) + compact form */}
+          <div className="flex flex-col gap-6">
+            {cfg.featuredImage && (
+              <Reveal delay={0.08}>
+                <figure data-testid="reserve-featured-image" className="img-reveal overflow-hidden rounded-2xl soft-shadow">
+                  <img src={cfg.featuredImage} alt={`${title} — real Splits Pro installation`} loading="lazy"
+                    className="block h-auto w-full object-cover" />
+                  {cfg.featuredCaption && (
+                    <figcaption className="bg-white px-6 py-4 text-sm italic text-[#6E6E73]">
+                      {cfg.featuredCaption}
+                    </figcaption>
+                  )}
+                </figure>
+              </Reveal>
+            )}
+            <Reveal delay={0.12}>
+              <div className="rounded-2xl border border-[#E5E5EA] bg-white p-8 soft-shadow sm:p-10" data-testid="reserve-form-card">
               <div className="mb-6"><GoogleRating /></div>
               <h3 className="font-serif text-2xl leading-snug text-[#1D1D1F]">Reserve Your Complimentary Home Comfort Plan&trade;</h3>
               <p className="mt-2 text-sm leading-relaxed text-[#6E6E73]">
@@ -106,6 +120,7 @@ const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro,
               </ul>
             </div>
           </Reveal>
+          </div>
         </div>
       </section>
 

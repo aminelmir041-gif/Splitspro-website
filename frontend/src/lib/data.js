@@ -40,6 +40,7 @@ export const SERVICE_OPTIONS = [
 // Real client photography (uploaded).
 export const IMAGES = {
   heroLiving: A + "q03928px_hero1.png",
+  splitOutdoorInstall: A + "juttcwwk_wmremove-transformed.jpeg",
   heroInterior: A + "q6fmbwv0_AdobeStock_569217207.webp",
   splitBedroom: A + "4gx7zwbm_Daikin-Zena-Split-System-sq.jpg",
   splitLiving: A + "g2e5o1an_AdobeStock_2001823238.webp",
@@ -206,6 +207,8 @@ export const FORM_TRUST_STRIP = [
 export const SERVICE_LANDING = {
   "split-systems": {
     reviewCategory: "split-systems",
+    featuredImage: IMAGES.splitOutdoorInstall,
+    featuredCaption: "One of our professionally installed split systems in a Western Sydney home.",
     formHeading: "Book Your Free Split System Quote & Plan",
     formService: "Split System Installation",
     benefits: [
