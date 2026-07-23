@@ -37,7 +37,7 @@ const Reviews = () => {
                     </span>
                     <blockquote className="mt-5 flex-1 text-base leading-relaxed text-[#1D1D1F]">&ldquo;{r.text}&rdquo;</blockquote>
                     <figcaption className="mt-6 flex items-center gap-3">
-                      <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#EEF3FF] font-serif text-lg font-medium text-[#1E3A8A]">
+                      <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#F3E9D2] font-serif text-lg font-medium text-[#C8A46A]">
                         {r.name?.trim()?.charAt(0)?.toUpperCase() || "S"}
                       </span>
                       <span>

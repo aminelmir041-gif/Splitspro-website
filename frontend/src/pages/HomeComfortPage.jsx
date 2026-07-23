@@ -68,7 +68,7 @@ const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro,
             </Reveal>
             {review && (
               <Reveal delay={0.2}>
-                <figure className="mt-8 border-l-2 border-[#1E3A8A] pl-5" data-testid="reserve-review">
+                <figure className="mt-8 border-l-2 border-[#C8A46A] pl-5" data-testid="reserve-review">
                   <Stars n={review.rating} />
                   <blockquote className="mt-3 font-serif text-xl leading-relaxed text-[#1D1D1F]">&ldquo;{review.text}&rdquo;</blockquote>
                   <figcaption className="mt-3 text-sm font-semibold text-[#1D1D1F]">{review.name} <span className="font-normal text-[#6E6E73]">· Verified Google Review</span></figcaption>
@@ -79,7 +79,7 @@ const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro,
               <ul className="mt-8 grid gap-3 sm:grid-cols-2">
                 {["Complimentary — normally valued over $200", "Fixed written quote", "Licensed & insured", "No pressure, no obligation"].map((t) => (
                   <li key={t} className="flex items-start gap-3 text-[#1D1D1F]">
-                    <Check className="mt-0.5 h-5 w-5 shrink-0 text-[#1E3A8A]" strokeWidth={2} /> <span>{t}</span>
+                    <Check className="mt-0.5 h-5 w-5 shrink-0 text-[#C8A46A]" strokeWidth={2} /> <span>{t}</span>
                   </li>
                 ))}
               </ul>
@@ -114,7 +114,7 @@ const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro,
               <ul className="mt-6 flex flex-wrap gap-x-4 gap-y-2 border-t border-[#E5E5EA] pt-5">
                 {FORM_TRUST_STRIP.map((t) => (
                   <li key={t} className="flex items-center gap-1.5 text-xs font-medium text-[#6E6E73]">
-                    <Check className="h-3.5 w-3.5 text-[#1E3A8A]" strokeWidth={2.5} /> {t}
+                    <Check className="h-3.5 w-3.5 text-[#C8A46A]" strokeWidth={2.5} /> {t}
                   </li>
                 ))}
               </ul>
@@ -133,7 +133,7 @@ const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro,
               {cfg.benefits.map((b, i) => (
                 <Reveal key={b.title} delay={i * 0.08}>
                   <div className="hover-rise h-full rounded-2xl border border-[#E5E5EA] bg-white p-8 soft-shadow-sm">
-                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#EEF3FF] text-[#1E3A8A]">
+                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#F3E9D2] text-[#C8A46A]">
                       <b.icon className="h-6 w-6" strokeWidth={1.7} />
                     </span>
                     <h3 className="mt-6 font-serif text-xl text-[#1D1D1F]">{b.title}</h3>
@@ -171,7 +171,7 @@ const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro,
         <div className="sp-container">
           <div className="max-w-3xl">
             <Reveal>
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#1E3A8A]/20 bg-[#EEF3FF] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1E3A8A]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#C8A46A]/20 bg-[#F3E9D2] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#C8A46A]">
                 <Sparkles className="h-3.5 w-3.5" /> Complimentary · Normally valued over $200
               </span>
             </Reveal>
@@ -179,7 +179,7 @@ const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro,
               <h2 className="mt-6 font-serif text-4xl font-medium leading-[1.08] tracking-tight text-[#1D1D1F] md:text-5xl text-balance">The Splits Pro Home Comfort Plan&trade;</h2>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="mt-4 font-serif text-xl text-[#1E3A8A]">Your home deserves more than just a quote.</p>
+              <p className="mt-4 font-serif text-xl text-[#C8A46A]">Your home deserves more than just a quote.</p>
             </Reveal>
             <Reveal delay={0.14}>
               <p className="mt-6 leading-relaxed text-[#6E6E73]">
@@ -193,7 +193,7 @@ const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro,
             {HOME_COMFORT_INCLUDES.map((t, i) => (
               <Reveal key={t} delay={(i % 3) * 0.06}>
                 <div className="flex items-center gap-4 rounded-2xl border border-[#E5E5EA] bg-white p-6 soft-shadow-sm">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#EEF3FF] text-[#1E3A8A]">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#F3E9D2] text-[#C8A46A]">
                     <Check className="h-5 w-5" strokeWidth={2.2} />
                   </span>
                   <span className="font-medium text-[#1D1D1F]">{t}</span>
@@ -244,7 +244,7 @@ const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro,
             {HOME_COMFORT_GUARANTEES.map((t, i) => (
               <Reveal key={t} delay={(i % 3) * 0.06}>
                 <div className="hover-rise flex h-full items-start gap-4 rounded-2xl border border-[#E5E5EA] bg-white p-7 soft-shadow-sm">
-                  <ShieldCheck className="mt-0.5 h-6 w-6 shrink-0 text-[#1E3A8A]" strokeWidth={1.8} />
+                  <ShieldCheck className="mt-0.5 h-6 w-6 shrink-0 text-[#C8A46A]" strokeWidth={1.8} />
                   <span className="font-medium leading-relaxed text-[#1D1D1F]">{t}</span>
                 </div>
               </Reveal>
@@ -267,7 +267,7 @@ const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro,
       </section>
 
       {/* Exclusivity */}
-      <section className="relative overflow-hidden bg-[#0B1F3A] py-24 sm:py-32" data-testid="exclusivity-section">
+      <section className="relative overflow-hidden bg-[#0B0B0B] py-24 sm:py-32" data-testid="exclusivity-section">
         <div className="sp-container relative z-10 max-w-3xl text-center mx-auto">
           <Reveal><Overline light>By Appointment</Overline></Reveal>
           <Reveal delay={0.06}>
@@ -276,7 +276,7 @@ const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro,
             </h2>
           </Reveal>
           <Reveal delay={0.12}>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-blue-100/70">
+            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/70">
               To ensure every consultation receives the time and attention it deserves, we only offer a limited number of complimentary Home Comfort Plans each month. Reserve your consultation before this month&apos;s appointments are filled.
             </p>
           </Reveal>

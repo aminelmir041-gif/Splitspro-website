@@ -24,7 +24,7 @@ const Gallery = () => (
             className="group img-reveal relative mb-6 break-inside-avoid overflow-hidden rounded-2xl soft-shadow-sm"
           >
             {g.placeholder ? (
-              <div className="flex aspect-[3/4] w-full flex-col items-center justify-center bg-[#0B1F3A] text-blue-100/70">
+              <div className="flex aspect-[3/4] w-full flex-col items-center justify-center bg-[#0B0B0B] text-white/70">
                 <ImageIcon className="h-9 w-9" strokeWidth={1.4} />
                 <span className="mt-3 text-sm">{g.title}</span>
               </div>

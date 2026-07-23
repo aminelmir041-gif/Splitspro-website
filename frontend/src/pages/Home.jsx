@@ -50,8 +50,8 @@ const Hero = () => {
     <section ref={ref} onMouseMove={onMove} data-testid="hero" className="relative h-screen min-h-[680px] overflow-hidden">
       <motion.div className="absolute inset-0 -z-10" style={{ scale: zoom, x: imgX, y: imgY }}>
         <img src={IMAGES.heroLiving} alt="Premium modern Australian living room with wall-mounted split system air conditioning" className="h-full w-full scale-110 object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0B1F3A]/80 via-[#0B1F3A]/45 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1F3A]/70 via-transparent to-[#0B1F3A]/20" />
+        <div className="absolute inset-0 hero-overlay-lr" />
+        <div className="absolute inset-0 hero-overlay-base" />
       </motion.div>
 
       <Airflow className="z-0 opacity-50" />
@@ -72,7 +72,7 @@ const Hero = () => {
         </h1>
 
         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.9 }}
-          className="mt-7 max-w-xl text-lg leading-relaxed text-blue-100/85 sm:text-xl">
+          className="mt-7 max-w-xl text-lg leading-relaxed text-white/85 sm:text-xl">
           Every home deserves the right solution. We take the time to understand your home, recommend the perfect air conditioning system and install it with precision and care.
         </motion.p>
 
@@ -85,7 +85,7 @@ const Hero = () => {
           <GoogleRating light />
           <figure data-testid="hero-featured-review" className="mt-5 border-l-2 border-[#FBBC04] pl-4">
             <p className="text-yellow-400 tracking-widest text-sm">{"★".repeat(FEATURED_REVIEW.rating)}</p>
-            <blockquote className="mt-2 text-sm leading-relaxed text-blue-100/85 line-clamp-3">&ldquo;{FEATURED_REVIEW.text}&rdquo;</blockquote>
+            <blockquote className="mt-2 text-sm leading-relaxed text-white/85 line-clamp-3">&ldquo;{FEATURED_REVIEW.text}&rdquo;</blockquote>
             <figcaption className="mt-2 text-xs font-semibold text-white/70">— {FEATURED_REVIEW.name}, Verified Google Review</figcaption>
           </figure>
         </motion.div>
@@ -114,7 +114,7 @@ const EnquirySection = () => (
           <div className="mt-7"><GoogleRating /></div>
         </Reveal>
         <Reveal delay={0.15}>
-          <figure className="mt-8 border-l-2 border-[#1E3A8A] pl-5">
+          <figure className="mt-8 border-l-2 border-[#C8A46A] pl-5">
             <p className="text-[#FBBC04] tracking-widest">{"★".repeat(5)}</p>
             <blockquote className="mt-3 font-serif text-xl leading-relaxed text-[#1D1D1F]">&ldquo;{TRUST_QUOTE}&rdquo;</blockquote>
           </figure>
@@ -163,13 +163,13 @@ const Services = () => (
               </div>
               <div className="p-8">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#EEF3FF] text-[#1E3A8A]">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F3E9D2] text-[#C8A46A]">
                     <s.icon className="h-5 w-5" strokeWidth={1.8} />
                   </span>
                   <h3 className="font-serif text-2xl text-[#1D1D1F]">{s.title}</h3>
                 </div>
                 <p className="mt-4 text-[#6E6E73]">{s.desc}</p>
-                <span className="link-line mt-6 inline-flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wider text-[#1E3A8A]">
+                <span className="link-line mt-6 inline-flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wider text-[#C8A46A]">
                   Explore <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </span>
               </div>
@@ -195,7 +195,7 @@ const GalleryPreview = () => (
     <div className="sp-container">
       <div className="flex flex-wrap items-end justify-between gap-6">
         <SectionHeading overline="Real Installations" title="Work we&apos;re proud to show" />
-        <Reveal><Link to="/gallery" className="link-line text-sm font-semibold uppercase tracking-wider text-[#1E3A8A]">View Full Gallery</Link></Reveal>
+        <Reveal><Link to="/gallery" className="link-line text-sm font-semibold uppercase tracking-wider text-[#C8A46A]">View Full Gallery</Link></Reveal>
       </div>
       <div className="mt-14 grid gap-6 md:grid-cols-3">
         {[

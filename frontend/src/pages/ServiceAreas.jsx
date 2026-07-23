@@ -21,9 +21,9 @@ const ServiceAreas = () => (
           {AREAS_REGIONS.map((grp, gi) => (
             <Reveal key={grp.region} delay={(gi % 4) * 0.05}>
               <div>
-                <h3 className={`font-serif text-lg ${grp.primary ? "text-[#1E3A8A]" : "text-[#1D1D1F]"}`}>
+                <h3 className={`font-serif text-lg ${grp.primary ? "text-[#C8A46A]" : "text-[#1D1D1F]"}`}>
                   {grp.region}
-                  {grp.primary && <span className="ml-2 rounded-full bg-[#1E3A8A] px-2 py-0.5 align-middle text-[10px] font-semibold uppercase tracking-wider text-white">Primary</span>}
+                  {grp.primary && <span className="ml-2 rounded-full bg-[#C8A46A] px-2 py-0.5 align-middle text-[10px] font-semibold uppercase tracking-wider text-white">Primary</span>}
                 </h3>
                 <ul className="mt-3 space-y-1.5">
                   {grp.suburbs.map((a) => (
@@ -36,8 +36,8 @@ const ServiceAreas = () => (
         </div>
 
         <Reveal delay={0.1}>
-          <p className="mt-12 text-[#6E6E73]"><MapPin className="mr-1 inline h-4 w-4 text-[#1E3A8A]" /> SplitsPro services <span className="font-semibold text-[#1D1D1F]">all Sydney metropolitan suburbs</span>.</p>
-          <a href={PHONE_TEL} data-testid="areas-call-btn" className="mt-5 inline-flex items-center gap-2 rounded-md bg-[#1E3A8A] px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition-transform duration-300 hover:scale-[1.02]">
+          <p className="mt-12 text-[#6E6E73]"><MapPin className="mr-1 inline h-4 w-4 text-[#C8A46A]" /> SplitsPro services <span className="font-semibold text-[#1D1D1F]">all Sydney metropolitan suburbs</span>.</p>
+          <a href={PHONE_TEL} data-testid="areas-call-btn" className="mt-5 inline-flex items-center gap-2 rounded-md bg-[#C8A46A] px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition-transform duration-300 hover:scale-[1.02]">
             <Phone className="h-4 w-4" /> {PHONE}
           </a>
         </Reveal>

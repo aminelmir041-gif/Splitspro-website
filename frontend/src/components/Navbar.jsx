@@ -24,7 +24,7 @@ export const Navbar = () => {
     <header
       data-testid="navbar"
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        solid ? "border-b border-[#E5E5EA] bg-white/80 py-2 backdrop-blur-xl" : "py-3"
+        solid ? "border-b border-[#E5E5EA] bg-[#F8F7F5]/95 py-2 backdrop-blur-xl" : "py-3"
       }`}
     >
       {!solid && <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 to-transparent" />}
@@ -41,7 +41,7 @@ export const Navbar = () => {
               className={({ isActive }) =>
                 `link-line text-sm font-medium tracking-wide transition-colors duration-300 ${
                   solid
-                    ? isActive ? "text-[#1E3A8A]" : "text-[#1D1D1F] hover:text-[#1E3A8A]"
+                    ? isActive ? "text-[#C8A46A]" : "text-[#1D1D1F] hover:text-[#C8A46A]"
                     : isActive ? "text-white" : "text-white/85 hover:text-white"
                 }`
               }
@@ -53,7 +53,7 @@ export const Navbar = () => {
 
         <div className="flex items-center gap-3">
           <a href={PHONE_TEL} data-testid="nav-call-btn"
-            className={`hidden items-center gap-2 text-sm font-semibold tracking-wide transition-colors duration-300 sm:flex ${solid ? "text-[#1E3A8A]" : "text-white"}`}>
+            className={`hidden items-center gap-2 text-sm font-semibold tracking-wide transition-colors duration-300 sm:flex ${solid ? "text-[#C8A46A]" : "text-white"}`}>
             <Phone className="h-4 w-4" /> {PHONE}
           </a>
           <button
@@ -80,11 +80,11 @@ export const Navbar = () => {
             <div className="sp-container grid gap-0.5 py-5">
               {NAV.map((item) => (
                 <NavLink key={item.to} to={item.to} end={item.to === "/"}
-                  className={({ isActive }) => `border-b border-[#F5F5F7] py-3.5 font-serif text-lg ${isActive ? "text-[#1E3A8A]" : "text-[#1D1D1F]"}`}>
+                  className={({ isActive }) => `border-b border-[#F5F5F7] py-3.5 font-serif text-lg ${isActive ? "text-[#C8A46A]" : "text-[#1D1D1F]"}`}>
                   {item.label}
                 </NavLink>
               ))}
-              <a href={PHONE_TEL} data-testid="mobile-call-btn" className="mt-4 flex items-center justify-center gap-2 rounded-full border border-[#1E3A8A] py-3.5 text-sm font-semibold uppercase tracking-wider text-[#1E3A8A]">
+              <a href={PHONE_TEL} data-testid="mobile-call-btn" className="mt-4 flex items-center justify-center gap-2 rounded-full border border-[#C8A46A] py-3.5 text-sm font-semibold uppercase tracking-wider text-[#C8A46A]">
                 <Phone className="h-4 w-4" /> Call {PHONE}
               </a>
             </div>

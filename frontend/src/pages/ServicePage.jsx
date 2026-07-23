@@ -25,7 +25,7 @@ const ServicePage = ({ slug, overline, title, sub, image, introImage, intro, fea
               {cfg.benefits.map((b, i) => (
                 <Reveal key={b.title} delay={i * 0.08}>
                   <div className="hover-rise h-full rounded-2xl border border-[#E5E5EA] bg-white p-8 soft-shadow-sm">
-                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#EEF3FF] text-[#1E3A8A]">
+                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#F3E9D2] text-[#C8A46A]">
                       <b.icon className="h-6 w-6" strokeWidth={1.7} />
                     </span>
                     <h3 className="mt-6 font-serif text-xl text-[#1D1D1F]">{b.title}</h3>
@@ -110,14 +110,14 @@ const ServicePage = ({ slug, overline, title, sub, image, introImage, intro, fea
       )}
 
       {/* Tailored quote form */}
-      <section id="quote" className="relative overflow-hidden bg-[#0B1F3A] py-24 sm:py-32" data-testid="service-quote">
+      <section id="quote" className="relative overflow-hidden bg-[#0B0B0B] py-24 sm:py-32" data-testid="service-quote">
         <div className="sp-container relative grid gap-14 lg:grid-cols-2 lg:gap-20">
           <div>
-            <span className="overline text-blue-300">Free, No-Obligation</span>
+            <span className="overline text-[#C8A46A]">Free, No-Obligation</span>
             <h2 className="mt-5 font-serif text-4xl font-medium leading-tight tracking-tight text-white md:text-5xl text-balance">
               {cfg.formHeading || "Book Your Free Quote & Plan"}
             </h2>
-            <p className="mt-6 max-w-md text-lg leading-relaxed text-blue-100/70">
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-white/70">
               Tell us a little about your home and we&apos;ll call you back to arrange a considered consultation and honest quote.
             </p>
           </div>

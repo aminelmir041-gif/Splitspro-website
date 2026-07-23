@@ -17,8 +17,8 @@ const Contact = () => (
         <div>
           <Reveal>
             <span className="overline">Speak With Us</span>
-            <a href={PHONE_TEL} data-testid="contact-call-btn" className="mt-5 flex items-center gap-3 font-serif text-4xl text-[#1D1D1F] transition-colors hover:text-[#1E3A8A]">
-              <Phone className="h-7 w-7 text-[#1E3A8A]" /> {PHONE}
+            <a href={PHONE_TEL} data-testid="contact-call-btn" className="mt-5 flex items-center gap-3 font-serif text-4xl text-[#1D1D1F] transition-colors hover:text-[#C8A46A]">
+              <Phone className="h-7 w-7 text-[#C8A46A]" /> {PHONE}
             </a>
           </Reveal>
 

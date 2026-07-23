@@ -21,7 +21,7 @@ const SUBURBS = [
   { name: "Oran Park", pos: [-34.0090, 150.7430] },
 ];
 
-const NAVY = "#1E3A8A";
+const NAVY = "#C8A46A";
 const LIGHT = "#3B82F6";
 
 const SubTip = ({ name }) => (
@@ -91,13 +91,13 @@ export const ServiceAreasMap = () => {
 
       <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-[#6E6E73]">
-          <MapPin className="mr-1 inline h-4 w-4 text-[#1E3A8A]" />
+          <MapPin className="mr-1 inline h-4 w-4 text-[#C8A46A]" />
           Nearby suburb not listed? Contact us to confirm availability.
         </p>
         <Link
           to="/contact"
           data-testid="check-suburb-btn"
-          className="inline-flex items-center gap-2 rounded-md bg-[#1E3A8A] px-6 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-white transition-transform duration-300 hover:scale-[1.02]"
+          className="inline-flex items-center gap-2 rounded-md bg-[#C8A46A] px-6 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-white transition-transform duration-300 hover:scale-[1.02]"
         >
           Check Your Suburb <ArrowUpRight className="h-4 w-4" />
         </Link>

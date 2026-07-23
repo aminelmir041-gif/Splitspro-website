@@ -6,7 +6,7 @@ import { PHONE, PHONE_TEL, BRANDS, PROCESS, WHY, GOOGLE_RATING } from "../lib/da
 import { getReviews } from "../lib/api";
 
 export const Overline = ({ children, light = false }) => (
-  <span className={`overline ${light ? "text-blue-300" : ""}`}>{children}</span>
+  <span className={`overline ${light ? "text-[#C8A46A]" : ""}`}>{children}</span>
 );
 
 export const SectionHeading = ({ overline, title, sub, align = "left", light = false }) => (
@@ -15,7 +15,7 @@ export const SectionHeading = ({ overline, title, sub, align = "left", light = f
     <Reveal delay={0.05}>
       <h2 className={`mt-5 font-serif text-4xl font-medium leading-[1.08] tracking-tight md:text-5xl text-balance ${light ? "text-white" : "text-[#1D1D1F]"}`}>{title}</h2>
     </Reveal>
-    {sub && <Reveal delay={0.1}><p className={`mt-5 text-lg leading-relaxed ${light ? "text-blue-100/70" : "text-[#6E6E73]"}`}>{sub}</p></Reveal>}
+    {sub && <Reveal delay={0.1}><p className={`mt-5 text-lg leading-relaxed ${light ? "text-white/70" : "text-[#6E6E73]"}`}>{sub}</p></Reveal>}
   </div>
 );
 
@@ -50,39 +50,40 @@ export const PageHero = ({ overline, title, sub, image, note, imgPos = "object-c
       <section className="relative flex min-h-[58vh] items-end overflow-hidden">
         <div className="img-reveal absolute inset-0 -z-10">
           <motion.img src={image} alt={title} initial={{ scale: 1.1 }} animate={{ scale: 1 }} transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }} className={`h-full w-full object-cover ${imgPos}`} />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B1F3A]/85 via-[#0B1F3A]/40 to-[#0B1F3A]/20" />
+          <div className="absolute inset-0 hero-overlay-lr" />
+          <div className="absolute inset-0 hero-overlay-base" />
         </div>
         <div className="sp-container pb-16 pt-40">
           <Reveal><Overline light>{overline}</Overline></Reveal>
           <Reveal delay={0.05}><h1 className="mt-5 max-w-4xl font-serif text-5xl font-medium leading-none tracking-tight text-white md:text-6xl lg:text-7xl text-balance">{title}</h1></Reveal>
-          {sub && <Reveal delay={0.1}><p className="mt-6 max-w-2xl text-lg leading-relaxed text-blue-100/80">{sub}</p></Reveal>}
+          {sub && <Reveal delay={0.1}><p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/85">{sub}</p></Reveal>}
         </div>
       </section>
     );
   }
   return (
-    <section className="relative flex min-h-[56vh] items-end overflow-hidden bg-[#0B1F3A]">
-      <motion.div aria-hidden className="absolute -left-40 top-0 h-[520px] w-[520px] rounded-full bg-[#1E3A8A]/50 blur-[120px]" animate={{ x: [0, 80, 0], y: [0, 40, 0] }} transition={{ duration: 16, repeat: Infinity }} />
-      <motion.div aria-hidden className="absolute -right-20 bottom-0 h-[420px] w-[420px] rounded-full bg-[#2563EB]/30 blur-[120px]" animate={{ x: [0, -60, 0], y: [0, -30, 0] }} transition={{ duration: 18, repeat: Infinity }} />
+    <section className="relative flex min-h-[56vh] items-end overflow-hidden bg-[#0B0B0B]">
+      <motion.div aria-hidden className="absolute -left-40 top-0 h-[520px] w-[520px] rounded-full bg-[#C8A46A]/50 blur-[120px]" animate={{ x: [0, 80, 0], y: [0, 40, 0] }} transition={{ duration: 16, repeat: Infinity }} />
+      <motion.div aria-hidden className="absolute -right-20 bottom-0 h-[420px] w-[420px] rounded-full bg-[#C8A46A]/20 blur-[120px]" animate={{ x: [0, -60, 0], y: [0, -30, 0] }} transition={{ duration: 18, repeat: Infinity }} />
       <Airflow className="opacity-40" />
       <div className="sp-container relative pb-16 pt-40">
         <Reveal><Overline light>{overline}</Overline></Reveal>
         <Reveal delay={0.05}><h1 className="mt-5 max-w-4xl font-serif text-5xl font-medium leading-none tracking-tight text-white md:text-6xl lg:text-7xl text-balance">{title}</h1></Reveal>
-        {sub && <Reveal delay={0.1}><p className="mt-6 max-w-2xl text-lg leading-relaxed text-blue-100/80">{sub}</p></Reveal>}
-        {note && <Reveal delay={0.15}><p className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-blue-100/70">{note}</p></Reveal>}
+        {sub && <Reveal delay={0.1}><p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80">{sub}</p></Reveal>}
+        {note && <Reveal delay={0.15}><p className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-white/70">{note}</p></Reveal>}
       </div>
     </section>
   );
 };
 
 export const CTASection = () => (
-  <section className="relative overflow-hidden bg-[#0B1F3A] py-28 sm:py-36" data-testid="cta-section">
-    <motion.div aria-hidden className="absolute left-1/2 top-0 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-[#1E3A8A]/40 blur-[130px]" animate={{ opacity: [0.5, 0.8, 0.5] }} transition={{ duration: 8, repeat: Infinity }} />
+  <section className="relative overflow-hidden bg-[#0B0B0B] py-28 sm:py-36" data-testid="cta-section">
+    <motion.div aria-hidden className="absolute left-1/2 top-0 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-[#C8A46A]/40 blur-[130px]" animate={{ opacity: [0.5, 0.8, 0.5] }} transition={{ duration: 8, repeat: Infinity }} />
     <Airflow className="opacity-30" />
     <div className="sp-container relative z-10 text-center">
       <Reveal><Overline light>Request a quote</Overline></Reveal>
       <Reveal delay={0.06}><h2 className="mx-auto mt-5 max-w-3xl font-serif text-4xl font-medium leading-tight tracking-tight text-white md:text-5xl text-balance">Let&apos;s craft the right comfort for your home</h2></Reveal>
-      <Reveal delay={0.12}><p className="mx-auto mt-6 max-w-xl text-lg text-blue-100/70">A considered consultation, an honest recommendation and a precise installation. Request your free, no-obligation quote today.</p></Reveal>
+      <Reveal delay={0.12}><p className="mx-auto mt-6 max-w-xl text-lg text-white/70">A considered consultation, an honest recommendation and a precise installation. Request your free, no-obligation quote today.</p></Reveal>
       <Reveal delay={0.18}>
         <div className="mt-10 flex flex-wrap justify-center gap-4">
           <a href={PHONE_TEL} className="btn-glass-light"><Phone className="h-4 w-4" /> Call {PHONE}</a>
@@ -127,8 +128,8 @@ export const WhyGrid = () => (
     {WHY.map((w, i) => (
       <Reveal key={w.title} delay={(i % 3) * 0.08}>
         <div className="hover-rise group h-full rounded-2xl border border-[#E5E5EA] bg-white p-8 soft-shadow-sm">
-          <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#EEF3FF] text-[#1E3A8A]">
-            <motion.span aria-hidden className="absolute inset-0 rounded-full bg-[#1E3A8A]/10" animate={{ scale: [1, 1.25, 1], opacity: [0.6, 0, 0.6] }} transition={{ duration: 3, repeat: Infinity, delay: i * 0.3 }} />
+          <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#F3E9D2] text-[#C8A46A]">
+            <motion.span aria-hidden className="absolute inset-0 rounded-full bg-[#C8A46A]/10" animate={{ scale: [1, 1.25, 1], opacity: [0.6, 0, 0.6] }} transition={{ duration: 3, repeat: Infinity, delay: i * 0.3 }} />
             <w.icon className="h-6 w-6" strokeWidth={1.7} />
           </span>
           <h3 className="mt-6 font-serif text-xl text-[#1D1D1F]">{w.title}</h3>
@@ -143,7 +144,7 @@ export const ProcessTimeline = () => (
   <div className="relative">
     <div className="absolute left-0 right-0 top-7 hidden h-px bg-[#E5E5EA] lg:block" />
     <motion.div
-      className="absolute left-0 top-7 hidden h-px bg-[#1E3A8A] lg:block"
+      className="absolute left-0 top-7 hidden h-px bg-[#C8A46A] lg:block"
       initial={{ width: "0%" }}
       whileInView={{ width: "100%" }}
       viewport={{ once: true }}
@@ -153,7 +154,7 @@ export const ProcessTimeline = () => (
       {PROCESS.map((p, i) => (
         <Reveal key={p.step} delay={i * 0.12}>
           <div className="relative">
-            <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-[#1E3A8A] bg-white font-serif text-lg font-medium text-[#1E3A8A]">{p.step}</span>
+            <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-[#C8A46A] bg-white font-serif text-lg font-medium text-[#C8A46A]">{p.step}</span>
             <h3 className="mt-6 font-serif text-2xl text-[#1D1D1F]">{p.title}</h3>
             <p className="mt-3 text-sm leading-relaxed text-[#6E6E73]">{p.desc}</p>
           </div>
@@ -187,7 +188,7 @@ export const FeatureList = ({ items }) => (
     {items.map((it, i) => (
       <Reveal key={it} delay={(i % 2) * 0.05}>
         <li className="flex items-center gap-4 border-b border-[#E5E5EA] pb-5">
-          <Check className="h-5 w-5 shrink-0 text-[#1E3A8A]" strokeWidth={2} />
+          <Check className="h-5 w-5 shrink-0 text-[#C8A46A]" strokeWidth={2} />
           <span className="text-lg text-[#1D1D1F]">{it}</span>
         </li>
       </Reveal>
@@ -209,7 +210,7 @@ export const GoogleRating = ({ light = false, className = "" }) => (
     <svg viewBox="0 0 48 48" className="h-5 w-5" aria-hidden><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC04" d="M11.69 28.18c-.44-1.32-.69-2.73-.69-4.18s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>
     <span className={`text-sm font-semibold ${light ? "text-white" : "text-[#1D1D1F]"}`}>{GOOGLE_RATING.score}</span>
     <Stars />
-    <span className={`text-sm ${light ? "text-blue-100/70" : "text-[#6E6E73]"}`}>{GOOGLE_RATING.count} Verified Reviews</span>
+    <span className={`text-sm ${light ? "text-white/70" : "text-[#6E6E73]"}`}>{GOOGLE_RATING.count} Verified Reviews</span>
   </div>
 );
 
@@ -226,7 +227,7 @@ export const TrustBadges = () => {
       <div className="sp-container flex flex-wrap items-center justify-center gap-x-10 gap-y-4 py-6">
         {items.map((b) => (
           <span key={b.label} className="inline-flex items-center gap-2 text-sm font-semibold text-[#1D1D1F]">
-            <b.icon className="h-4 w-4 text-[#1E3A8A]" strokeWidth={2} /> {b.label}
+            <b.icon className="h-4 w-4 text-[#C8A46A]" strokeWidth={2} /> {b.label}
           </span>
         ))}
       </div>
@@ -235,7 +236,7 @@ export const TrustBadges = () => {
 };
 
 const Avatar = ({ name }) => (
-  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#EEF3FF] font-serif text-lg font-medium text-[#1E3A8A]">
+  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#F3E9D2] font-serif text-lg font-medium text-[#C8A46A]">
     {name?.trim()?.charAt(0)?.toUpperCase() || "S"}
   </span>
 );
@@ -254,7 +255,7 @@ export const ServiceReviews = ({ category, title = "What local homeowners say", 
   if (!list.length) return null;
 
   return (
-    <section className={`py-24 sm:py-32 ${light ? "bg-[#0B1F3A]" : "bg-white"}`} data-testid="service-reviews">
+    <section className={`py-24 sm:py-32 ${light ? "bg-[#0B0B0B]" : "bg-white"}`} data-testid="service-reviews">
       <div className="sp-container">
         <div className="flex flex-col items-start gap-4">
           <GoogleRating light={light} />
@@ -270,7 +271,7 @@ export const ServiceReviews = ({ category, title = "What local homeowners say", 
                   <Avatar name={r.name} />
                   <span>
                     <span className={`block text-sm font-semibold ${light ? "text-white" : "text-[#1D1D1F]"}`}>{r.name}</span>
-                    <span className={`block text-xs ${light ? "text-blue-100/60" : "text-[#6E6E73]"}`}>Verified Google Review</span>
+                    <span className={`block text-xs ${light ? "text-white/55" : "text-[#6E6E73]"}`}>Verified Google Review</span>
                   </span>
                 </figcaption>
               </figure>

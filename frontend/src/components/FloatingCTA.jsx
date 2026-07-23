@@ -48,7 +48,7 @@ export const FloatingCTA = () => {
             <Link
               to="/contact"
               data-testid="sticky-quote-btn"
-              className="flex h-[66px] items-center justify-center gap-2 rounded-none bg-[#1E3A8A] text-sm font-semibold uppercase tracking-[0.08em] text-white"
+              className="flex h-[66px] items-center justify-center gap-2 rounded-none bg-[#C8A46A] text-sm font-semibold uppercase tracking-[0.08em] text-white"
             >
               Get Free Quote <ArrowUpRight className="h-4 w-4" />
             </Link>
@@ -73,7 +73,7 @@ export const FloatingCTA = () => {
             <Link
               to="/contact"
               data-testid="floating-quote-btn"
-              className="flex items-center gap-2 rounded-md bg-[#1E3A8A] px-5 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-white shadow-md transition-colors duration-300 hover:bg-[#16306e]"
+              className="flex items-center gap-2 rounded-md bg-[#C8A46A] px-5 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-white shadow-md transition-colors duration-300 hover:bg-[#16306e]"
             >
               Get Free Quote <ArrowUpRight className="h-4 w-4" />
             </Link>

@@ -7,7 +7,7 @@ const MAPS_SRC =
   "https://www.google.com/maps?q=Bass+Hill+NSW+Australia&z=11&output=embed";
 
 export const Footer = () => (
-  <footer data-testid="footer" className="bg-[#0B1F3A] text-white">
+  <footer data-testid="footer" className="bg-[#0B0B0B] text-white">
     <div className="sp-container grid gap-12 py-20 lg:grid-cols-12">
       <div className="lg:col-span-4">
         <Logo onDark />

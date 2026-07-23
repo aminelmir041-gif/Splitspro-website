@@ -14,7 +14,7 @@ const buildInitial = (defaultService = "") => ({
 });
 
 const fieldClass =
-  "h-12 rounded-sm border-0 border-b border-[#E5E5EA] bg-transparent px-0 text-[#1D1D1F] shadow-none focus-visible:border-[#1E3A8A] focus-visible:ring-0 placeholder:text-[#6E6E73]/60";
+  "h-12 rounded-sm border-0 border-b border-[#E5E5EA] bg-transparent px-0 text-[#1D1D1F] shadow-none focus-visible:border-[#C8A46A] focus-visible:ring-0 placeholder:text-[#6E6E73]/60";
 
 export const QuoteForm = ({ onDark = false, defaultService = "", submitLabel = "Get Free Quote & Plan" }) => {
   const [form, setForm] = useState(buildInitial(defaultService));
@@ -79,13 +79,13 @@ export const QuoteForm = ({ onDark = false, defaultService = "", submitLabel = "
   if (done) {
     return (
       <div data-testid="quote-success" className="py-8 text-center">
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#1E3A8A] text-white">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#C8A46A] text-white">
           <Check className="h-7 w-7" />
         </div>
         <h3 className={`mt-6 font-serif text-2xl ${onDark ? "text-white" : "text-[#1D1D1F]"}`}>Request received</h3>
-        <p className={`mt-2 ${onDark ? "text-blue-100/70" : "text-[#6E6E73]"}`}>One of our team will call you shortly to arrange your free quote and plan.</p>
+        <p className={`mt-2 ${onDark ? "text-white/70" : "text-[#6E6E73]"}`}>One of our team will call you shortly to arrange your free quote and plan.</p>
         <button onClick={() => setDone(false)} data-testid="quote-another-btn"
-          className="mt-6 text-sm font-semibold text-[#1E3A8A] link-line">
+          className="mt-6 text-sm font-semibold text-[#C8A46A] link-line">
           Submit another request
         </button>
       </div>
@@ -139,7 +139,7 @@ export const QuoteForm = ({ onDark = false, defaultService = "", submitLabel = "
         <label htmlFor="q-message" className={labelClass}>Message (optional)</label>
         <Textarea id="q-message" data-testid="quote-message-input" value={form.message}
           onChange={(e) => update("message", e.target.value)} placeholder="Tell us a little about your home or the system you have in mind…"
-          className="min-h-24 rounded-sm border-0 border-b border-[#E5E5EA] bg-transparent px-0 text-[#1D1D1F] shadow-none focus-visible:border-[#1E3A8A] focus-visible:ring-0 placeholder:text-[#6E6E73]/60" />
+          className="min-h-24 rounded-sm border-0 border-b border-[#E5E5EA] bg-transparent px-0 text-[#1D1D1F] shadow-none focus-visible:border-[#C8A46A] focus-visible:ring-0 placeholder:text-[#6E6E73]/60" />
       </div>
 
       <div>
@@ -147,7 +147,7 @@ export const QuoteForm = ({ onDark = false, defaultService = "", submitLabel = "
         <input ref={fileRef} type="file" accept="image/*" onChange={onPickPhoto} data-testid="quote-photo-input" className="hidden" />
         {!photoPreview ? (
           <button type="button" onClick={() => fileRef.current?.click()} data-testid="quote-photo-btn"
-            className={`flex h-12 w-full items-center gap-3 rounded-sm border border-dashed px-4 text-sm transition-colors ${onDark ? "border-white/30 text-white/70 hover:border-white/60" : "border-[#C7C7CC] text-[#6E6E73] hover:border-[#1E3A8A] hover:text-[#1E3A8A]"}`}>
+            className={`flex h-12 w-full items-center gap-3 rounded-sm border border-dashed px-4 text-sm transition-colors ${onDark ? "border-white/30 text-white/70 hover:border-white/60" : "border-[#C7C7CC] text-[#6E6E73] hover:border-[#C8A46A] hover:text-[#C8A46A]"}`}>
             <Upload className="h-4 w-4" /> Add a photo — it helps us quote accurately
           </button>
         ) : (
@@ -164,7 +164,7 @@ export const QuoteForm = ({ onDark = false, defaultService = "", submitLabel = "
 
       <div className="mt-1 flex flex-col gap-3 sm:flex-row">
         <button type="submit" disabled={loading} data-testid="quote-submit-btn"
-          className="flex h-[52px] flex-1 items-center justify-center rounded-sm bg-[#1E3A8A] px-8 py-4 text-sm font-semibold uppercase tracking-wider text-white transition-transform duration-300 hover:scale-[1.01] disabled:opacity-70">
+          className="flex h-[52px] flex-1 items-center justify-center rounded-sm bg-[#C8A46A] px-8 py-4 text-sm font-semibold uppercase tracking-wider text-white transition-transform duration-300 hover:scale-[1.01] disabled:opacity-70">
           {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : submitLabel}
         </button>
         <a href={PHONE_TEL} data-testid="quote-call-btn"

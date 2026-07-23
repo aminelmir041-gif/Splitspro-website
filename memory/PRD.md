@@ -71,6 +71,19 @@ Goal: lift Google/Meta Ads conversions on the two highest-intent pages WITHOUT r
 - Shared content in data.js: HOME_COMFORT_INCLUDES (9), HOME_COMFORT_GUARANTEES (5), FORM_TRUST_STRIP (7).
 - Verified: iteration_10 — frontend 9/9 acceptance PASS, zero regressions (Cleaning/Repairs/Servicing + Home unaffected). Backend unchanged (iteration_9 12/12).
 
+## v10 — PREMIUM VISUAL REFRESH (Black + Metallic Gold, 2026-07-23)
+Goal: elevate the entire site to a timeless, architectural, Apple/Porsche/B&O luxury aesthetic while keeping layout & functionality intact.
+- **Palette shift**: primary accent Blue #1E3A8A → Metallic Gold #C8A46A; dark section bg Navy #0B1F3A → Rich Black #0B0B0B; light icon tint #EEF3FF → Warm Cream #F3E9D2; body/warm white #F8F7F5. Applied via bulk `replace_all` across 12 component/page files + a full rewrite of `index.css` (CSS variables, buttons, cursor, loader, leaflet tooltips, ::selection).
+- **Hero overlay**: swapped the equal-darkening blue overlays for two new utility classes: `.hero-overlay-lr` (left-to-right black→transparent, ~92%→0% per spec) + `.hero-overlay-base` (subtle bottom-only fade for CTA legibility). Applied to Home hero and every PageHero. Hero image stays bright, warm & luxurious; the AC unit remains clearly visible.
+- **Split System hero image**: swapped from the darker bedroom shot to the brighter `IMAGES.splitLiving` (Adobe living-room with a wall-mounted split visible up front); introImage still uses the bedroom.
+- **Buttons refined** (`.btn-glass`, `.btn-glass-light`, `.btn-glass-outline` in index.css): rich-black backgrounds, metallic gold borders/hover glow, softer 0.375rem radius, elegant shadows — no bright yellow/orange gold.
+- **Typography**: heading font untouched; removed the risky `color` on `.font-serif` compound selector that was overriding `text-white` on hero headings; body copy contrast preserved via body `color: var(--sp-ink)`. Overline tracking widened to `[0.28em]` in gold for the premium accent look.
+- **Desktop logo**: added `lg:h-[70px]` (unscrolled) and `lg:h-[54px]` (scrolled) — ~25-30% larger on desktop only. Mobile/tablet unchanged. Header height unchanged.
+- **Navbar**: scrolled bg tightened from `bg-white/80` → `bg-[#F8F7F5]/95` so the header doesn't blend with dark hero content behind it.
+- Functionality untouched — only colors, CSS variables, hero overlays, logo sizing, and one hero image were changed. Compile clean; previous functional tests (iteration_9 12/12, iteration_10 9/9) still valid.
+
+
+
 ## Backlog / Next (updated)
 - P1: Wire /api/quotes (+ photo_url) to GoHighLevel via webhook/API for real lead automation.
 - P2: Simple admin/lead view to review submitted leads + uploaded photos.
