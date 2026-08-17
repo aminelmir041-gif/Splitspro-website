@@ -22,7 +22,7 @@ const Stars = ({ n = 5 }) => (
   </span>
 );
 
-const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro, features, imgPos = "object-center" }) => {
+const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro, features, imgPos = "object-center", seoBlocks = null, extraFaqs = null, helmet = null }) => {
   const cfg = SERVICE_LANDING[slug] || {};
   const lenis = useLenis();
   const [review, setReview] = useState(null);
@@ -43,6 +43,7 @@ const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro,
 
   return (
     <>
+      {helmet}
       <PageHero overline={overline} title={title} sub={sub} image={image} imgPos={imgPos} />
 
       <TrustBadges />
@@ -123,6 +124,8 @@ const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro,
           </div>
         </div>
       </section>
+
+      {seoBlocks}
 
       {/* Benefits (existing style) */}
       {cfg.benefits && (
@@ -291,13 +294,13 @@ const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro,
       </section>
 
       {/* FAQ */}
-      {cfg.faqs && (
+      {(cfg.faqs || extraFaqs) && (
         <section className="bg-white py-24 sm:py-32" data-testid="service-faq">
           <div className="sp-container grid gap-14 lg:grid-cols-[0.7fr_1.3fr]">
             <SectionHeading overline="FAQ" title="Answers, before you ask" />
             <Reveal delay={0.1}>
               <Accordion type="single" collapsible className="w-full">
-                {cfg.faqs.map((f, i) => (
+                {[...(extraFaqs || []), ...(cfg.faqs || [])].map((f, i) => (
                   <AccordionItem key={i} value={`item-${i}`} data-testid={`faq-item-${i}`} className="border-b border-[#E5E5EA]">
                     <AccordionTrigger className="py-6 text-left font-serif text-xl font-normal text-[#1D1D1F] hover:no-underline">{f.q}</AccordionTrigger>
                     <AccordionContent className="pb-6 text-base leading-relaxed text-[#6E6E73]">{f.a}</AccordionContent>

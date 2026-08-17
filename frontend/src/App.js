@@ -3,6 +3,7 @@ import "@/App.css";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ReactLenis, useLenis } from "lenis/react";
 import { motion, AnimatePresence } from "framer-motion";
+import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "@/components/ui/sonner";
 
 import Navbar from "@/components/Navbar";
@@ -23,6 +24,7 @@ import Reviews from "@/pages/Reviews";
 import ServiceAreas from "@/pages/ServiceAreas";
 import FAQ from "@/pages/FAQ";
 import Contact from "@/pages/Contact";
+import BrandPage from "@/pages/BrandPage";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -49,6 +51,7 @@ const AnimatedRoutes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/split-systems" element={<SplitSystems />} />
+          <Route path="/split-systems/:slug" element={<BrandPage />} />
           <Route path="/ducted" element={<Ducted />} />
           <Route path="/cleaning" element={<Cleaning />} />
           <Route path="/repairs" element={<Repairs />} />
@@ -66,22 +69,24 @@ const AnimatedRoutes = () => {
 
 function App() {
   return (
-    <div className="App">
-      <PageLoader />
-      <CustomCursor />
-      <ReactLenis root options={{ lerp: 0.08, smoothWheel: true }}>
-        <BrowserRouter>
-          <ScrollToTop />
-          <Navbar />
-          <main>
-            <AnimatedRoutes />
-          </main>
-          <Footer />
-          <FloatingCTA />
-          <Toaster position="top-center" richColors />
-        </BrowserRouter>
-      </ReactLenis>
-    </div>
+    <HelmetProvider>
+      <div className="App">
+        <PageLoader />
+        <CustomCursor />
+        <ReactLenis root options={{ lerp: 0.08, smoothWheel: true }}>
+          <BrowserRouter>
+            <ScrollToTop />
+            <Navbar />
+            <main>
+              <AnimatedRoutes />
+            </main>
+            <Footer />
+            <FloatingCTA />
+            <Toaster position="top-center" richColors />
+          </BrowserRouter>
+        </ReactLenis>
+      </div>
+    </HelmetProvider>
   );
 }
 

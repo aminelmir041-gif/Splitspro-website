@@ -92,6 +92,21 @@ Goal: elevate the entire site to a timeless, architectural, Apple/Porsche/B&O lu
 - Functionality unchanged; compile clean; verified via screenshot (logo prominent + centred with generous spacing, map wider zoom, gold markers rendering).
 
 
+## v12 — GALLERY + SPLIT SYSTEMS SEO OVERHAUL (2026-07-24)
+- **Gallery**: added 4 real customer installs — Daikin Zena in ensuite, Rinnai split in living, Daikin outdoor bracket mount, Daikin split in garage/utility. Total gallery entries: 7 → 11.
+- **Split Systems SEO** — comprehensive on-page SEO **without touching the premium design**. Uses `react-helmet-async` (installed) inside a new `HelmetProvider` in App.js.
+  - New H1: *"Split System Air Conditioning Supply & Installation"* with subhead *"Compare trusted air conditioning brands, view supplied and installed prices and find the right split system for your room."*
+  - Meta title: *"Split System Air Conditioning Supply & Installation | SplitsPro"*; meta description mentions Daikin, Rinnai, Mitsubishi Electric & Mitsubishi Heavy Industries + supplied-and-installed + free sizing advice. Canonical + OG tags set.
+  - **Brand pricing nav** (`brand-pricing-nav`) — 6 clickable brand cards near the top AND repeated under a *"Split System Air Conditioner Prices — Supplied & Installed"* heading, each linking to a dedicated brand page. Card text includes the brand/range name ("View Daikin Cora prices" etc.).
+  - New content sections (naturally worded — no keyword stuffing): *Split system air conditioning for your home* (bedrooms/living/office/granny flats/apartments/individual rooms/replacements), *What size split system do I need?* + **Get Free Sizing Advice** CTA, *Professional split system installation* with 4 real install photos and descriptive alt text (e.g. *"Daikin split system air conditioner installed in a modern ensuite"*), *Replacing an old split system?* + **Get a Replacement Quote** CTA.
+  - Extended FAQ: 8 new SEO-focused Q&As merged with existing (installation cost, sizing for bedroom / living room, replacement, brand choice, supply & install, install duration).
+- **6 dedicated brand pages** (`/split-systems/:slug`) via new `BrandPage.jsx` template + `SPLIT_BRANDS` config in data.js:
+  - `/split-systems/daikin-cora` · `/daikin-alira-x` · `/rinnai-pb-series` · `/rinnai-t-series` · `/mitsubishi-electric` · `/mitsubishi-heavy-ciara`.
+  - Each page has unique `<title>`, meta description, canonical, H1, body copy, available capacities and a brand-tagged quote form (submit label "Get My {Brand} Quote"). Cross-brand cards link between siblings; a prominent **"Back to Split System Air Conditioning"** CTA links to the hub — clean site hierarchy.
+- **HomeComfortPage** extended with optional `helmet`, `seoBlocks` and `extraFaqs` props so the SEO additions live inside the same page without any redesign. Ducted and the other services are untouched.
+- **Technical SEO**: `/public/sitemap.xml` created with 18 URLs incl. all brand pages (`/split-systems/*`); `/public/robots.txt` referencing the sitemap. Existing LocalBusiness/HVACBusiness structured data (index.html) unchanged.
+- Compile clean; brand pages verified via HTTP 200 + screenshot (Daikin Cora renders correctly with hero H1, trust badges, back-link and brand quote card).
+
 ## Backlog / Next (updated)
 - P1: Wire /api/quotes (+ photo_url) to GoHighLevel via webhook/API for real lead automation.
 - P2: Simple admin/lead view to review submitted leads + uploaded photos.

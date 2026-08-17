@@ -53,6 +53,11 @@ export const IMAGES = {
   outdoorRinnai: A + "tvk64ify_Rinnai-reverse-cycle-split-system-aircon-outdoor-unit.jpg",
   outdoorRinnai2: A + "meyqoj4d_file_000000004bf881fbb2fa04727afb3b11.png",
   outdoorDaikin: A + "8sn2d27k_AdobeStock_1222382516_Editorial_Use_Only.webp",
+  // Real customer installs — added Aug 2026
+  installDaikinBathroom: A + "ld9z3ey8_20260807_165742.webp",
+  installRinnaiWall: A + "a2zwvxp5_20260808_150102.webp",
+  installDaikinOutdoor2: A + "q9r7krqk_20260810_162548.webp",
+  installDaikinGarage: A + "smto7cvr_IMG-20260811-WA0065.webp",
 };
 
 export const FEATURED_SERVICES = [
@@ -136,6 +141,10 @@ export const GALLERY = [
   { src: IMAGES.splitIndoor, title: "Rinnai Indoor Split", tag: "Split System" },
   { src: IMAGES.outdoorDaikin, title: "Daikin Condenser", tag: "Outdoor" },
   { src: IMAGES.ductedHall, title: "Ducted Hallway Vent", tag: "Ducted" },
+  { src: IMAGES.installDaikinBathroom, title: "Daikin Split — Ensuite", tag: "Split System" },
+  { src: IMAGES.installRinnaiWall, title: "Rinnai Split — Living Area", tag: "Split System" },
+  { src: IMAGES.installDaikinOutdoor2, title: "Daikin Outdoor — Bracket Mount", tag: "Outdoor" },
+  { src: IMAGES.installDaikinGarage, title: "Daikin Split — Utility Room", tag: "Split System" },
 ];
 
 export const FAQS = [
@@ -268,3 +277,98 @@ export const SERVICE_LANDING = {
     faqs: [FAQS[3], FAQS[4], FAQS[5], FAQS[6]],
   },
 };
+
+
+// ---- Split System brand pricing navigation ----
+export const SPLIT_BRANDS = [
+  {
+    slug: "daikin-cora",
+    brand: "Daikin",
+    range: "Cora",
+    label: "Daikin Cora",
+    tagline: "Quiet, reliable and energy-efficient reverse cycle split system.",
+    sizes: "2.5kW · 3.5kW · 5.0kW · 7.1kW",
+    metaTitle: "Daikin Cora Split System Prices & Installation | SplitsPro",
+    h1: "Daikin Cora Split System Air Conditioning",
+    metaDesc: "Daikin Cora reverse cycle split systems supplied and installed by SplitsPro across Western Sydney. View sizes, prices and book your installation.",
+    body: "The Daikin Cora is one of Australia's most popular residential split systems — a reliable, quiet reverse cycle unit backed by Daikin's 5-year manufacturer's warranty. We supply and install the Cora across bedrooms, living rooms and home offices.",
+    image: IMAGES.splitBedroom,
+  },
+  {
+    slug: "daikin-alira-x",
+    brand: "Daikin",
+    range: "Alira X",
+    label: "Daikin Alira X",
+    tagline: "Premium ultra-quiet Daikin range with app control and human sensing.",
+    sizes: "2.5kW · 3.5kW · 5.0kW · 7.1kW · 8.5kW",
+    metaTitle: "Daikin Alira X Prices & Installation | SplitsPro",
+    h1: "Daikin Alira X Split System Air Conditioning",
+    metaDesc: "Daikin Alira X premium split systems supplied and installed by SplitsPro. View sizes, features and get a fixed installed price for your home.",
+    body: "The Daikin Alira X sits at the top of Daikin's residential range — ultra-quiet, refined styling, human-sensing and Wi-Fi control as standard. Ideal for main living areas and master bedrooms where quietness and refinement matter most.",
+    image: IMAGES.installDaikinGarage,
+  },
+  {
+    slug: "rinnai-pb-series",
+    brand: "Rinnai",
+    range: "PB Series",
+    label: "Rinnai PB Series",
+    tagline: "Value-driven Rinnai split systems for everyday rooms.",
+    sizes: "2.5kW · 3.5kW · 5.0kW · 7.1kW",
+    metaTitle: "Rinnai PB Series Split System Prices & Installation | SplitsPro",
+    h1: "Rinnai PB Series Split System Air Conditioning",
+    metaDesc: "Rinnai PB Series reverse cycle split systems supplied and installed by SplitsPro. Great value, reliable performance and a professional installation.",
+    body: "The Rinnai PB Series is a dependable, well-priced reverse cycle split system — a great choice for bedrooms, granny flats, home offices and rental properties where value and reliability matter.",
+    image: IMAGES.splitIndoor,
+  },
+  {
+    slug: "rinnai-t-series",
+    brand: "Rinnai",
+    range: "T Series",
+    label: "Rinnai T Series",
+    tagline: "Rinnai's upgraded T Series with premium finish and improved efficiency.",
+    sizes: "2.5kW · 3.5kW · 5.0kW · 7.1kW · 8.0kW",
+    metaTitle: "Rinnai T Series Air Conditioner Prices & Installation | SplitsPro",
+    h1: "Rinnai T Series Split System Air Conditioning",
+    metaDesc: "Rinnai T Series split systems supplied and installed by SplitsPro. Refined design, quieter operation and a fixed installed price.",
+    body: "The Rinnai T Series is Rinnai's premium residential split range — quieter operation, improved efficiency and a more refined finish than the PB. Suited to living rooms and master bedrooms.",
+    image: IMAGES.installRinnaiWall,
+  },
+  {
+    slug: "mitsubishi-electric",
+    brand: "Mitsubishi Electric",
+    range: "MSZ Range",
+    label: "Mitsubishi Electric",
+    tagline: "Mitsubishi Electric MSZ — refined, whisper-quiet performance.",
+    sizes: "2.5kW · 3.5kW · 5.0kW · 7.1kW · 8.0kW",
+    metaTitle: "Mitsubishi Electric Split System Prices & Installation | SplitsPro",
+    h1: "Mitsubishi Electric Split System Air Conditioning",
+    metaDesc: "Mitsubishi Electric split systems supplied and installed by SplitsPro across Western Sydney. View the MSZ range, sizes and installed prices.",
+    body: "Mitsubishi Electric's MSZ range is renowned for quiet, refined performance and long-term reliability. A premium choice for living areas, bedrooms and open-plan spaces where sound levels matter.",
+    image: IMAGES.splitLiving,
+  },
+  {
+    slug: "mitsubishi-heavy-ciara",
+    brand: "Mitsubishi Heavy Industries",
+    range: "Ciara",
+    label: "Mitsubishi Heavy — Ciara",
+    tagline: "Mitsubishi Heavy Industries Ciara — Japanese-engineered comfort.",
+    sizes: "2.5kW · 3.5kW · 5.0kW · 7.1kW · 8.0kW",
+    metaTitle: "Mitsubishi Heavy Industries Ciara Prices & Installation | SplitsPro",
+    h1: "Mitsubishi Heavy Industries Ciara Split System",
+    metaDesc: "Mitsubishi Heavy Industries Ciara split systems supplied and installed by SplitsPro. Japanese engineering, quiet operation and a fixed installed price.",
+    body: "The Mitsubishi Heavy Industries Ciara offers Japanese engineering, quiet operation and strong warranty support. A refined alternative for homeowners who want premium performance at a competitive price.",
+    image: IMAGES.installDaikinBathroom,
+  },
+];
+
+// ---- Split System FAQs (added for SEO) ----
+export const SPLIT_FAQS = [
+  { q: "How much does a split system installation cost?", a: "Supplied-and-installed prices vary with the brand, capacity (kW) and the complexity of the pipe run. As a guide, a straightforward 2.5kW–3.5kW install typically starts from around a few thousand dollars, with larger or more complex jobs quoted individually. We provide a fixed written quote before any work starts — no surprises." },
+  { q: "What size split system do I need?", a: "The right size depends on room dimensions, ceiling height, windows, insulation, sun exposure and how the room is used. Under-sized units struggle in summer; over-sized units short-cycle and waste energy. Send us your room details and we'll recommend the correct capacity." },
+  { q: "Is a 2.5kW split system enough for a bedroom?", a: "A 2.5kW split system is generally suitable for a standard bedroom up to around 20-25 m². Larger master bedrooms, north-facing rooms or rooms with high ceilings may need 3.5kW. We'll confirm based on your room." },
+  { q: "What size air conditioner should I use for a living room?", a: "Most Australian living rooms suit a 5.0kW–7.1kW reverse cycle split system. Open-plan or double-height spaces may benefit from an 8.0kW+ unit, or in some cases a ducted system." },
+  { q: "Can you replace my existing split system?", a: "Yes. We regularly replace old wall-mounted split systems with new Daikin, Rinnai, Mitsubishi Electric or Mitsubishi Heavy Industries units — reusing existing wall penetrations where possible for a neat finish." },
+  { q: "Which split system brand should I choose?", a: "It comes down to your priorities. Daikin and Mitsubishi Electric are known for premium refinement and reliability. Rinnai offers strong value. Mitsubishi Heavy Industries sits between the two. We'll recommend a shortlist based on your room and budget." },
+  { q: "Do you supply and install the air conditioner?", a: "Yes — every quote we provide is supplied and installed. That includes the unit, bracket, pipe, control cabling, testing and commissioning." },
+  { q: "How long does a split system installation take?", a: "A standard split system installation is typically completed in a few hours. More complex installs (long pipe runs, second-storey mounts, tricky access) may take longer — we confirm timing at quote." },
+];
