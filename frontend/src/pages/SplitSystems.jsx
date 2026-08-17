@@ -8,8 +8,8 @@ import { IMAGES, SPLIT_BRANDS, SPLIT_FAQS } from "../lib/data";
 
 const CANONICAL = "https://splitspro.com.au/split-systems";
 
-const BrandNav = ({ heading = "View split system prices", overline = "Split System Prices — Supplied & Installed", sub = "Choose a brand or range to see current supplied & installed pricing and book your installation." }) => (
-  <section className="bg-[#F5F5F7] py-24 sm:py-32" data-testid="brand-pricing-nav">
+const BrandNav = ({ heading = "View split system prices", overline = "Split System Prices — Supplied & Installed", sub = "Choose a brand or range to see current supplied & installed pricing and book your installation.", className = "" }) => (
+  <section className={`bg-[#F5F5F7] py-24 sm:py-32 ${className}`} data-testid="brand-pricing-nav">
     <div className="sp-container">
       <SectionHeading overline={overline} title={heading} sub={sub} />
       <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -31,10 +31,34 @@ const BrandNav = ({ heading = "View split system prices", overline = "Split Syst
   </section>
 );
 
+// Compact mobile-only brand chip row — sits immediately under the hero.
+const MobileBrandRow = () => (
+  <nav
+    data-testid="mobile-brand-row"
+    aria-label="Split system brand pricing"
+    className="lg:hidden border-b border-[#E5E5EA] bg-white"
+  >
+    <div className="sp-container">
+      <div className="-mx-6 flex snap-x snap-mandatory items-center gap-6 overflow-x-auto whitespace-nowrap px-6 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {SPLIT_BRANDS.map((b) => (
+          <Link
+            key={b.slug}
+            to={`/split-systems/${b.slug}`}
+            data-testid={`mobile-brand-link-${b.slug}`}
+            className="snap-start text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0B0B0B] border-b border-transparent pb-0.5 transition-colors hover:text-[#C8A46A] hover:border-[#C8A46A]"
+          >
+            {b.brand}
+          </Link>
+        ))}
+      </div>
+    </div>
+  </nav>
+);
+
 const SplitSystemsSeo = () => (
   <>
-    {/* Brand pricing navigation — near the top */}
-    <BrandNav heading="View split system prices" overline="Pricing" sub="Choose a brand or range to see current supplied & installed pricing and book your installation." />
+    {/* Brand pricing navigation — near the top (desktop only; mobile uses the compact row under the hero) */}
+    <BrandNav heading="View split system prices" overline="Pricing" sub="Choose a brand or range to see current supplied & installed pricing and book your installation." className="hidden lg:block" />
 
     {/* Split systems for your home */}
     <section className="bg-white py-24 sm:py-32" data-testid="split-for-home">
@@ -225,6 +249,7 @@ const SplitSystems = () => (
       "Complete post-install clean-up",
     ]}
     helmet={helmet}
+    afterHero={<MobileBrandRow />}
     seoBlocks={<SplitSystemsSeo />}
     extraFaqs={SPLIT_FAQS}
   />

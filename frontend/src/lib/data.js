@@ -300,7 +300,8 @@ export const SPLIT_BRANDS = [
       {
         slug: "cora",
         name: "Cora",
-        blurb: "Quiet, reliable and energy-efficient. Daikin's most popular residential range.",
+        blurb: "Quiet, efficient and reliable everyday Daikin comfort. Cora combines whisper-quiet operation with Coanda airflow, precision temperature control and an Enzyme Blue air-purifying filter, making it a great choice for bedrooms and living areas.",
+        features: ["Quiet Operation", "Coanda Airflow", "Air Purification", "Intelligent Comfort"],
         prices: [
           { kw: "2.5kW", price: "$1,650" },
           { kw: "3.5kW", price: "$1,700" },
@@ -311,7 +312,8 @@ export const SPLIT_BRANDS = [
       {
         slug: "alira-x",
         name: "Alira X",
-        blurb: "Ultra-quiet, refined styling with Wi-Fi control and human sensing. Daikin's premium range.",
+        blurb: "Daikin's premium choice for customers who want cleaner air and smarter comfort. Alira X combines Streamer air purification, three-stage filtration, Mould-Proof Operation, humidity sensing and built-in Wi-Fi.",
+        features: ["Streamer Purification", "Mould Protection", "Built-In Wi-Fi", "3-Stage Filtration"],
         prices: [
           { kw: "2.5kW", price: "$1,950" },
           { kw: "3.5kW", price: "$2,400" },
@@ -335,7 +337,8 @@ export const SPLIT_BRANDS = [
       {
         slug: "pb-series",
         name: "PB Series",
-        blurb: "Value-driven Rinnai split range — dependable performance for everyday rooms.",
+        blurb: "Smart, reliable heating and cooling designed for Australian conditions. The PB Series includes Wi-Fi control, quiet inverter operation, self-cleaning, 3D airflow, dehumidifying and sleep functions for comfortable everyday use.",
+        features: ["Wi-Fi Control", "Self-Cleaning", "3D Airflow", "Quiet Operation"],
         prices: [
           { kw: "2.5kW", price: "$1,450" },
           { kw: "3.5kW", price: "$1,550" },
@@ -346,7 +349,8 @@ export const SPLIT_BRANDS = [
       {
         slug: "t-series",
         name: "T Series",
-        blurb: "Rinnai's upgraded T Series with a more refined finish and improved efficiency.",
+        blurb: "Affordable smart comfort with modern controls. The Rinnai T Series includes Wi-Fi and voice control, Turbo heating and cooling, dehumidifying mode, Sleep Mode and a high-density air filter.",
+        features: ["Wi-Fi + Voice Control", "Turbo Mode", "Sleep Mode", "High-Density Filter"],
         prices: [
           { kw: "2.5kW", price: "$1,450" },
           { kw: "3.5kW", price: "$1,550" },
@@ -369,8 +373,9 @@ export const SPLIT_BRANDS = [
     ranges: [
       {
         slug: "ap-series",
-        name: "AP Series",
-        blurb: "Mitsubishi Electric's premium residential range — refined, whisper-quiet performance.",
+        name: "MSZ-AP Series",
+        blurb: "Premium Mitsubishi Electric comfort designed around exceptionally quiet operation. The AP Series combines Quiet Mode, Night Mode, built-in Wi-Fi on current applicable models and Dual Barrier Coating to help reduce dust and greasy dirt building up inside the unit.",
+        features: ["Ultra-Quiet", "Night Mode", "Wi-Fi Control", "Dual Barrier Coating"],
         prices: [
           { kw: "2.5kW", price: "$1,799" },
           { kw: "3.5kW", price: "$1,999" },
@@ -394,7 +399,8 @@ export const SPLIT_BRANDS = [
       {
         slug: "ciara-series",
         name: "Ciara Series",
-        blurb: "Mitsubishi Heavy Industries' Ciara Series — Japanese-engineered comfort with a wide capacity range.",
+        blurb: "A compact premium split system with smart control and strong clean-air features. Ciara includes built-in Wi-Fi, voice control compatibility, Allergen Clear filtration, Self-Clean Operation, quiet operation and advanced 3D airflow.",
+        features: ["Built-In Wi-Fi", "Voice Control", "Allergen Clear", "Self-Cleaning"],
         prices: [
           { kw: "2.0kW", price: "$1,450" },
           { kw: "2.5kW", price: "$1,590" },

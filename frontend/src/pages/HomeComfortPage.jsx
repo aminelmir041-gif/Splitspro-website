@@ -22,7 +22,7 @@ const Stars = ({ n = 5 }) => (
   </span>
 );
 
-const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro, features, imgPos = "object-center", seoBlocks = null, extraFaqs = null, helmet = null }) => {
+const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro, features, imgPos = "object-center", seoBlocks = null, afterHero = null, extraFaqs = null, helmet = null }) => {
   const cfg = SERVICE_LANDING[slug] || {};
   const lenis = useLenis();
   const [review, setReview] = useState(null);
@@ -45,6 +45,8 @@ const HomeComfortPage = ({ slug, overline, title, sub, image, introImage, intro,
     <>
       {helmet}
       <PageHero overline={overline} title={title} sub={sub} image={image} imgPos={imgPos} />
+
+      {afterHero}
 
       <TrustBadges />
 
