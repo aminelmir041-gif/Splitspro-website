@@ -1,0 +1,23 @@
+{
+  "summary": "Frontend-only verification of the MobileBrandRow pills fix under Split Systems hero. All spec requirements pass: 4 pills with correct testids/hrefs, brand names + 'See Prices' + gold accent + arrow, min-width 188px (Mitsubishi pills auto-wider), no text truncation (scrollWidth==clientWidth, text-overflow: clip), 'Mitsubishi Heavy Industries' shortened to 'Mitsubishi Heavy' in display while URL preserved. Swipeable (scroll container scrollWidth=897 vs viewport 375). ~2 pills visible on mobile (1 fully + 2nd at 93%; 3rd offscreen at x=400). Right-edge click on pill navigates (whole pill is link). Desktop 1440: all 4 pills visible & centered (sm:justify-center). Regression brand-pricing-nav 4 cards intact, no 'undefined'. All 4 /split-systems/{slug} pages render.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "SplitSystems mobile 375px", "issues": ["Rinnai pill's right edge is at x=388 (13px past 375 viewport), so strictly only 1 pill is 100% visible; 2nd pill is 93% visible. Matches spec's '2 to 2.5 pills' intent but not a strict '2 fully visible'. Consider slightly reducing pill min-width or horizontal padding if strict 2-full-pills is required."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "MobileBrandRow now clean and self-contained; SHORT_BRAND map keeps URLs untouched — good separation of display vs routing.",
+    "The scroll container uses -mx-6 + px-6 to bleed to edges — works well; scrollbar hidden per platform."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100% (all 12 assertions pass; 1 minor spacing note)"},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "MobileBrandRow at /app/frontend/src/pages/SplitSystems.jsx lines 35-67. Pills: min-w-[188px], rounded-full, border-[#E5E5EA], gold text-[#C8A46A] 'See Prices', ArrowUpRight icon. SHORT_BRAND map only shortens display for mitsubishi-heavy-industries. All data-testids verified: mobile-brand-row, mobile-brand-link-{daikin|rinnai|mitsubishi-electric|mitsubishi-heavy-industries}."
+}

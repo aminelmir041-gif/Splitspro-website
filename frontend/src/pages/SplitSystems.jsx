@@ -31,7 +31,14 @@ const BrandNav = ({ heading = "View split system prices", overline = "Split Syst
   </section>
 );
 
-// Compact clickable brand strip — sits immediately under the hero on every viewport.
+// Compact clickable brand price pills — swipeable strip immediately under the hero.
+const SHORT_BRAND = {
+  daikin: "Daikin",
+  rinnai: "Rinnai",
+  "mitsubishi-electric": "Mitsubishi Electric",
+  "mitsubishi-heavy-industries": "Mitsubishi Heavy",
+};
+
 const MobileBrandRow = () => (
   <nav
     data-testid="mobile-brand-row"
@@ -39,15 +46,19 @@ const MobileBrandRow = () => (
     className="border-b border-[#E5E5EA] bg-white"
   >
     <div className="sp-container">
-      <div className="-mx-6 flex snap-x snap-mandatory items-center gap-6 overflow-x-auto whitespace-nowrap px-6 py-3 sm:justify-center sm:gap-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="-mx-6 flex snap-x snap-mandatory items-stretch gap-3 overflow-x-auto whitespace-nowrap px-6 py-4 sm:justify-center [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {SPLIT_BRANDS.map((b) => (
           <Link
             key={b.slug}
             to={`/split-systems/${b.slug}`}
             data-testid={`mobile-brand-link-${b.slug}`}
-            className="snap-start text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0B0B0B] border-b border-transparent pb-0.5 transition-colors hover:text-[#C8A46A] hover:border-[#C8A46A] sm:text-xs"
+            className="group snap-start flex min-w-[188px] shrink-0 items-center justify-between gap-3 rounded-full border border-[#E5E5EA] bg-white px-5 py-2.5 transition-all duration-300 hover:border-[#C8A46A] hover:-translate-y-[1px] hover:soft-shadow-sm"
           >
-            {b.brand}
+            <span className="flex flex-col leading-tight">
+              <span className="text-[13px] font-bold uppercase tracking-[0.08em] text-[#0B0B0B]">{SHORT_BRAND[b.slug] || b.brand}</span>
+              <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#C8A46A]">See Prices</span>
+            </span>
+            <ArrowUpRight className="h-4 w-4 shrink-0 text-[#C8A46A] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         ))}
       </div>
