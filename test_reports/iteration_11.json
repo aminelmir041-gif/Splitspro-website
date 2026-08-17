@@ -1,0 +1,22 @@
+{
+  "summary": "Frontend-only verification of Split System brand pages restructure (4 manufacturer pages). All requested checks pass: brand nav shows exactly 4 cards with correct brand names (no 'undefined'), each manufacturer page renders correct range sections + pricing tables (Daikin Cora/Alira X, Rinnai PB/T, Mitsubishi Electric AP, MHI Ciara), BOOK INSTALLATION pre-fill flow populates QuoteForm message, submit label, and selection summary correctly with '$1,700 · Supplied & Installed' for Cora 3.5kW. Sitemap.xml contains the 4 new manufacturer URLs and none of the old range-level slugs. Regression pages (/ducted /cleaning /repairs /servicing /) all 200. Gallery rotated tiles 7-10 retain rotate-90 class.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "BrandPage.jsx uses `data-testid=price-row-{slug}-{kw.replace(/[^0-9a-z]/gi,'')}` — the /i flag makes it case-insensitive but the `a-z` char class only matches lowercase, so uppercase letters (like 'W' in 'kW') are preserved. Resulting testids are e.g. 'price-row-cora-25kW'. Works, but the intent stated in the review request ('35kw') doesn't match reality ('35kW'). Consider adding `.toLowerCase()` for consistent lowercase testids and to match the documented convention.",
+    "SPLIT_BRANDS still exports a `label` field identical to `brand` — dead field, safe to remove.",
+    "Daikin H1 shows only 'Daikin Split System Air Conditioning' (single H1), which is correct — no 'undefined' anywhere. Bug fix verified."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a", "frontend": "100%"},
+  "seed_data_creation": "",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Brand pricing kW slug case is UPPERCASE 'kW' (e.g. book-btn-cora-35kW) due to /[^0-9a-z]/gi regex — use exact casing in Playwright selectors. Lenis smooth scroll requires ~3s wait after click before form field values are ready."
+}

@@ -9,15 +9,15 @@ import {
 import { SERVICE_OPTIONS, PHONE_TEL } from "../lib/data";
 import { submitQuote, uploadPhoto } from "../lib/api";
 
-const buildInitial = (defaultService = "") => ({
-  name: "", phone: "", email: "", suburb: "", service: defaultService, message: "",
+const buildInitial = (defaultService = "", defaultMessage = "") => ({
+  name: "", phone: "", email: "", suburb: "", service: defaultService, message: defaultMessage,
 });
 
 const fieldClass =
   "h-12 rounded-sm border-0 border-b border-[#E5E5EA] bg-transparent px-0 text-[#1D1D1F] shadow-none focus-visible:border-[#C8A46A] focus-visible:ring-0 placeholder:text-[#6E6E73]/60";
 
-export const QuoteForm = ({ onDark = false, defaultService = "", submitLabel = "Get Free Quote & Plan" }) => {
-  const [form, setForm] = useState(buildInitial(defaultService));
+export const QuoteForm = ({ onDark = false, defaultService = "", defaultMessage = "", submitLabel = "Get Free Quote & Plan" }) => {
+  const [form, setForm] = useState(buildInitial(defaultService, defaultMessage));
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
   const [photo, setPhoto] = useState(null);
@@ -66,7 +66,7 @@ export const QuoteForm = ({ onDark = false, defaultService = "", submitLabel = "
       }
       await submitQuote({ ...form, photo_url });
       setDone(true);
-      setForm(buildInitial(defaultService));
+      setForm(buildInitial(defaultService, defaultMessage));
       clearPhoto();
       toast.success("Thank you — we'll be in touch shortly.");
     } catch (err) {

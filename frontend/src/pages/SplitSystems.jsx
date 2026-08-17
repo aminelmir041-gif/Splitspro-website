@@ -18,9 +18,9 @@ const BrandNav = ({ heading = "View split system prices", overline = "Split Syst
             <Link to={`/split-systems/${b.slug}`} data-testid={`brand-card-${b.slug}`}
               className="group flex h-full items-center justify-between rounded-xl border border-[#E5E5EA] bg-white p-6 transition-all duration-300 hover:border-[#C8A46A] hover:-translate-y-[3px] soft-shadow-sm">
               <span>
-                <span className="block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#6E6E73]">{b.brand}</span>
-                <span className="mt-1 block font-serif text-xl text-[#1D1D1F]">{b.range}</span>
-                <span className="mt-2 block text-xs text-[#6E6E73]">View {b.label} prices</span>
+                <span className="block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#6E6E73]">Brand</span>
+                <span className="mt-1 block font-serif text-xl text-[#1D1D1F]">{b.brand}</span>
+                <span className="mt-2 block text-xs text-[#6E6E73]">View {b.brand} prices</span>
               </span>
               <ArrowUpRight className="h-5 w-5 text-[#C8A46A] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
@@ -66,7 +66,9 @@ const SplitSystemsSeo = () => (
         </div>
         <Reveal delay={0.12}>
           <div className="img-reveal overflow-hidden rounded-2xl soft-shadow">
-            <img src={IMAGES.installDaikinBathroom} alt="Daikin split system air conditioner installed in a modern ensuite" loading="lazy" className="block h-full w-full object-cover" />
+            <div className="relative aspect-square w-full overflow-hidden">
+              <img src={IMAGES.installDaikinBathroom} alt="Daikin split system air conditioner installed in a modern ensuite" loading="lazy" className="absolute inset-0 h-full w-full rotate-90 object-cover" />
+            </div>
           </div>
         </Reveal>
       </div>
@@ -142,7 +144,9 @@ const SplitSystemsSeo = () => (
             ].map((img, i) => (
               <Reveal key={i} delay={i * 0.06}>
                 <div className="img-reveal overflow-hidden rounded-2xl soft-shadow-sm">
-                  <img src={img.src} alt={img.alt} loading="lazy" className="img-zoom aspect-[4/5] w-full object-cover" />
+                  <div className="relative aspect-[4/5] w-full overflow-hidden">
+                    <img src={img.src} alt={img.alt} loading="lazy" className="img-zoom absolute inset-0 h-full w-full rotate-90 object-cover" />
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -159,7 +163,9 @@ const SplitSystemsSeo = () => (
       <div className="sp-container grid gap-14 lg:grid-cols-2 lg:gap-20">
         <Reveal>
           <div className="img-reveal overflow-hidden rounded-2xl soft-shadow">
-            <img src={IMAGES.installDaikinOutdoor2} alt="Daikin outdoor condenser replaced on a Western Sydney home" loading="lazy" className="block h-full w-full object-cover" />
+            <div className="relative aspect-square w-full overflow-hidden">
+              <img src={IMAGES.installDaikinOutdoor2} alt="Daikin outdoor condenser replaced on a Western Sydney home" loading="lazy" className="absolute inset-0 h-full w-full rotate-90 object-cover" />
+            </div>
           </div>
         </Reveal>
         <div>

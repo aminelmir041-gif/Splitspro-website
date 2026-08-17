@@ -28,6 +28,22 @@ const Gallery = () => (
                 <ImageIcon className="h-9 w-9" strokeWidth={1.4} />
                 <span className="mt-3 text-sm">{g.title}</span>
               </div>
+            ) : g.rotate ? (
+              <>
+                <div className="relative aspect-square w-full overflow-hidden">
+                  <img
+                    src={g.src}
+                    alt={g.title}
+                    loading="lazy"
+                    data-testid={`gallery-img-rotated-${i}`}
+                    className="img-zoom absolute inset-0 h-full w-full rotate-90 object-cover"
+                  />
+                </div>
+                <figcaption className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-black/70 to-transparent p-6 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                  <span className="font-serif text-lg text-white">{g.title}</span>
+                  <span className="text-xs uppercase tracking-wider text-white/80">{g.tag}</span>
+                </figcaption>
+              </>
             ) : (
               <>
                 <img src={g.src} alt={g.title} loading="lazy" className="img-zoom w-full object-cover" />
