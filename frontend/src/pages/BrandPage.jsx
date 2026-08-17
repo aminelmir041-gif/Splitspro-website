@@ -88,6 +88,7 @@ const BrandPage = () => {
           className={`scroll-mt-24 py-16 sm:py-20 ${ri % 2 === 0 ? "bg-[#F5F5F7]" : "bg-white"}`}
         >
           <div className="sp-container">
+          <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-center lg:gap-12">
             <div className="max-w-3xl">
               <span className="overline text-[#C8A46A]">{brand.brand}</span>
               <h2 className="mt-3 font-serif text-3xl font-medium leading-tight tracking-tight text-[#0B0B0B] md:text-4xl text-balance">
@@ -100,6 +101,12 @@ const BrandPage = () => {
                 </p>
               )}
             </div>
+            {range.image && (
+              <div className="max-w-xs mx-auto lg:mx-0 lg:justify-self-end" data-testid={`range-image-${range.slug}`}>
+                <img src={range.image} alt={`${brand.brand} ${range.name} split system air conditioner`} loading="lazy" className="block h-auto w-full object-contain" />
+              </div>
+            )}
+          </div>
 
             <p className="mt-8 text-xs font-semibold uppercase tracking-[0.22em] text-[#6E6E73]">Supplied &amp; Installed</p>
             <div className="mt-3 overflow-hidden rounded-2xl border border-[#E5E5EA] bg-white soft-shadow-sm">

@@ -302,6 +302,7 @@ export const SPLIT_BRANDS = [
         name: "Cora",
         blurb: "Quiet, efficient and reliable everyday Daikin comfort. Cora combines whisper-quiet operation with Coanda airflow, precision temperature control and an Enzyme Blue air-purifying filter, making it a great choice for bedrooms and living areas.",
         features: ["Quiet Operation", "Coanda Airflow", "Air Purification", "Intelligent Comfort"],
+        image: "https://customer-assets-lxgj4vgw.emergentagent.net/job_splitspro-preview/artifacts/bkhsn8lt_Screenshot_20260817_152032_ChatGPT.jpg",
         prices: [
           { kw: "2.5kW", price: "$1,650" },
           { kw: "3.5kW", price: "$1,700" },
@@ -314,6 +315,7 @@ export const SPLIT_BRANDS = [
         name: "Alira X",
         blurb: "Daikin's premium choice for customers who want cleaner air and smarter comfort. Alira X combines Streamer air purification, three-stage filtration, Mould-Proof Operation, humidity sensing and built-in Wi-Fi.",
         features: ["Streamer Purification", "Mould Protection", "Built-In Wi-Fi", "3-Stage Filtration"],
+        image: "https://customer-assets-lxgj4vgw.emergentagent.net/job_splitspro-preview/artifacts/rl0bkt1q_Screenshot_20260817_152039_ChatGPT.webp",
         prices: [
           { kw: "2.5kW", price: "$1,950" },
           { kw: "3.5kW", price: "$2,400" },
@@ -376,6 +378,7 @@ export const SPLIT_BRANDS = [
         name: "MSZ-AP Series",
         blurb: "Premium Mitsubishi Electric comfort designed around exceptionally quiet operation. The AP Series combines Quiet Mode, Night Mode, built-in Wi-Fi on current applicable models and Dual Barrier Coating to help reduce dust and greasy dirt building up inside the unit.",
         features: ["Ultra-Quiet", "Night Mode", "Wi-Fi Control", "Dual Barrier Coating"],
+        image: "https://customer-assets-lxgj4vgw.emergentagent.net/job_splitspro-preview/artifacts/gam9w14y_Screenshot_20260817_152036_ChatGPT.jpg",
         prices: [
           { kw: "2.5kW", price: "$1,799" },
           { kw: "3.5kW", price: "$1,999" },
@@ -401,6 +404,7 @@ export const SPLIT_BRANDS = [
         name: "Ciara Series",
         blurb: "A compact premium split system with smart control and strong clean-air features. Ciara includes built-in Wi-Fi, voice control compatibility, Allergen Clear filtration, Self-Clean Operation, quiet operation and advanced 3D airflow.",
         features: ["Built-In Wi-Fi", "Voice Control", "Allergen Clear", "Self-Cleaning"],
+        image: "https://customer-assets-lxgj4vgw.emergentagent.net/job_splitspro-preview/artifacts/b7m2u7ip_Screenshot_20260817_152027_ChatGPT.webp",
         prices: [
           { kw: "2.0kW", price: "$1,450" },
           { kw: "2.5kW", price: "$1,590" },
