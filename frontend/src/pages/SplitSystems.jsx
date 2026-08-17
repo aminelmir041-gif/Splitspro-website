@@ -31,21 +31,21 @@ const BrandNav = ({ heading = "View split system prices", overline = "Split Syst
   </section>
 );
 
-// Compact mobile-only brand chip row — sits immediately under the hero.
+// Compact clickable brand strip — sits immediately under the hero on every viewport.
 const MobileBrandRow = () => (
   <nav
     data-testid="mobile-brand-row"
     aria-label="Split system brand pricing"
-    className="lg:hidden border-b border-[#E5E5EA] bg-white"
+    className="border-b border-[#E5E5EA] bg-white"
   >
     <div className="sp-container">
-      <div className="-mx-6 flex snap-x snap-mandatory items-center gap-6 overflow-x-auto whitespace-nowrap px-6 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="-mx-6 flex snap-x snap-mandatory items-center gap-6 overflow-x-auto whitespace-nowrap px-6 py-3 sm:justify-center sm:gap-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {SPLIT_BRANDS.map((b) => (
           <Link
             key={b.slug}
             to={`/split-systems/${b.slug}`}
             data-testid={`mobile-brand-link-${b.slug}`}
-            className="snap-start text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0B0B0B] border-b border-transparent pb-0.5 transition-colors hover:text-[#C8A46A] hover:border-[#C8A46A]"
+            className="snap-start text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0B0B0B] border-b border-transparent pb-0.5 transition-colors hover:text-[#C8A46A] hover:border-[#C8A46A] sm:text-xs"
           >
             {b.brand}
           </Link>
