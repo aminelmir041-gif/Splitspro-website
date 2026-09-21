@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Check, ChevronDown, Loader2, Phone, ShieldCheck, Sparkles, Wifi, Wind, Eye, Clock3 } from "lucide-react";
+import { Check, Loader2, Phone, ShieldCheck, Sparkles, Wifi, Wind, Eye, Clock3 } from "lucide-react";
 import { toast } from "sonner";
 import { submitQuote } from "../lib/api";
 import { IMAGES, PHONE, PHONE_TEL } from "../lib/data";
@@ -146,7 +146,7 @@ const QuickZenaForm = ({ dark = false, initialSize = "Not sure" }) => {
 };
 
 const ZenaSpecial = () => {
-  const scrollToForm = (size) => {
+  const scrollToForm = () => {
     const el = document.getElementById("zena-form");
     if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
   };
