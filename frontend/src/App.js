@@ -24,7 +24,7 @@ import Reviews from "@/pages/Reviews";
 import ServiceAreas from "@/pages/ServiceAreas";
 import FAQ from "@/pages/FAQ";
 import Contact from "@/pages/Contact";
-import BrandPage from "@/pages/BrandPage";
+import BrandPage from "@/pages/BrandPage";\nimport ZenaSpecial from "@/pages/ZenaSpecial";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -60,7 +60,7 @@ const AnimatedRoutes = () => {
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/service-areas" element={<ServiceAreas />} />
           <Route path="/faq" element={<FAQ />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/contact" element={<Contact />} />\n          <Route path="/daikin-zena-special" element={<ZenaSpecial />} />
         </Routes>
       </motion.div>
     </AnimatePresence>
